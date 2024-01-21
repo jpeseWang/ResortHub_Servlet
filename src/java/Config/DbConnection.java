@@ -8,7 +8,7 @@ public class DbConnection {
 
     // JDBC URL of SQL Server
     private static final String JDBC_URL = "jdbc:sqlserver://localhost\\SQLExpress:1433;databaseName=ResortManagementDB;"
-            + "user=sa;password=Quang2004@;"
+            + "user=sa;password=sa;"
             + "encrypt=true;trustServerCertificate=true;";
 
     // Establishes the connection to the database
