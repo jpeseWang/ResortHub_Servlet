@@ -96,7 +96,7 @@ public class EmployeeService extends RepositoryBase<EmployeeEntity> {
             dto.setSalary(entity.getSalary());
 
         String query = String.format(
-                "UPDATE %s SET FullName=?,BirthDate=?,Gender=?,IdNumber=?,PhoneNumber=?,Email=?,Qualification=?,Position=?,Salary=? WHERE Id = %s;",
+                "UPDATE %s SET FullName=?,BirthDate=?,Gender=?,IdNumber=?,PhoneNumber=?,Email=?,Qualification=?,Position=?,Salary=? WHERE Id = ?;",
                 getTableName(), id);
 
         List<Object> params = new ArrayList<>();
@@ -109,6 +109,7 @@ public class EmployeeService extends RepositoryBase<EmployeeEntity> {
         params.add(dto.getQualification().getIndex());
         params.add(dto.getPosition().getIndex());
         params.add(dto.getSalary());
+        params.add(id);
 
         super.executeNonQuery(query, params);
     }
@@ -126,7 +127,7 @@ public class EmployeeService extends RepositoryBase<EmployeeEntity> {
 
         super.executeNonQuery(query, params);
     }
-    
+
     private Employee mapEntityToEmployee(EmployeeEntity entity) {
         Employee employee = new Employee();
         employee.setId(entity.getId());
