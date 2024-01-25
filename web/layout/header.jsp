@@ -41,7 +41,7 @@
           </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-          <a href="/ResortHub/Admin/Dashboard/ListEmployee.jsp" class="text-sm font-semibold leading-6 text-gray-900"
+          <a href="/ResortHub/ListEmployee" class="text-sm font-semibold leading-6 text-gray-900"
             >Management</a
           >
           <a href="#" class="text-sm font-semibold leading-6 text-gray-900"

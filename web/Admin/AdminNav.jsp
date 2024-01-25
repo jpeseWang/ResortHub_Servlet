@@ -8,7 +8,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
-      
+       <%@ include file="../layout/header.jsp" %>
         <div class=" mx-6">
             <div class="sm:hidden">
                 <label for="tabs" class="sr-only">Select a tab</label>

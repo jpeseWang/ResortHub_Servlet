@@ -22,13 +22,32 @@ public class EmployeeController extends HttpServlet {
             throws ServletException, IOException {
 
         EmployeeService employeeService = new EmployeeService();
+        java.util.List<Employee> employees = employeeService.getAllEmployees();
         String id = request.getParameter("id");
-        try {
-            Employee employee = employeeService.getEmployeeById(id);
-            request.setAttribute("employee", employee);
-            request.getRequestDispatcher("Admin/Dashboard/UpdateEmployee.jsp").forward(request, response);
-        } catch (Exception e) {
 
+        String action = request.getParameter("action");
+        switch (action) {
+
+            case "getAll":
+                request.setAttribute("employees", employees);
+                request.getRequestDispatcher("Admin/Dashboard/ListEmployee.jsp").forward(request, response);
+                break;
+
+            case "getById":
+                Employee employee = employeeService.getEmployeeById(id);
+                request.setAttribute("employee", employee);
+                request.getRequestDispatcher("Admin/Dashboard/UpdateEmployee.jsp").forward(request, response);
+                break;
+
+            case "delete":
+                employeeService.deleteEmployee(id);
+                String message = "Delete employee successfully!";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("Admin/Dashboard/SuccessToast.jsp").forward(request, response);
+                break;
+
+            default:
+                request.getRequestDispatcher("Admin/Dashboard/CreateEmployee.jsp").forward(request, response);
         }
 
     }
@@ -41,7 +60,6 @@ public class EmployeeController extends HttpServlet {
         EmployeeValidator employeeValidator = new EmployeeValidator();
 
         List<String> validationErrors;
-        List<Employee> employees = employeeService.getAllEmployees();
         String action = request.getParameter("action");
         String id = request.getParameter("Id");
         switch (action) {
