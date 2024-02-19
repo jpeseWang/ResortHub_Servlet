@@ -37,7 +37,7 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         return rentalContracts;
     }
 
-    public RentalContract getRentalContractById(int id) {
+    public RentalContract getRentalContractById(String id) {
         RentalContractEntity entity = super.getById(id);
         RentalContract rentalContract = mapEntityToRentalContract(entity);
 

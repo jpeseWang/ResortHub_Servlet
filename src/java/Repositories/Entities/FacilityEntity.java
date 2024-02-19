@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FacilityEntity {
+
     private String id;
     private String name;
     private float area;
@@ -12,6 +13,7 @@ public class FacilityEntity {
     private int maxOccupancy;
     private String rentType;
     private int facilityType;
+    private String imgSrc;
 
     public FacilityEntity(ResultSet rs) throws SQLException {
         this.id = rs.getString("Id");
@@ -21,6 +23,8 @@ public class FacilityEntity {
         this.maxOccupancy = rs.getInt("MaxOccupancy");
         this.rentType = rs.getString("RentType");
         this.facilityType = rs.getInt("FacilityType");
+        this.imgSrc = rs.getString("ImgSrc");
+
     }
 
     // Getter methods
@@ -52,7 +56,10 @@ public class FacilityEntity {
         return facilityType;
     }
 
-    // Setter methods (if needed)
+    public String getImgSrc() {
+        return imgSrc;
+    }
 
+    // Setter methods (if needed)
     // Other methods
 }

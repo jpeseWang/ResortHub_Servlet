@@ -103,7 +103,7 @@
 
                 <p class="mt-10 text-center text-sm text-gray-500">
                     Already a member?
-                    <a href="/ResortManagement/pages/Auth/login.jsp" class=" leading-6 text-black underline">
+                    <a href="/ResortHub/pages/Auth/login.jsp" class=" leading-6 text-black underline">
                         Sign in.
                     </a>
                 </p>

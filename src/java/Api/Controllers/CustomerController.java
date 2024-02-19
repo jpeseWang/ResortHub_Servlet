@@ -14,6 +14,7 @@ import Domain.DTOs.CustomerDto.CreateCustomerDto;
 import Domain.DTOs.CustomerDto.UpdateCustomerDto;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Customer;
+import Domain.Models.Employee;
 import Services.CustomerService;
 
 public class CustomerController extends HttpServlet {
@@ -25,18 +26,31 @@ public class CustomerController extends HttpServlet {
 
         List<Customer> customers = customerService.getAllCustomers();
 
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CustomerController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CustomerController at " + request.getContextPath() + "</h1>");
-            out.println("Customers: " + customers.get(2).getCustomerType());
-            out.println("</body>");
-            out.println("</html>");
+        String id = request.getParameter("id");
+
+        String action = request.getParameter("action");
+        switch (action) {
+
+            case "getAll":
+                request.setAttribute("customers", customers);
+                request.getRequestDispatcher("Admin/CustomerManagement/ListCustomer.jsp").forward(request, response);
+                break;
+
+            case "getById":
+                   Customer customer = customerService.getCustomerById(id);
+                request.setAttribute("customer", customer);
+                request.getRequestDispatcher("Admin/CustomerManagement/UpdateCustomer.jsp").forward(request, response);
+                break;
+
+            case "delete":
+                customerService.deleteCustomer(id);
+                String message = "Delete customer successfully!";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
+                break;
+
+            default:
+                request.getRequestDispatcher("Admin/CustomerManagement/CreateCustomer.jsp").forward(request, response);
         }
     }
 
@@ -58,11 +72,17 @@ public class CustomerController extends HttpServlet {
                 if (validationErrors.isEmpty()) {
                     try {
                         customerService.createCustomer(createCustomerDto);
+                        String message = "Create customer successfully!";
+                        request.setAttribute("message", message);
+                        request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
+                        return;
+                        
+                        
                     } catch (ConflictException ex) {
                         handleConflictException(response, ex.getMessage());
                     }
                 } else {
-                    handleValidationErrors(request, response, validationErrors);
+                    handleValidationErrors(request, response, validationErrors, "Create");
                 }
                 break;
                 
@@ -78,7 +98,7 @@ public class CustomerController extends HttpServlet {
                         handleConflictException(response, ex.getMessage());
                     }
                 } else {
-                    handleValidationErrors(request, response, validationErrors);
+                    handleValidationErrors(request, response, validationErrors, "Update");
                 }
                 break;
             default:
@@ -100,24 +120,12 @@ public class CustomerController extends HttpServlet {
         }
     }
 
-    private void handleValidationErrors(HttpServletRequest request, HttpServletResponse response, List<String> validationErrors)
+    private void handleValidationErrors(HttpServletRequest request, HttpServletResponse response, List<String> validationErrors, String pageName)
             throws IOException, ServletException {
 //        Hanle error log
         request.setAttribute("error", String.join(", ", validationErrors));
-        request.getRequestDispatcher("/ResortManagement/Admin/Dashboard/CreateEmployee.jsp").forward(request, response);
-        
-        
-//        try (PrintWriter out = response.getWriter()) {
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet CustomerController</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Validation failed: " + String.join(", ", validationErrors) + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
+        request.getRequestDispatcher("/ResortManagement/Admin/CustomerManagement/" + pageName +"Customer.jsp").forward(request, response);
+
     }
 
     private void handleInvalidAction(HttpServletResponse response, String action) throws IOException {

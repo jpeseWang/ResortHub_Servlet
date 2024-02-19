@@ -30,8 +30,9 @@ public class CustomerService extends RepositoryBase<CustomerEntity> {
         List<Customer> customers = new ArrayList<>();
         List<CustomerEntity> entities = super.getAll();
 
-        for (CustomerEntity entity : entities)
+        for (CustomerEntity entity : entities) {
             customers.add(mapEntityToCustomer(entity));
+        }
 
         return customers;
     }
@@ -74,22 +75,30 @@ public class CustomerService extends RepositoryBase<CustomerEntity> {
             throw new NotFoundException("Customer ID not found.");
         }
 
-        if (dto.getFullName() == null)
+        if (dto.getFullName() == null) {
             dto.setFullName(entity.getFullName());
-        if (dto.getBirthDate() == null)
+        }
+        if (dto.getBirthDate() == null) {
             dto.setBirthDate(entity.getBirthDate());
-        if (dto.getGender() == null)
+        }
+        if (dto.getGender() == null) {
             dto.setGender(entity.getGender());
-        if (dto.getIdNumber() == null)
+        }
+        if (dto.getIdNumber() == null) {
             dto.setIdNumber(entity.getIdNumber());
-        if (dto.getPhoneNumber() == null)
+        }
+        if (dto.getPhoneNumber() == null) {
             dto.setPhoneNumber(entity.getPhoneNumber());
-        if (dto.getEmail() == null)
+        }
+        if (dto.getEmail() == null) {
             dto.setEmail(entity.getEmail());
-        if (dto.getCustomerType() == CustomerType.None)
+        }
+        if (dto.getCustomerType() == CustomerType.None) {
             dto.setCustomerType(CustomerType.fromIndex(entity.getCustomerType()));
-        if (dto.getAddress() == null)
+        }
+        if (dto.getAddress() == null) {
             dto.setAddress(entity.getAddress());
+        }
 
         String query = String.format(
                 "UPDATE %s SET FullName=?,BirthDate=?,Gender=?,IdNumber=?,PhoneNumber=?,Email=?,CustomerType=?,Address=? WHERE Id = %s;",
@@ -104,6 +113,20 @@ public class CustomerService extends RepositoryBase<CustomerEntity> {
         params.add(dto.getEmail());
         params.add(dto.getCustomerType().getIndex());
         params.add(dto.getAddress());
+
+        super.executeNonQuery(query, params);
+    }
+
+    public void deleteCustomer(String id) {
+        CustomerEntity entity = super.getById(id);
+
+        if (entity == null) {
+            throw new NotFoundException("User ID not found.");
+        }
+
+        String query = String.format("DELETE FROM %s WHERE Id = ?;", getTableName());
+        List<Object> params = new ArrayList<>();
+        params.add(id);
 
         super.executeNonQuery(query, params);
     }

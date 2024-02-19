@@ -1,4 +1,4 @@
-package Api.Controllers.Employee;
+package Api.Controllers;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,24 +30,24 @@ public class EmployeeController extends HttpServlet {
 
             case "getAll":
                 request.setAttribute("employees", employees);
-                request.getRequestDispatcher("Admin/Dashboard/ListEmployee.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/EmployeeManagement/ListEmployee.jsp").forward(request, response);
                 break;
 
             case "getById":
                 Employee employee = employeeService.getEmployeeById(id);
                 request.setAttribute("employee", employee);
-                request.getRequestDispatcher("Admin/Dashboard/UpdateEmployee.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
                 break;
 
             case "delete":
                 employeeService.deleteEmployee(id);
                 String message = "Delete employee successfully!";
                 request.setAttribute("message", message);
-                request.getRequestDispatcher("Admin/Dashboard/SuccessToast.jsp").forward(request, response);
+                request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
                 break;
 
             default:
-                request.getRequestDispatcher("Admin/Dashboard/CreateEmployee.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/EmployeeManagement/CreateEmployee.jsp").forward(request, response);
         }
 
     }
@@ -74,7 +74,7 @@ public class EmployeeController extends HttpServlet {
 
                         String message = "Create employee successfully!";
                         request.setAttribute("message", message);
-                        request.getRequestDispatcher("Admin/Dashboard/SuccessToast.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/EmployeeManagement/SuccessToast.jsp").forward(request, response);
                         return;
                     } catch (ConflictException ex) {
                         request.setAttribute("error", ex.getMessage());
@@ -82,7 +82,7 @@ public class EmployeeController extends HttpServlet {
                 } else {
                     request.setAttribute("error", String.join(" - ", validationErrors));
                 }
-                request.getRequestDispatcher("Admin/Dashboard/CreateEmployee.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/EmployeeManagement/CreateEmployee.jsp").forward(request, response);
                 break;
 
             case "update":
@@ -94,15 +94,15 @@ public class EmployeeController extends HttpServlet {
                         employeeService.updateEmployee(id, updateEmployeeDto);
                         String message = "Update employee successfully!";
                         request.setAttribute("message", message);
-                        request.getRequestDispatcher("Admin/Dashboard/SuccessToast.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/EmployeeManagement/SuccessToast.jsp").forward(request, response);
 
                     } catch (ConflictException ex) {
                         request.setAttribute("error", ex.getMessage());
-                        request.getRequestDispatcher("Admin/Dashboard/UpdateEmployee.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
                     }
                 } else {
                     request.setAttribute("error", String.join(", ", validationErrors));
-                    request.getRequestDispatcher("Admin/Dashboard/UpdateEmployee.jsp").forward(request, response);
+                    request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
                 }
 
                 break;

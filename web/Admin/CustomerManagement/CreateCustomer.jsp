@@ -14,29 +14,29 @@
     </head>
     <body>
         <%@ include file="../AdminNav.jsp" %>
-
+ <%java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy"); %>
         <div class="space-y-10 divide-y divide-gray-900/10 mx-6 mt-12">
             <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
                 <div class="px-4 sm:px-0">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create new Employee</h2>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create new Customer</h2>
                     <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
                     <% String error = (String) request.getAttribute("error");%>
                     <span class="text-red-400 font-medium text-lg"><%= error != null ? error : ""%></span>
                 </div>
-                
-                
+
+
                 <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
-                      name="CreateEmployee"
+                      name="CreateCustomer"
                       method="POST"
-                      action="/ResortHub/EmployeeController?action=create">
+                      action="/ResortHub/CustomerController?action=create">
                     <div class="px-4 py-6 sm:p-8">
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                             <div class="sm:col-span-4">
-                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Employee ID</label>
+                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Customer ID</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input <% if (formData != null) {%>value="<%= formData.getId()%>"<% } %> type="text" name="Id" placeholder="Ex: NV-0000" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <input <% if (formData != null) {%>value="<%= formData.getId()%>"<% } %> type="text" name="Id" placeholder="Ex: KH-0000" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,8 @@
                                 <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Birthday</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="date" name="BirthDate" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                       
+                                        <input type="date" <% if (formData != null) {%>value="<%= formData.getBirthday()%>"<% } %> name="BirthDate" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
@@ -87,39 +88,28 @@
                                 <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input <% if (formData != null) {%>value="<%= formData.getEmail()%>"<% } %> type="text" name="Email" placeholder="Ex: employe0@gmail.com" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <input <% if (formData != null) {%>value="<%= formData.getEmail()%>"<% } %> type="text" name="Email" placeholder="Ex: customer0@gmail.com" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2 sm:col-start-1">
-                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Qualification</label>
+                                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Customer Type</label>
                                 <div class="mt-2">           
-                                    <select <% if (formData != null) {%>value="<%= formData.getQualification()%>"<% } %> id="country" name="Qualification" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        <option value=1>Intermediate</option>  
-                                        <option value="2">College</option> 
-                                        <option value="3">University</option> 
-                                        <option value="4">PostGraduate</option> 
+                                    <select  id="country" name="CustomerType" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                        <option value=1>Diamond</option>  
+                                        <option value="2">Platinum</option> 
+                                        <option value="3">Gold</option> 
+                                        <option value="4">Silver</option> 
+                                        <option value="5">Member</option> 
                                     </select> 
                                 </div>
                             </div>
-                            <div class="sm:col-span-2">
-                                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">Position</label>
+
+                            <div class="sm:col-span-4">
+                                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
                                 <div class="mt-2">
-                                    <select <% if (formData != null) {%>value="<%= formData.getPosition()%>"<% }%> id="country" name="Position" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        <option value="1">Receptionist</option>  
-                                        <option value="2">Server</option> 
-                                        <option value="3">Specialist</option> 
-                                        <option value="4">Supervisor</option> 
-                                        <option value="5">Manager</option> 
-                                        <option value="6">Director</option>  
-                                    </select>                                    
-                                </div>
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Salary</label>
-                                <div class="mt-2">
-                                    <input  type="text" name="Salary" placeholder="Ex: 50,000,000" id="website" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
+                                    <input type="text" name="Address" placeholder="1 Street name, 2 District, 3 City" id="website" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
                                 </div>
                             </div>
 
@@ -136,6 +126,6 @@
 
 
         </div>
-
+        <%@ include file="/layout/footer.jsp" %>
     </body>
 </html>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Domain.DTOs.BookingDto.CreateBookingDto;
+import Domain.Exceptions.NotFoundException;
 import Domain.Models.Booking;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.BookingEntity;
@@ -39,7 +40,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         return Bookings;
     }
 
-    public Booking getBookingById(int id) {
+    public Booking getBookingById(String id) {
         BookingEntity entity = super.getById(id);
         Booking booking = mapEntityToBooking(entity);
 
@@ -64,6 +65,20 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         super.executeNonQuery(query, params);
     }
 
+     public void deleteBooking(String id) {
+        BookingEntity entity = super.getById(id);
+
+        if (entity == null) {
+            throw new NotFoundException("Booking ID not found.");
+        }
+
+        String query = String.format("DELETE FROM %s WHERE Id = ?;", getTableName());
+        List<Object> params = new ArrayList<>();
+        params.add(id);
+
+        super.executeNonQuery(query, params);
+    }
+    
     private Booking mapEntityToBooking(BookingEntity entity) {
         Booking booking = new Booking();
         booking.setBookingDate(entity.getBookingDate());

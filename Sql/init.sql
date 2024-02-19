@@ -93,9 +93,17 @@ ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_customerid_foreign" FOREIGN KEY("CustomerId") REFERENCES "Customers"("Id");
 ALTER TABLE
     "RentalContracts" ADD CONSTRAINT "rentalcontracts_bookingid_foreign" FOREIGN KEY("BookingId") REFERENCES "Bookings"("Id");
-ALTER TABLE
-    "Facilities" ADD CONSTRAINT "facilities_id_foreign" FOREIGN KEY("Id") REFERENCES "Villas"("Id");
-ALTER TABLE
-    "Facilities" ADD CONSTRAINT "facilities_id_foreign" FOREIGN KEY("Id") REFERENCES "Houses"("Id");
-ALTER TABLE
-    "Facilities" ADD CONSTRAINT "facilities_id_foreign" FOREIGN KEY("Id") REFERENCES "Rooms"("Id");
+
+
+
+
+    ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+
+ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+
+ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+
+
+-- Add the ImgSrc to Facilities table
+ALTER TABLE Facilities
+ADD ImgSrc NVARCHAR(255);

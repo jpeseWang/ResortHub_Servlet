@@ -5,85 +5,142 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>List Employee</title>
+        <title>Villa Management</title>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
 
-        <%@ include file="../AdminNav.jsp" %>
+        <%@ include file="../../AdminNav.jsp" %>
         <br>
 
         <div class="px-4 sm:px-6 lg:px-8">
-            <div class="sm:flex sm:items-center">
-                <div class="sm:flex-auto">
-                    <h1 class="text-base font-semibold leading-6 text-gray-900">Employees</h1>
-                    <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
-                </div>
-                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        <a href="/ResortHub/EmployeeController?action=getAll"> Add user</a>
-                    </button>
-                </div>
-            </div>
-            <div class="mt-8 flow-root">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-300">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">ID</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Birthday</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Gender</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone number</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
 
-                                    <c:forEach items="${employees}" var="c">
+            <main class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Villa Management</h1>
 
-                                        <tr class="hover:bg-gray-200 ">
+                <form class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+                    <section aria-labelledby="cart-heading" class="lg:col-span-7">
+                        <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">${c.id}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.fullName}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.birthDate}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.gender}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.email}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.phoneNumber}</td>
-                                            <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium sm:pr-6">
-                                                <a href="/ResortHub/EmployeeController?action=getById&id=${c.id}" class="text-indigo-600 hover:text-indigo-900 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                    </svg>
+                        <ul role="list" class="divide-y divide-gray-200 border-b border-t border-gray-200">
 
-                                                </a>
-                                            </td>
-                                            <td class="relative whitespace-nowrap py-4 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="/ResortHub/EmployeeController?action=delete&id=${c.id}" class="text-red-600 hover:text-red-900 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                    </svg>
+                            <c:forEach items="${facilities}" var="c">
 
-                                                </a>
-                                            </td>
+                                <li class="flex py-6 sm:py-10">
+                                    <div class="flex-shrink-0">
+                                        <img src="${c.imgSrc}" alt="Front of men&#039;s Basic Tee in sienna." class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
+                                    </div>
 
-                                        </tr>
+                                    <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
+                                        <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
+                                            <div>
+                                                <div class="flex justify-between">
+                                                    <h3 class="text-sm">
+                                                        <a href="#" class="font-medium text-gray-700 hover:text-gray-800">${c.name}</a>
+                                                    </h3>
+                                                </div>
+                                                <div class="mt-1 flex text-sm">
+                                                    <p class="text-gray-500">${c.facilityType}</p>
+                                                    <p class="ml-4 border-l border-gray-200 pl-4 text-gray-500">${c.rentType}</p>
+                                                </div>
+                                                <p class="mt-1 text-sm font-medium text-gray-900">$${c.rentalCost}</p>
+                                            </div>
 
-                                    </c:forEach>
+                                            <div class="mt-4 sm:mt-0 sm:pr-9">
+                                                <label for="quantity-0" class="sr-only">Quantity, Basic Tee</label>
+                                                <select id="quantity-0" name="quantity-0" class="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+
+                                                    <c:forEach begin="1" end="${c.maxOccupancy}" varStatus="loop">
+                                                        <option value="${loop.index}">${loop.index}</option>
+                                                    </c:forEach>
+                                                </select>
 
 
 
-                                </tbody>
-                            </table>
+                                                <div class="absolute right-0 top-0">
+                                                    <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg>
 
 
+                                                    </button>
+                                                    <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                                                        <span class="sr-only">Remove</span>
+                                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="mt-4 flex space-x-2 text-sm text-gray-700">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                                            </svg>
+                                            <span>Available</span>
+                                        </p>
+                                    </div>
+                                </li>
+
+
+
+                            </c:forEach>
+
+                        </ul>
+                    </section>
+
+
+                    <!-- Order summary -->
+                    <section aria-labelledby="summary-heading" class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
+                        <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Villa Management summary</h2>
+
+                        <dl class="mt-6 space-y-4">
+<!--                            <div class="flex items-center justify-between">
+                                <dt class="text-sm text-gray-600">Total Villa</dt>
+                                <dd class="text-sm font-medium text-gray-900">${facilities.size()}</dd>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                <dt class="flex items-center text-sm text-gray-600">
+                                    <span>Shipping estimate</span>
+                                    <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
+                                        <span class="sr-only">Learn more about how shipping is calculated</span>
+                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                                </dt>
+                                <dd class="text-sm font-medium text-gray-900">$5.00</dd>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                <dt class="flex text-sm text-gray-600">
+                                    <span>Tax estimate</span>
+                                    <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
+                                        <span class="sr-only">Learn more about how tax is calculated</span>
+                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                                </dt>
+                                <dd class="text-sm font-medium text-gray-900">$8.32</dd>
+                            </div>-->
+                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                <dt class="text-base font-medium text-gray-900">Total Villa</dt>
+                                <dd class="text-base font-medium text-gray-900">${facilities.size()}</dd>
+                            </div>
+                        </dl>
+
+                        <div class="mt-6">
+                            <a href="/ResortHub/Admin/FacilityManagement/Villa/CreateVilla.jsp">
+                                <button type="button" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Add Villa</button>
+                            </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </section>
+                </form>
 
+            </main>
+        </div>
+        <%@ include file="/layout/footer.jsp" %>
     </body>
 </html>

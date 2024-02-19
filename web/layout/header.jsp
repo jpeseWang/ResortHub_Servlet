@@ -13,9 +13,10 @@
         aria-label="Global"
       >
         <div class="flex lg:flex-1">
-          <a href="/ResortManagement/pages/Home/index.jsp" class="-m-1.5 p-1.5">
+          <a href="/ResortHub/pages/Home/index.jsp" class="-m-1.5 p-1.5">
             <span class="sr-only">Resort Hub Logo</span>
-            <img class="h-12 w-auto" src="../assets/images/logo.png" alt="" />
+            <img class="h-12 w-auto" src="https://github.com/jpeseWang/ResortHub_Servlet/blob/main/web/assets/images/logo.png?raw=true" alt="" />
+             
           </a>
         </div>
         <div class="flex lg:hidden">
@@ -41,13 +42,13 @@
           </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-          <a href="/ResortHub/ListEmployee" class="text-sm font-semibold leading-6 text-gray-900"
+          <a href="/ResortHub/Admin/FacilityManagement/ListFacility.jsp" class="text-sm font-semibold leading-6 text-gray-900"
             >Management</a
           >
           <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
             >Features</a
           >
-          <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
+          <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=villa&role=user" class="text-sm font-semibold leading-6 text-gray-900"
             >Marketplace</a
           >
           <a href="#" class="text-sm font-semibold leading-6 text-gray-900"

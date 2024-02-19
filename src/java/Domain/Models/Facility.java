@@ -15,6 +15,7 @@ public class Facility {
     private Villa villa;
     private House house;
     private Room room;
+    private String imgSrc;
 
     public Facility() {
     }
@@ -60,6 +61,10 @@ public class Facility {
     public Room getRoom() {
         return room;
     }
+    
+    public String getImgSrc() {
+        return imgSrc;
+    }
 
     // Setters
 
@@ -101,5 +106,9 @@ public class Facility {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+    
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
     }
 }

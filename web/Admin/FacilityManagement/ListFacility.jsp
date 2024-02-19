@@ -14,76 +14,73 @@
         <br>
 
         <div class="px-4 sm:px-6 lg:px-8">
-            <div class="sm:flex sm:items-center">
-                <div class="sm:flex-auto">
-                    <h1 class="text-base font-semibold leading-6 text-gray-900">Employees</h1>
-                    <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
-                </div>
-                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        <a href="/ResortHub/EmployeeController?action=getAll"> Add user</a>
-                    </button>
-                </div>
-            </div>
-            <div class="mt-8 flow-root">
-                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                            <table class="min-w-full divide-y divide-gray-300">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">ID</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Birthday</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Gender</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone number</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
 
-                                    <c:forEach items="${employees}" var="c">
+            <div class=" flow-root">
+                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="bg-white py-6">
+                        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                            <div class="mx-auto max-w-2xl text-center">
+                                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">ResortHub's Facility</h2>
+                                <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p>
+                            </div>
+                            <div class=" mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-9 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80 hover:opacity-80">
+                                    <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=villa&role=admin">
+                                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlsbGF8ZW58MHx8MHx8fDA%3D" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+                                        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                                        <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
 
-                                        <tr class="hover:bg-gray-200 ">
 
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">${c.id}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.fullName}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.birthDate}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.gender}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.email}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${c.phoneNumber}</td>
-                                            <td class="relative whitespace-nowrap py-4 pl-3 text-right text-sm font-medium sm:pr-6">
-                                                <a href="/ResortHub/EmployeeController?action=getById&id=${c.id}" class="text-indigo-600 hover:text-indigo-900 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                    </svg>
+                                        <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
 
-                                                </a>
-                                            </td>
-                                            <td class="relative whitespace-nowrap py-4 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                <a href="/ResortHub/EmployeeController?action=delete&id=${c.id}" class="text-red-600 hover:text-red-900 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                                                    </svg>
+                                            <span class="absolute inset-0"></span>
+                                            Villa Management
 
-                                                </a>
-                                            </td>
+                                        </h3></a> 
+                                </article>
 
-                                        </tr>
+                                <!-- More posts... -->
+                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+                                    <a href="/ResortHub/Admin/FacilityManagement/Villa/ListVilla.jsp">
+                                        <img src="https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdXNlfGVufDB8fDB8fHww" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+                                        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                                        <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
 
-                                    </c:forEach>
+
+                                        <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
+
+                                            <span class="absolute inset-0"></span>
+                                            House Management
+
+                                        </h3>
+                                    </a>
+                                </article>
 
 
 
-                                </tbody>
-                            </table>
+
+                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+                                    <img src="https://plus.unsplash.com/premium_photo-1674676471380-1258cb31b3ac?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9vbXxlbnwwfHwwfHx8MA%3D%3D" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+                                    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                                    <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
 
 
+                                    <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
+                                        <a href="#">
+                                            <span class="absolute inset-0"></span>
+                                            Room Management
+                                        </a>
+                                    </h3>
+                                </article>
+
+
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-
+    <%@ include file="/layout/footer.jsp" %>
     </body>
 </html>

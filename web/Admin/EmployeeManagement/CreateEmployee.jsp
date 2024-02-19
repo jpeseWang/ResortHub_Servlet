@@ -23,8 +23,8 @@
                     <% String error = (String) request.getAttribute("error");%>
                     <span class="text-red-400 font-medium text-lg"><%= error != null ? error : ""%></span>
                 </div>
-                
-                
+
+
                 <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
                       name="CreateEmployee"
                       method="POST"
@@ -136,6 +136,6 @@
 
 
         </div>
-
+        <%@ include file="/layout/footer.jsp" %>
     </body>
 </html>

@@ -39,8 +39,10 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="../../pages/Home/Category.jsp"/>
-        <jsp:include page="../../pages/Home/Review.jsp"/>
-        <jsp:include page="../../layout/footer.jsp"/>
+        <jsp:include page="/pages/Home/Category.jsp"/>
+        <jsp:include page="/pages/Home/Review.jsp"/>
+        <jsp:include page="/pages/Home/Partner.jsp"/>
+        <jsp:include page="/layout/footer.jsp"/>
+
     </body>
 </html>

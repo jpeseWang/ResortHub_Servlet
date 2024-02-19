@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>EmployeeController</servlet-name>
-        <servlet-class>Api.Controllers.Employee.EmployeeController</servlet-class>
+        <servlet-class>Api.Controllers.EmployeeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerController</servlet-name>
@@ -19,6 +19,14 @@
     <servlet>
         <servlet-name>DeleteEmployee</servlet-name>
         <servlet-class>Api.Controllers.Employee.DeleteEmployee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FacilityController</servlet-name>
+        <servlet-class>Api.Controllers.FacilityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingController</servlet-name>
+        <servlet-class>Api.Controllers.BookingController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeController</servlet-name>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>DeleteEmployee</servlet-name>
         <url-pattern>/DeleteEmployee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacilityController</servlet-name>
+        <url-pattern>/FacilityController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingController</servlet-name>
+        <url-pattern>/BookingController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

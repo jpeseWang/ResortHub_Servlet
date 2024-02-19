@@ -11,6 +11,7 @@ import Utils.ConvertUtils;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class CreateFacilityDto {
+
     private String id;
     private String name;
     private float area;
@@ -21,6 +22,7 @@ public class CreateFacilityDto {
     private Villa villa;
     private House house;
     private Room room;
+    private String imgSrc;
 
     public CreateFacilityDto(HttpServletRequest request) {
         id = request.getParameter("Id");
@@ -30,6 +32,7 @@ public class CreateFacilityDto {
         maxOccupancy = Integer.parseInt(request.getParameter("MaxOccupancy"));
         rentType = request.getParameter("RentType");
         facilityType = FacilityType.fromIndex(ConvertUtils.convertStringToInt(request.getParameter("FacilityType")));
+        imgSrc = request.getParameter("ImgSrc");
 
         switch (facilityType) {
             case Villa:
@@ -53,7 +56,6 @@ public class CreateFacilityDto {
     }
 
     // Getters
-
     public String getId() {
         return id;
     }
@@ -94,8 +96,11 @@ public class CreateFacilityDto {
         return room;
     }
 
-    // Setters
+    public String getImgSrc() {
+        return imgSrc;
+    }
 
+    // Setters
     public void setId(String id) {
         this.id = id;
     }
@@ -134,5 +139,9 @@ public class CreateFacilityDto {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
     }
 }

@@ -13,6 +13,7 @@ import Repositories.Common.RepositoryBase;
 import Repositories.Entities.FacilityEntity;
 
 public class FacilityService extends RepositoryBase<FacilityEntity> {
+
     private VillaService villaService;
     private HouseService houseService;
     private RoomService roomService;
@@ -37,8 +38,9 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         List<Facility> facilities = new ArrayList<>();
         List<FacilityEntity> entities = super.getAll();
 
-        for (FacilityEntity entity : entities)
+        for (FacilityEntity entity : entities) {
             facilities.add(mapEntityToFacility(entity));
+        }
 
         return facilities;
     }
@@ -72,7 +74,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         }
 
         String query = String.format(
-                "INSERT INTO %s (Id,Name,Area,RentalCost,MaxOccupancy,RentType,FacilityType) VALUES (?,?,?,?,?,?,?);",
+                "INSERT INTO %s (Id,Name,Area,RentalCost,MaxOccupancy,RentType,FacilityType, ImgSrc) VALUES (?,?,?,?,?,?,?,?);",
                 getTableName());
 
         List<Object> params = new ArrayList<>();
@@ -83,6 +85,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         params.add(dto.getMaxOccupancy());
         params.add(dto.getRentType());
         params.add(dto.getFacilityType().getIndex());
+        params.add(dto.getImgSrc());
 
         super.executeNonQuery(query, params);
 
@@ -110,7 +113,8 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         facility.setMaxOccupancy(entity.getMaxOccupancy());
         facility.setRentType(entity.getRentType());
         facility.setFacilityType(FacilityType.fromIndex(entity.getFacilityType()));
-
+        facility.setImgSrc(entity.getImgSrc());
+        
         return facility;
     }
 
