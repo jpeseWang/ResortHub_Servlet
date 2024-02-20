@@ -21,11 +21,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-              Add a new Villa
+              Add a new House
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
-              This information will be displayed publicly so be careful what you
-              share.
+              Design the house with a spacious layout that allows for fluid
+              movement between rooms.
             </p>
             <% String error = (String) request.getAttribute("error");%>
             <span class="text-red-400 font-medium text-lg"
@@ -46,7 +46,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                       type="text"
                       name="Id"
                       class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="SVVL-0000"
+                      placeholder="SVHO-0000"
                     />
                   </div>
                 </div>
@@ -65,8 +65,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <input
                       type="text"
                       name="Name"
-                      id="username"
-                      autocomplete="username"
                       class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       placeholder="Your Villa's name (First letter captial)"
                     />
@@ -94,7 +92,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </div>
               </div>
 
-              <input name="FacilityType" value="1" class="hidden" />
+              <input name="FacilityType" value="2" class="hidden" />
 
               <div class="sm:col-span-2">
                 <label
@@ -195,10 +193,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
           <div class="border-b border-gray-900/10 pb-12">
             <h2 class="text-base font-semibold leading-7 text-gray-900">
-              Villa details
+              House details
             </h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">
-              Determine the architectural style of the villa.
+              Determine the specialization of the house.
             </p>
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-9">
@@ -213,22 +211,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     type="text"
                     name="StandardRoom"
                     placeholder="Ex: Standard/ Superior/ Deluxe/..."
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div class="sm:col-span-3">
-                <label
-                  for="last-name"
-                  class="block text-sm font-medium leading-6 text-gray-900"
-                  >Pool Area</label
-                >
-                <div class="mt-2">
-                  <input
-                    type="text"
-                    name="PoolArea"
-                    placeholder="m2 (Must be > 30m2)"
                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
