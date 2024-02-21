@@ -48,27 +48,27 @@ public class FacilityController extends HttpServlet {
 
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
-        String role = request.getParameter("role");
+       
         switch (action) {
 
+            case "getMarketplaceItem":
+                request.setAttribute("facilities", facilities);
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                break;
             case "getAll":
 
                 switch (facilityType) {
                     case "villa":
                         request.setAttribute("facilities", facilities);
-                        if ("admin".equals(role)) { // Use equals method for string comparison
-                            request.getRequestDispatcher("Admin/FacilityManagement/Villa/ListVilla.jsp").forward(request, response);
-                        } else {
-                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
-                        }
+                        request.getRequestDispatcher("Admin/FacilityManagement/Villa/ListVilla.jsp").forward(request, response);
                         break;
                     case "house":
                         request.setAttribute("facilities", facilities);
-                        request.getRequestDispatcher("Admin/FacilityManagement/ListFacility.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/FacilityManagement/House/ListHouse.jsp").forward(request, response);
                         break;
                     case "room":
                         request.setAttribute("facilities", facilities);
-                        request.getRequestDispatcher("Admin/FacilityManagement/ListFacility.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/FacilityManagement/Room/ListRoom.jsp").forward(request, response);
                         break;
                     default:
                         response.sendRedirect("Admin/FacilityManagement/ListFacility.jsp");
@@ -102,7 +102,7 @@ public class FacilityController extends HttpServlet {
 
         List<String> validationErrors;
         String action = request.getParameter("action");
-        String id = request.getParameter("Id");
+        String facilityType = request.getParameter("facilityType");
         switch (action) {
 
             case "create":
@@ -122,30 +122,17 @@ public class FacilityController extends HttpServlet {
                         request.setAttribute("error", ex.getMessage());
                     }
                 } else {
+
                     request.setAttribute("error", String.join(" - ", validationErrors));
                 }
-                request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request, response);
-                break;
+                if (facilityType.equals("villa")) {
+                    request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request, response);
+                } else if (facilityType.equals("house")) {
+                    request.getRequestDispatcher("Admin/FacilityManagement/House/CreateHouse.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("Admin/FacilityManagement/Room/CreateRoom.jsp").forward(request, response);
+                }
 
-            case "update":
-
-//                UpdateEmployeeDto updateEmployeeDto = new UpdateEmployeeDto(request);
-//                validationErrors = facilityValidator.validateCreateFacilityDto(createFacilityDto);
-//                if (validationErrors.isEmpty()) {
-//                    try {
-//                        facilityService.updateEmployee(id, updateEmployeeDto);
-//                        String message = "Update employee successfully!";
-//                        request.setAttribute("message", message);
-//                        request.getRequestDispatcher("Admin/EmployeeManagement/SuccessToast.jsp").forward(request, response);
-//
-//                    } catch (ConflictException ex) {
-//                        request.setAttribute("error", ex.getMessage());
-//                        request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
-//                    }
-//                } else {
-//                    request.setAttribute("error", String.join(", ", validationErrors));
-//                    request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
-//                }
                 break;
 
             default:

@@ -19,7 +19,7 @@
 
         <div class="bg-gray-50">
             <%@ include file="/layout/header.jsp" %>
-            
+
             <div>
                 <!--
                   Mobile filter dialog
@@ -27,13 +27,13 @@
                   Off-canvas filters for mobile, show/hide based on off-canvas filters state.
                 -->
                 <div class="relative z-40 sm:hidden" role="dialog" aria-modal="true">
-                  
+
                     <!-- Off-canvas menu backdrop -->
                     <div id="menuBackdrop" class="fixed inset-0 bg-black bg-opacity-25" style="display: none;"></div>
                     <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 
                     <div class="fixed inset-0 z-40 flex">
-                       
+
                         <div class="hidden relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
                             <div class="flex items-center justify-between px-4">
                                 <h2 class="text-lg font-medium text-gray-900">Filters</h2>
@@ -54,7 +54,7 @@
                                         <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400" aria-controls="filter-section-1" aria-expanded="false">
                                             <span class="font-medium text-gray-900">Color</span>
                                             <span class="ml-6 flex items-center">
-                                              
+
                                                 <svg class="rotate-0 h-5 w-5 transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                                                 </svg>
@@ -196,7 +196,7 @@
                                                     </svg>
                                                 </button>
 
-                                  
+
                                                 <div class="color-selection hidden absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     <form class="space-y-4">
                                                         <div class="flex items-center">
@@ -234,7 +234,7 @@
                                                     </svg>
                                                 </button>
 
-                    
+
                                                 <div class="size-selection hidden absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     <form class="space-y-4">
                                                         <div class="flex items-center">
@@ -281,18 +281,23 @@
                                 <div aria-hidden="true" class="hidden h-5 w-px bg-gray-300 sm:ml-4 sm:block"></div>
 
                                 <div class="mt-2 sm:ml-4 sm:mt-0">
-                                    <div class="-m-1 flex flex-wrap items-center">
-                                        <span class="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900">
-                                            <span>Objects</span>
-                                            <button type="button" class="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500">
-                                                <span class="sr-only">Remove filter for Objects</span>
-                                                <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-                                                <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
-                                                </svg>
-                                            </button>
+                                    <div class="-m-1 flex flex-wrap items-center" id="filter-buttons">
+                                        <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="All">
+                                            <span>All</span>
+                                        </span>
+                                        <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="Villa">
+                                            <span>Villa</span>
+                                        </span>
+                                        <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="House">
+                                            <span>House</span>
+                                        </span>
+                                        <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="Room">
+                                            <span>Room</span>
                                         </span>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </section>
@@ -302,18 +307,23 @@
                         <h2 id="products-heading" class="sr-only">Products</h2>
 
                         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                        
+
+
                             <c:forEach items="${facilities}" var="c">
-                             <a href="/ResortHub/FacilityController?action=getById&id=${c.id}" class="group">
-                                <div class="max-w-[300px] max-h-[200px] overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                                    <img src="${c.imgSrc}" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-scale-down object-center group-hover:opacity-75">
+                                <div class="facility-item" data-type="${c.facilityType}">
+                                    <a href="/ResortHub/FacilityController?action=getById&id=${c.id}" class="group">
+                                        <div class="max-w-[300px] max-h-[200px] overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                            <img src="${c.imgSrc}" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-scale-down object-center group-hover:opacity-75">
+                                        </div>
+                                        <h3 class="mt-4 text-sm text-gray-700">${c.name} | ${c.facilityType}</h3>
+                                        <p class="mt-1 text-lg font-medium text-gray-900">$${c.rentalCost}</p>
+                                    </a>
                                 </div>
-                                <h3 class="mt-4 text-sm text-gray-700">${c.name} | ${c.facilityType}</h3>
-                                <p class="mt-1 text-lg font-medium text-gray-900">$${c.rentalCost}</p>
-                            </a>
                             </c:forEach>
-                            
-                   
+
+
+
+
                         </div>
                     </section>
                 </main>

@@ -89,7 +89,7 @@
                             <h3 class="sr-only">Description</h3>
 
                             <div class="space-y-6 text-base text-gray-700">
-                                <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
+                                <p>As you approach the gated entrance, a winding cobblestone driveway leads you through meticulously manicured gardens adorned with vibrant blooms and fragrant herbs. Tall cypress trees stand sentinel along the path, guiding you to the grand entrance of the villa.</p>
                             </div>
                         </div>
 
@@ -101,7 +101,7 @@
                                     <li class="text-gray-400"><span class="text-gray-600">Area: ${c.area} m2</span></li>
                                     <li class="text-gray-400"><span class="text-gray-600">$Rent type: ${c.rentType}</span></li>
                                     <li class="text-gray-400"><span class="text-gray-600">Facility type: ${c.facilityType}</span></li>
-                                    <li class="text-gray-400"><span class="text-gray-600">${c.area}</span></li>
+                                   
                                 </ul>
                             </div>
                         </div>

@@ -25,12 +25,10 @@
                             </div>
                             <div class=" mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-9 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                                 <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80 hover:opacity-80">
-                                    <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=villa&role=admin">
+                                    <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=villa">
                                         <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlsbGF8ZW58MHx8MHx8fDA%3D" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
                                         <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                                         <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
-
-
                                         <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
 
                                             <span class="absolute inset-0"></span>
@@ -40,8 +38,8 @@
                                 </article>
 
                                 <!-- More posts... -->
-                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
-                                    <a href="/ResortHub/Admin/FacilityManagement/Villa/ListVilla.jsp">
+                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80 hover:opacity-80">
+                                            <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=house">
                                         <img src="https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGhvdXNlfGVufDB8fDB8fHww" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
                                         <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                                         <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
@@ -59,14 +57,14 @@
 
 
 
-                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+                                <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80 hover:opacity-80">
                                     <img src="https://plus.unsplash.com/premium_photo-1674676471380-1258cb31b3ac?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9vbXxlbnwwfHwwfHx8MA%3D%3D" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
                                     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                                     <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
 
 
                                     <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
-                                        <a href="#">
+                                               <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=room">
                                             <span class="absolute inset-0"></span>
                                             Room Management
                                         </a>

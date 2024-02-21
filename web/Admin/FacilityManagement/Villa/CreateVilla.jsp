@@ -11,12 +11,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <%@ include file="../../AdminNav.jsp" %>
     <br />
+            <a href="/ResortHub/FacilityController?action=getAll&facilityType=villa" class="text-sm font-semibold leading-6 hover:text-indigo-500 text-gray-600 py-16 ml-6"><span aria-hidden="true">←</span> Back to Villa Management</a>
 
-    <div class="px-9 sm:px-6 lg:px-16">
+    <div class="px-9 sm:px-6 lg:px-16 mt-9">
       <form
         name="CreateFacility"
         method="POST"
-        action="/ResortHub/FacilityController?action=create"
+        action="/ResortHub/FacilityController?action=create&facilityType=villa"
       >
         <div class="space-y-12">
           <div class="border-b border-gray-900/10 pb-12">

@@ -48,7 +48,7 @@
           <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
             >Features</a
           >
-          <a href="http://localhost:8080/ResortHub/FacilityController?action=getAll&facilityType=villa&role=user" class="text-sm font-semibold leading-6 text-gray-900"
+          <a href="http://localhost:8080/ResortHub/FacilityController?action=getMarketplaceItem" class="text-sm font-semibold leading-6 text-gray-900"
             >Marketplace</a
           >
           <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
