@@ -29,8 +29,13 @@ public class FacilityValidator {
         validateArea(createFacilityDto.getArea(), errMsg);
         validateRentalCost(createFacilityDto.getRentalCost(), errMsg);
         validateMaxOccupancy(createFacilityDto.getMaxOccupancy(), errMsg);
-        validateFloors(createFacilityDto.getFacilityType(), createFacilityDto.getVilla(), createFacilityDto.getHouse(),
-                createFacilityDto.getRoom(), errMsg);
+
+        FacilityType facilityType = createFacilityDto.getFacilityType();
+        if (facilityType == FacilityType.Villa || facilityType == FacilityType.House) {
+            validateFloors(createFacilityDto.getFacilityType(), createFacilityDto.getVilla(),
+                    createFacilityDto.getHouse(),
+                    createFacilityDto.getRoom(), errMsg);
+        }
 
         // Add more validations as needed
 

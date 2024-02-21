@@ -3,6 +3,8 @@ package Services;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Domain.Enums.UserRole;
+import Domain.Models.User;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.UserEntity;
 
@@ -18,4 +20,19 @@ public class UserService extends RepositoryBase<UserEntity> {
         return "Users";
     }
 
+    public User getUserByUsername(String username) {
+        UserEntity entity = super.getByValue("Username", username);
+
+        return entity != null ? mapEntityToUser(entity) : null;
+    }
+
+    private User mapEntityToUser(UserEntity entity) {
+        User user = new User();
+        user.setId(entity.getId());
+        user.setUsername(entity.getUsername());
+        user.setPassword(entity.getPassword());
+        user.setUserRole(UserRole.fromIndex(entity.getUserRole()));
+
+        return user;
+    }
 }
