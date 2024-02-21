@@ -28,6 +28,10 @@
         <servlet-name>BookingController</servlet-name>
         <servlet-class>Api.Controllers.BookingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthController</servlet-name>
+        <servlet-class>Api.Controllers.AuthController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeController</servlet-name>
         <url-pattern>/EmployeeController</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>BookingController</servlet-name>
         <url-pattern>/BookingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthController</servlet-name>
+        <url-pattern>/AuthController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
