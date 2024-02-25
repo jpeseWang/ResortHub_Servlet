@@ -97,7 +97,7 @@ ALTER TABLE
 
 
 
-    ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
 ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 

@@ -31,13 +31,13 @@ public class BookingService extends RepositoryBase<BookingEntity> {
     }
 
     public List<Booking> getAllBookings() {
-        List<Booking> Bookings = new ArrayList<>();
+        List<Booking> bookings = new ArrayList<>();
         List<BookingEntity> entities = super.getAll();
 
         for (BookingEntity entity : entities)
-            Bookings.add(mapEntityToBooking(entity));
+            bookings.add(mapEntityToBooking(entity));
 
-        return Bookings;
+        return bookings;
     }
 
     public Booking getBookingById(String id) {
@@ -48,6 +48,34 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         booking.setFacility(facilityService.getFacilityById(entity.getFacilityId()));
 
         return booking;
+    }
+
+    public List<Booking> getBookingsByYear(int year) {
+        String query = String.format(
+                "SELECT * FROM %s WHERE YEAR(BookingDate) = %d ORDER BY BookingDate DESC, StartDate DESC, EndDate ASC;",
+                getTableName(), year);
+
+        List<BookingEntity> entities = super.executeQuery(query, new ArrayList<Object>());
+        List<Booking> bookings = new ArrayList<>();
+
+        for (BookingEntity entity : entities)
+            bookings.add(mapEntityToBooking(entity));
+
+        return bookings;
+    }
+
+    public List<Booking> getBookingsByYearAndMonth(int year, int month) {
+        String query = String.format(
+                "SELECT * FROM %s WHERE YEAR(BookingDate) = %d AND MONTH(BookingDate) = %d ORDER BY BookingDate DESC, StartDate DESC, EndDate ASC;",
+                getTableName(), year, month);
+
+        List<BookingEntity> entities = super.executeQuery(query, new ArrayList<>());
+        List<Booking> bookings = new ArrayList<>();
+
+        for (BookingEntity entity : entities)
+            bookings.add(mapEntityToBooking(entity));
+
+        return bookings;
     }
 
     public void createBooking(CreateBookingDto dto) {
@@ -65,7 +93,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         super.executeNonQuery(query, params);
     }
 
-     public void deleteBooking(String id) {
+    public void deleteBooking(String id) {
         BookingEntity entity = super.getById(id);
 
         if (entity == null) {
@@ -78,7 +106,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
 
         super.executeNonQuery(query, params);
     }
-    
+
     private Booking mapEntityToBooking(BookingEntity entity) {
         Booking booking = new Booking();
         booking.setBookingDate(entity.getBookingDate());

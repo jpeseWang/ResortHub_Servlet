@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 import Config.DbConnection;
-import Utils.ConvertUtils;
 
 public abstract class RepositoryBase<TEntity> {
 
