@@ -36,3 +36,9 @@ VALUES
     ('KH-0013', 'Matthew Taylor', '1996-01-15', 'Male', '345678901234', '1234567890', 'matthew.taylor@example.com', 3, '1010 Elm St'),
     ('KH-0014', 'Olivia Brown', '1993-05-20', 'Female', '456789012345', '8901234567', 'olivia.brown@example.com', 2, '1111 Pine St'),
     ('KH-0015', 'Daniel Wilson', '1985-09-08', 'Male', '567890123456', '5678901234', 'daniel.wilson@example.com', 1, '1212 Maple St');
+
+INSERT INTO Users (Username, Password, UserRole, CustomerId) VALUES 
+('admin1', 'admin1password', 1, 'KH-0000'),
+('admin2', 'admin2password', 1, 'KH-0000'),
+('user1', 'user1password', 2, 'KH-0001'),
+('user2', 'user2password', 2, 'KH-0002');
