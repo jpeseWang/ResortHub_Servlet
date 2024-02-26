@@ -14,7 +14,7 @@ CREATE TABLE "Villas"(
 ALTER TABLE
     "Villas" ADD CONSTRAINT "villas_id_primary" PRIMARY KEY("Id");
 CREATE TABLE "RentalContracts"(
-    "Id" INT NOT NULL,
+    "Id" INT IDENTITY(1,1) NOT NULL,
     "BookingId" INT NOT NULL,
     "Deposit" DECIMAL(18, 2) NOT NULL,
     "TotalAmount" DECIMAL(18, 2) NOT NULL
@@ -66,7 +66,7 @@ CREATE TABLE "Employees"(
 ALTER TABLE
     "Employees" ADD CONSTRAINT "employees_id_primary" PRIMARY KEY("Id");
 CREATE TABLE "Bookings"(
-    "Id" INT NOT NULL,
+    "Id" INT IDENTITY(1,1) NOT NULL,
     "BookingDate" DATE NOT NULL,
     "StartDate" DATE NOT NULL,
     "EndDate" DATE NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE "Bookings"(
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_id_primary" PRIMARY KEY("Id");
 CREATE TABLE "Users"(
-    "Id" INT NOT NULL,
+    "Id" INT IDENTITY(1,1) NOT NULL,
     "Username" NVARCHAR(255) NOT NULL,
     "Password" NVARCHAR(255) NOT NULL,
     "UserRole" INT NOT NULL
@@ -112,7 +112,3 @@ ADD ImgSrc NVARCHAR(255);
 ALTER TABLE "Users"
 ADD CustomerId NVARCHAR(7);
 
-ALTER TABLE "Users" ADD CONSTRAINT "User_Customer_fk" FOREIGN KEY ("CustomerId") REFERENCES "Customers"("Id");
-
-ALTER TABLE Users
-DROP CONSTRAINT User_Customer_fk;
