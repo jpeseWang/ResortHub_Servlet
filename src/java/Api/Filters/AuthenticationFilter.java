@@ -16,6 +16,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -45,6 +46,22 @@ public class AuthenticationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+
+        String uri = req.getRequestURI();
+        System.out.println("URI: " + uri);
+
+        if (uri.contains("login") || uri.contains("login.jsp")) {
+            chain.doFilter(request, response);
+        } else {
+            String resource = uri.substring(uri.lastIndexOf("/") + 1);
+
+            if (resource.endsWith(".jsp")) {
+                resource = resource.substring(0, resource.length() - 4);
+            }
+
+            HttpSession session = req.getSession();
+        }
+
     }
 
     /**
