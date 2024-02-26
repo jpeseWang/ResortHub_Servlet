@@ -7,6 +7,8 @@ public class User {
     private String username;
     private String password;
     private UserRole userRole;
+    private String customerId;
+    private Customer customer;
 
     public User() {
     }
@@ -28,6 +30,14 @@ public class User {
         return userRole;
     }
 
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -43,5 +53,13 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

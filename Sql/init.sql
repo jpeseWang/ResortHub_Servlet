@@ -107,3 +107,9 @@ ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERE
 -- Add the ImgSrc to Facilities table
 ALTER TABLE Facilities
 ADD ImgSrc NVARCHAR(255);
+
+-- Update user login
+ALTER TABLE "Users"
+ADD CustomerId NVARCHAR(7);
+
+ALTER TABLE "Users" ADD CONSTRAINT "User_Customer_fk" FOREIGN KEY ("CustomerId") REFERENCES "Customers"("Id");

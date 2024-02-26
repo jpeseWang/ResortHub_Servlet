@@ -20,6 +20,12 @@ public class UserService extends RepositoryBase<UserEntity> {
         return "Users";
     }
 
+    public User getUserById(int id) {
+        UserEntity entity = super.getById(id);
+
+        return entity != null ? mapEntityToUser(entity) : null;
+    }
+
     public User getUserByUsername(String username) {
         UserEntity entity = super.getByValue("Username", username);
 
@@ -32,6 +38,7 @@ public class UserService extends RepositoryBase<UserEntity> {
         user.setUsername(entity.getUsername());
         user.setPassword(entity.getPassword());
         user.setUserRole(UserRole.fromIndex(entity.getUserRole()));
+        user.setCustomerId(entity.getCustomerId());
 
         return user;
     }
