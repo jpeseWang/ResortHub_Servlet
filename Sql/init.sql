@@ -41,7 +41,8 @@ CREATE TABLE "Facilities"(
     "RentalCost" DECIMAL(18, 2) NOT NULL,
     "MaxOccupancy" INT NOT NULL,
     "RentType" NVARCHAR(50) NOT NULL,
-    "FacilityType" INT NOT NULL
+    "FacilityType" INT NOT NULL,
+    "ImgSrc" NVARCHAR(255)
 );
 ALTER TABLE
     "Facilities" ADD CONSTRAINT "facilities_id_primary" PRIMARY KEY("Id");
@@ -79,7 +80,8 @@ CREATE TABLE "Users"(
     "Id" INT IDENTITY(1,1) NOT NULL,
     "Username" NVARCHAR(255) NOT NULL,
     "Password" NVARCHAR(255) NOT NULL,
-    "UserRole" INT NOT NULL
+    "UserRole" INT NOT NULL,
+    "CustomerId" NVARCHAR(7)
 );
 ALTER TABLE
     "Users" ADD CONSTRAINT "users_id_primary" PRIMARY KEY("Id");
@@ -102,13 +104,4 @@ ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFE
 ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
 ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
-
-
--- Add the ImgSrc to Facilities table
-ALTER TABLE Facilities
-ADD ImgSrc NVARCHAR(255);
-
--- Update user login
-ALTER TABLE "Users"
-ADD CustomerId NVARCHAR(7);
 

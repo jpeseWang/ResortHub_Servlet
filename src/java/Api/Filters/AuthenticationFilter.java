@@ -61,7 +61,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        if (user.getUserRole() == UserRole.Admin) {
+        if (user.getUserRole() != UserRole.Admin) {
             res.sendRedirect("/ResortHub/components/Forbidden.jsp");
             return;
         }

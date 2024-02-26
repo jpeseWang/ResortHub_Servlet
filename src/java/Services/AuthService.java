@@ -21,11 +21,14 @@ public class AuthService {
         if (user == null) {
             throw new NotFoundException("Username not found.");
         }
-
         HttpSession session = request.getSession();
 
+        if (session != null) {
+            session.removeAttribute("User");
+        }
+
         if (user.getPassword().equals(password)) {
-            session.setAttribute("user", user);
+            session.setAttribute("User", user);
         } else {
             throw new UnauthorizedException("Username or Password incorrect");
         }

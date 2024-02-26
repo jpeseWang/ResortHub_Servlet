@@ -3,6 +3,7 @@ package Api.Controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import Domain.Exceptions.NotFoundException;
 import Domain.Exceptions.UnauthorizedException;
 import Services.AuthService;
 import jakarta.servlet.ServletException;
@@ -31,12 +32,14 @@ public class AuthController extends HttpServlet {
 
         if (username == null || password == null) {
             response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+            return;
         }
 
         try {
             authService.login(request, username, password);
-        } catch (Exception ex) {
+        } catch (UnauthorizedException | NotFoundException ex) {
             response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+            return;
         }
 
         response.sendRedirect("/ResortHub/pages/Home/index.jsp");
