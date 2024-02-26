@@ -113,3 +113,6 @@ ALTER TABLE "Users"
 ADD CustomerId NVARCHAR(7);
 
 ALTER TABLE "Users" ADD CONSTRAINT "User_Customer_fk" FOREIGN KEY ("CustomerId") REFERENCES "Customers"("Id");
+
+ALTER TABLE Users
+DROP CONSTRAINT User_Customer_fk;
