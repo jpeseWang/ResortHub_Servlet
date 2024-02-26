@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
- */
 package Api.Filters;
 
+import Domain.Common.PageRegistry;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.util.Arrays;
+
+import Domain.Enums.UserRole;
+import Domain.Models.User;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -18,10 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/**
- *
- * @author PC0
- */
 public class AuthenticationFilter implements Filter {
 
     // The filter configuration object we are associated with. If
@@ -48,20 +42,31 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        System.out.println("URI: " + uri);
+        System.out.println("[URI]: " + uri);
 
-        if (uri.contains("login") || uri.contains("login.jsp")) {
+        if (uri.endsWith("login.jsp")) {
             chain.doFilter(request, response);
-        } else {
-            String resource = uri.substring(uri.lastIndexOf("/") + 1);
-
-            if (resource.endsWith(".jsp")) {
-                resource = resource.substring(0, resource.length() - 4);
-            }
-
-            HttpSession session = req.getSession();
+            return;
         }
 
+        HttpSession session = req.getSession(false);
+        User user = null;
+
+        if (session != null) {
+            user = (User) session.getAttribute("User");
+        }
+
+        if (session == null || user == null) {
+            res.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+            return;
+        }
+
+        if (user.getUserRole() == UserRole.Admin) {
+            res.sendRedirect("/ResortHub/components/Forbidden.jsp");
+            return;
+        }
+
+        chain.doFilter(request, response);
     }
 
     /**
