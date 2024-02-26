@@ -84,11 +84,11 @@
                             <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                 <select name="Position" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                     <option <c:if test="${c.position.getIndex() eq '1'}">selected</c:if> value="1">Receptionist</option>  
-                                <option <c:if test="${c.position.getIndex() eq '1'}">selected</c:if> value="2">Server</option> 
-                                <option <c:if test="${c.position.getIndex() eq '1'}">selected</c:if> value="3">Specialist</option> 
-                                <option <c:if test="${c.position.getIndex() eq '1'}">selected</c:if> value="4">Supervisor</option> 
-                                <option <c:if test="${c.position.getIndex() eq '1'}">selected</c:if> value="5">Manager</option> 
-                                <option <c:if test="${c.position.getIndex() eq '1'}">selected</c:if> value="6">Director</option>  
+                                <option <c:if test="${c.position.getIndex() eq '2'}">selected</c:if> value="2">Server</option> 
+                                <option <c:if test="${c.position.getIndex() eq '3'}">selected</c:if> value="3">Specialist</option> 
+                                <option <c:if test="${c.position.getIndex() eq '4'}">selected</c:if> value="4">Supervisor</option> 
+                                <option <c:if test="${c.position.getIndex() eq '5'}">selected</c:if> value="5">Manager</option> 
+                                <option <c:if test="${c.position.getIndex() eq '6'}">selected</c:if> value="6">Director</option>  
                                 </select>  
                             </dd>
                         </div>
@@ -108,6 +108,6 @@
         </div>
 
 
- <%@ include file="/layout/footer.jsp" %>
+        <%@ include file="/layout/footer.jsp" %>
     </body>
 </html>

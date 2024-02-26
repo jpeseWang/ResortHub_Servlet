@@ -66,7 +66,7 @@ public class EmployeeController extends HttpServlet {
 
             case "create":
                 CreateEmployeeDto createEmployeeDto = new CreateEmployeeDto(request);
-                request.setAttribute("formData", createEmployeeDto);
+                request.setAttribute("employee", createEmployeeDto);
                 validationErrors = employeeValidator.validateCreateEmployeeDto(createEmployeeDto);
                 if (validationErrors.isEmpty()) {
                     try {

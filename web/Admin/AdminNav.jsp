@@ -97,7 +97,7 @@
 
                         <!--                        Promotion-->
                         <a
-                            href="/ResortHub/BookingController?action=getAll"
+                            href="/ResortHub/Admin/PromotionManagement/ListPromotion.jsp"
                             class="border-transparent text-gray-400 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium"
                             >
                        

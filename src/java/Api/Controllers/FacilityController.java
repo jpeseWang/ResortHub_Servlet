@@ -45,7 +45,6 @@ public class FacilityController extends HttpServlet {
         java.util.List<Facility> facilities = facilityService.getAllFacilities();
 
         String id = request.getParameter("id");
-
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
        
@@ -106,9 +105,8 @@ public class FacilityController extends HttpServlet {
         switch (action) {
 
             case "create":
-
                 CreateFacilityDto createFacilityDto = new CreateFacilityDto(request);
-                request.setAttribute("formData", createFacilityDto);
+                request.setAttribute("facility", createFacilityDto);
                 validationErrors = facilityValidator.validateCreateFacilityDto(createFacilityDto);
                 if (validationErrors.isEmpty()) {
                     try {
@@ -122,10 +120,10 @@ public class FacilityController extends HttpServlet {
                         request.setAttribute("error", ex.getMessage());
                     }
                 } else {
-
                     request.setAttribute("error", String.join(" - ", validationErrors));
                 }
                 if (facilityType.equals("villa")) {
+                    
                     request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request, response);
                 } else if (facilityType.equals("house")) {
                     request.getRequestDispatcher("Admin/FacilityManagement/House/CreateHouse.jsp").forward(request, response);

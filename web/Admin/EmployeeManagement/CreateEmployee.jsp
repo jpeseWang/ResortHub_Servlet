@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="Domain.DTOs.EmployeeDto.CreateEmployeeDto" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     CreateEmployeeDto formData = (CreateEmployeeDto) request.getAttribute("formData");
 %>
@@ -36,7 +36,7 @@
                                 <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Employee ID</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input <% if (formData != null) {%>value="<%= formData.getId()%>"<% } %> type="text" name="Id" placeholder="Ex: NV-0000" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <input value="${employee.id}" type="text" name="Id" placeholder="Ex: NV-0000" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                 <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Full name</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input  <% if (formData != null) {%>value="<%= formData.getFullName()%>"<% } %> type="text" name="FullName" placeholder="Ex: Tran Quang Huy" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <input  value="${employee.fullName}" type="text" name="FullName" placeholder="Ex: Tran Quang Huy" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                 <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Birthday</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="date" name="BirthDate" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <input type="date" value="${employee.birthDate}" name="BirthDate" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                             <div class="sm:col-span-4">
                                 <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Gender</label>
                                 <div class="mt-2">
-                                    <select <% if (formData != null) {%>value="<%= formData.getGender()%>"<% } %> id="country" name="Gender" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                    <select value="${employee.gender}" name="Gender"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
                                         <option>Male</option>
                                         <option>Female</option>                          
                                     </select>
@@ -72,14 +72,14 @@
                             <div class="sm:col-span-3">
                                 <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Identification Number</label>
                                 <div class="mt-2">
-                                    <input <% if (formData != null) {%>value="<%= formData.getIdNumber()%>"<% } %> type="text" name="IdNumber" placeholder="It should have 9 or 12 digits" id="first-name" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <input value="${employee.idNumber}" type="text" name="IdNumber" placeholder="It should have 9 or 12 digits" id="first-name" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-3">
                                 <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                                 <div class="mt-2">
-                                    <input <% if (formData != null) {%>value="<%= formData.getPhoneNumber()%>"<% } %> type="text" name="PhoneNumber" placeholder="It should start with 0 and have 10 digits" id="last-name" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <input value="${employee.phoneNumber}" type="text" name="PhoneNumber" placeholder="It should start with 0 and have 10 digits" id="last-name" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -87,7 +87,7 @@
                                 <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input <% if (formData != null) {%>value="<%= formData.getEmail()%>"<% } %> type="text" name="Email" placeholder="Ex: employe0@gmail.com" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <input value="${employee.email}" type="text" name="Email" placeholder="Ex: employe0@gmail.com" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
                                     </div>
                                 </div>
                             </div>
@@ -95,31 +95,31 @@
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Qualification</label>
                                 <div class="mt-2">           
-                                    <select <% if (formData != null) {%>value="<%= formData.getQualification()%>"<% } %> id="country" name="Qualification" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        <option value=1>Intermediate</option>  
-                                        <option value="2">College</option> 
-                                        <option value="3">University</option> 
-                                        <option value="4">PostGraduate</option> 
+                                    <select id="country" name="Qualification" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                        <option value="1" <c:if test="${employee.qualification.getIndex() eq '1'}">selected</c:if>>Intermediate</option>
+                                        <option value="2" <c:if test="${employee.qualification.getIndex() eq '2'}">selected</c:if>>College</option>
+                                        <option value="3" <c:if test="${employee.qualification.getIndex() eq '3'}">selected</c:if>>University</option>
+                                        <option value="4" <c:if test="${employee.qualification.getIndex() eq '4'}">selected</c:if>>PostGraduate</option>
                                     </select> 
                                 </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="region" class="block text-sm font-medium leading-6 text-gray-900">Position</label>
                                 <div class="mt-2">
-                                    <select <% if (formData != null) {%>value="<%= formData.getPosition()%>"<% }%> id="country" name="Position" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        <option value="1">Receptionist</option>  
-                                        <option value="2">Server</option> 
-                                        <option value="3">Specialist</option> 
-                                        <option value="4">Supervisor</option> 
-                                        <option value="5">Manager</option> 
-                                        <option value="6">Director</option>  
+                                    <select id="country" name="Position" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                                       <option <c:if test="${employee.position.getIndex() eq '1'}">selected</c:if> value="1">Receptionist</option>  
+                                <option <c:if test="${employee.position.getIndex() eq '2'}">selected</c:if> value="2">Server</option> 
+                                <option <c:if test="${employee.position.getIndex() eq '3'}">selected</c:if> value="3">Specialist</option> 
+                                <option <c:if test="${employee.position.getIndex() eq '4'}">selected</c:if> value="4">Supervisor</option> 
+                                <option <c:if test="${employee.position.getIndex() eq '5'}">selected</c:if> value="5">Manager</option> 
+                                <option <c:if test="${employee.position.getIndex() eq '6'}">selected</c:if> value="6">Director</option>  
                                     </select>                                    
                                 </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Salary</label>
                                 <div class="mt-2">
-                                    <input  type="text" name="Salary" placeholder="Ex: 50,000,000" id="website" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
+                                    <input value="${employee.salary}" type="text" name="Salary" placeholder="Ex: 50,000,000" id="website" class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
                                 </div>
                             </div>
 
