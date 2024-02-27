@@ -1,10 +1,6 @@
-<%-- 
-    Document   : login
-    Created on : Jan 5, 2024, 11:30:06 PM
-    Author     : jpesewang
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +12,7 @@
         <jsp:include page="../../layout/header.jsp"/>  
         <div class="flex min-h-full flex-1 flex-col justify-center py-12 p-0">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img class="mx-auto h-12 w-auto" src="../../assets/images/logo.png" alt="Your Company" />
+                <img class="mx-auto h-12 w-auto" src="https://github.com/jpeseWang/ResortHub_Servlet/blob/main/web/assets/images/logo.png?raw=true" alt="Your Company" />
                 <h2 class="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">
                     WELCOME TO RESORT HUB BOOKING SITE
                 </h2>
@@ -77,6 +73,8 @@
                                     </a>
                                 </div>
                             </div>
+                            <span class="text-red-400 font-medium text-base">${requestScope.error}</span>
+
                             <p class="text-center font-light text-sm text-gray-500 py-3 px-4">
                                 By logging in, you agree to Resort Hub&apos;s
                                 <span class="underline">Privacy Policy</span> and
@@ -98,12 +96,7 @@
                 </form>
                 <div class="mt-10">
                     <div class="relative">
-                        <!--                    <div class="inset-0 flex items-center" aria-hidden="true">
-                                                 <div class="w-full border-t border-gray-200"></div> 
-                                                <div class="flex justify-center text-sm font-medium leading-6">
-                                                    <span class="bg-white px-6 text-gray-900 text-center">OR</span>
-                                                </div>
-                                            </div>-->
+                   
 
                         <div class="mt-6 gap-4">
                             <div class="cursor-pointer flex w-full items-center justify-center gap-3 rounded-md px-3 py-1.5 text-gray-600 hover:bg-gray-100 focus-visible:outline ring-2 ring-gray-300">

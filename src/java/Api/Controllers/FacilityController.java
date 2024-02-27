@@ -7,6 +7,7 @@ import Domain.DTOs.FacilityDto.CreateFacilityDto;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Employee;
 import Domain.Models.Facility;
+import Domain.Models.MaintenanceFacility;
 import Services.EmployeeService;
 import Services.FacilityService;
 import java.io.IOException;
@@ -85,6 +86,10 @@ public class FacilityController extends HttpServlet {
                 break;
 
             case "getListMaintenance":
+
+                java.util.List<MaintenanceFacility> maintenanceFacilityList = facilityService.getFacilitiesForMaintenance(2024, 2);
+                request.setAttribute("maintenanceFacility", maintenanceFacilityList);
+                request.getRequestDispatcher("Admin/FacilityManagement/ListFacilityMaintenance.jsp").forward(request, response);
                 break;
 
             case "delete":
