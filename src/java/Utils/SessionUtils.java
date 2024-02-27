@@ -15,4 +15,9 @@ public class SessionUtils {
 
         return user;
     }
+    public static logOut(){
+        HttpSession session = request.getSession();
+        session.removeAttribute("User");
+        response.sendRedirect("/ResortHub/pages/Home/index.jsp");
+   }
 }

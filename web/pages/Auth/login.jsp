@@ -26,7 +26,7 @@
                 <form class="space-y-4"  
                       name="AuthController"
                       method="POST"
-                      action="/ResortHub/AuthController">
+                      action="/ResortHub/AuthController?action=login">
                     <div>
                         <div class="mt-2">
                             <input
