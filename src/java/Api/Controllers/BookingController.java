@@ -5,8 +5,10 @@
 package Api.Controllers;
 
 import Domain.DTOs.BookingDto.CreateBookingDto;
+import Domain.Enums.UserRole;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Employee;
+import Domain.Models.User;
 import Services.EmployeeService;
 import Services.BookingService;
 import Domain.Models.Booking;
@@ -72,9 +74,16 @@ public class BookingController extends HttpServlet {
         switch (action) {
             case "createBooking":
                 CreateBookingDto createBookingDto = new CreateBookingDto(request);
-                createBookingDto.setCustomerId(SessionUtils.getUserFromSession(request).getCustomerId());
+                User user = SessionUtils.getUserFromSession(request);
+                if (user == null) {
+                    response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+                }
+                if (user.getUserRole() == UserRole.Admin) {
+                    response.sendRedirect("/ResortHub/components/Forbidden.jsp");
+                }
+                createBookingDto.setCustomerId(user.getCustomerId());
                 BookingService.createBooking(createBookingDto);
-                String message = "Create customer successfully!";
+                String message = "Create booking successfully!";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
 
