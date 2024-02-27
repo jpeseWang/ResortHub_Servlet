@@ -77,9 +77,11 @@ public class BookingController extends HttpServlet {
                 User user = SessionUtils.getUserFromSession(request);
                 if (user == null) {
                     response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+                    return;
                 }
                 if (user.getUserRole() == UserRole.Admin) {
                     response.sendRedirect("/ResortHub/components/Forbidden.jsp");
+                    return;
                 }
                 createBookingDto.setCustomerId(user.getCustomerId());
                 BookingService.createBooking(createBookingDto);
