@@ -17,9 +17,4 @@ public class SessionUtils {
 
         return user;
     }
-    public static void logOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        session.removeAttribute("User");
-        response.sendRedirect("/ResortHub/pages/Home/index.jsp");
-    }
 }

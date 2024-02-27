@@ -3,6 +3,8 @@ package Services;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.io.IOException;
+
 import Domain.Exceptions.NotFoundException;
 import Domain.Exceptions.UnauthorizedException;
 import Domain.Models.User;
@@ -32,5 +34,10 @@ public class AuthService {
         } else {
             throw new UnauthorizedException("Username or Password incorrect");
         }
+    }
+
+    public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        session.removeAttribute("User");
     }
 }

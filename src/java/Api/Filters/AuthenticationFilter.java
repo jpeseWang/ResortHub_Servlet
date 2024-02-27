@@ -42,12 +42,13 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
-        System.out.println("[URI]: " + uri);
 
-        if (uri.endsWith("login.jsp")) {
-            chain.doFilter(request, response);
-            return;
-        }
+        /*
+         * if (uri.endsWith("login.jsp")) {
+         * chain.doFilter(request, response);
+         * return;
+         * }
+         */
 
         HttpSession session = req.getSession(false);
         User user = null;

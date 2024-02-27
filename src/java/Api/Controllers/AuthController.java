@@ -48,7 +48,7 @@ public class AuthController extends HttpServlet {
 
                 try {
                     authService.login(request, username, password);
-                    
+
                     User user = (User) session.getAttribute("User");
 
                     if (user != null) { // Check if user is not null
@@ -70,7 +70,8 @@ public class AuthController extends HttpServlet {
                 break;
 
             case "logout":
-                SessionUtils.logOut(request, response);
+                authService.logout(request);
+                response.sendRedirect("/ResortHub/pages/Home/index.jsp");
                 break;
 
             default:
