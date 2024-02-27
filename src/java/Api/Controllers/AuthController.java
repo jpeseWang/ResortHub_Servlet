@@ -1,5 +1,6 @@
 package Api.Controllers;
 
+import Domain.Enums.UserRole;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -7,10 +8,12 @@ import Domain.Exceptions.NotFoundException;
 import Domain.Exceptions.UnauthorizedException;
 import Domain.Models.User;
 import Services.AuthService;
+import Utils.SessionUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class AuthController extends HttpServlet {
 
@@ -45,13 +48,13 @@ public class AuthController extends HttpServlet {
 
                 try {
                     authService.login(request, username, password);
-                    HttpSession session = request.getSession();
+                    
                     User user = (User) session.getAttribute("User");
 
                     if (user != null) { // Check if user is not null
-                        if (user.getUserRole() == 1) {
+                        if (user.getUserRole() == UserRole.Admin) {
                             response.sendRedirect("/ResortHub/Admin/FacilityManagement/ListFacility.jsp");
-                        } else if (user.getUserRole() == 2) {
+                        } else if (user.getUserRole() == UserRole.User) {
                             response.sendRedirect("/ResortHub/components/Onboarding.jsp");
                         } else {
                             response.sendRedirect("/ResortHub/pages/Home/index.jsp");
@@ -67,7 +70,7 @@ public class AuthController extends HttpServlet {
                 break;
 
             case "logout":
-
+                SessionUtils.logOut(request, response);
                 break;
 
             default:

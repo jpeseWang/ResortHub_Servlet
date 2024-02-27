@@ -13,12 +13,27 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Facility Details</title>
         <script src="pages/Facility/MarketplaceScript.js"></script>
+        <script>
+            // Get the current date
+            var currentDate = new Date();
+
+            // Format the date to yyyy-mm-dd
+            var year = currentDate.getFullYear();
+            var month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Adding 1 to month since it's zero-indexed
+            var day = ('0' + currentDate.getDate()).slice(-2);
+            var formattedDate = year + '-' + month + '-' + day;
+
+            // Set the formatted date as the value of BookingDate input field
+            window.onload = function () {
+                document.getElementsByName('BookingDate')[0].value = formattedDate;
+            };
+        </script>
     </head>
     <body>
         <script type="text/javascript"><%@include file="MarketplaceScript.js" %></script>
 
         <%@ include file="/layout/header.jsp" %>
-         <c:set var="c" value="${facility}"/>
+        <c:set var="c" value="${facility}"/>
         <div class="bg-white">
             <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                 <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
@@ -36,17 +51,16 @@
                                     <span class="ring-transparent pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2" aria-hidden="true"></span>
                                 </button>
 
-                                <!-- More images... -->
                             </div>
                         </div>
 
                         <div class="">
-                            <!-- Tab panel, show/hide based on tab state. -->
+
                             <div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
                                 <img src="${c.imgSrc}" alt="Angled front view with bag zipped and handles upright." class="h-full w-full object-cover object-center sm:rounded-lg max-h-[524px]">
                             </div>
 
-                            <!-- More images... -->
+
                         </div>
                     </div>
 
@@ -59,31 +73,7 @@
                             <p class="text-3xl tracking-tight text-gray-900">$${c.rentalCost}</p>
                         </div>
 
-                        <!-- Reviews -->
-<!--                        <div class="mt-3">
-                            <h3 class="sr-only">Reviews</h3>
-                            <div class="flex items-center">
-                                <div class="flex items-center">
-                                     Active: "text-indigo-500", Inactive: "text-gray-300" 
-                                    <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                    </svg>
-                                    <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                    </svg>
-                                    <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                    </svg>
-                                    <svg class="h-5 w-5 flex-shrink-0 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                    </svg>
-                                    <svg class="h-5 w-5 flex-shrink-0 text-gray-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                                <p class="sr-only">4 out of 5 stars</p>
-                            </div>
-                        </div>-->
+
 
                         <div class="mt-6">
                             <h3 class="sr-only">Description</h3>
@@ -101,24 +91,44 @@
                                     <li class="text-gray-400"><span class="text-gray-600">Area: ${c.area} m2</span></li>
                                     <li class="text-gray-400"><span class="text-gray-600">$Rent type: ${c.rentType}</span></li>
                                     <li class="text-gray-400"><span class="text-gray-600">Facility type: ${c.facilityType}</span></li>
-                                   
+
                                 </ul>
                             </div>
                         </div>
 
-                        <form class="mt-6">
-                
-                            
-                            <div>
-                                 <h3 class="text-sm text-gray-600">Quantity</h3>
-                                 <select id="quantity-0" name="quantity-0" class="mt-2 w-[60px] max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                        <form class="mt-6"
+                              name="BookingController"
+                              method="POST"
+                              action="/ResortHub/BookingController?action=createBooking">
+                            <input name="BookingDate" value="0" class="hidden"/>
+                            <input name="CustomerId" value="0" class="hidden"/>
+                            <input name="FacilityId" value="${c.id}" class="hidden"/>
 
-                                                    <c:forEach begin="1" end="${c.maxOccupancy}" varStatus="loop">
-                                                        <option value="${loop.index}">${loop.index}</option>
-                                                    </c:forEach>
-                                                </select>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Check in date</h3>
+
+                                <input
+                                    type="date"
+                                    name="StartDate"
+                                    required
+                                    class="block w-[220px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+                                    />
                             </div>
-                                      
+
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Check out date</h3>
+
+                                <input
+                                    type="date"
+                                    name="EndDate"
+
+                                    required
+                                    class="block w-[220px]  rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+                                    />
+                            </div>
+
+
+
 
                             <div class="mt-10 flex">
                                 <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Book now</button>
@@ -157,7 +167,7 @@
                                     <div class="prose prose-sm pb-6" id="disclosure-1">
                                         <ul role="list">
                                             <li>Multiple strap configurations</li>
-                                           
+
                                         </ul>
                                     </div>
                                 </div>
