@@ -3,12 +3,16 @@ package Services;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
 import Domain.Enums.FacilityType;
 import Domain.Exceptions.ConflictException;
+import Domain.Models.Booking;
 import Domain.Models.Facility;
+import Domain.Models.MaintenanceFacility;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.FacilityEntity;
 
@@ -17,6 +21,8 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
     private VillaService villaService;
     private HouseService houseService;
     private RoomService roomService;
+
+    private BookingService bookingService;
 
     @Override
     protected String getTableName() {
@@ -64,6 +70,36 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         }
 
         return facility;
+    }
+
+    public List<MaintenanceFacility> getFacilitiesForMaintenance(int year, int month) {
+        BookingService bookingService = new BookingService();
+        List<Booking> bookings = bookingService.getBookingsByYearAndMonth(year, month);
+
+        Map<String, String> facilityIdToNameMap = new HashMap<>();
+
+        Map<String, Integer> facilityUsageCountMap = new HashMap<>();
+
+        for (Booking booking : bookings) {
+            String facilityId = booking.getFacilityId();
+            facilityUsageCountMap.put(facilityId, facilityUsageCountMap.getOrDefault(facilityId, 0) + 1);
+            facilityIdToNameMap.putIfAbsent(facilityId, booking.getFacility().getName());
+        }
+
+        List<MaintenanceFacility> maintenanceFacilities = new ArrayList<>();
+
+        for (Map.Entry<String, Integer> entry : facilityUsageCountMap.entrySet()) {
+            MaintenanceFacility maintenanceFacility = new MaintenanceFacility();
+            String facilityId = entry.getKey();
+
+            maintenanceFacility.setId(facilityId);
+            maintenanceFacility.setUsageCount(entry.getValue());
+            maintenanceFacility.setName(facilityIdToNameMap.getOrDefault(facilityId, "Unknown"));
+
+            maintenanceFacilities.add(maintenanceFacility);
+        }
+
+        return maintenanceFacilities;
     }
 
     public void createFacility(CreateFacilityDto dto) {
@@ -114,7 +150,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         facility.setRentType(entity.getRentType());
         facility.setFacilityType(FacilityType.fromIndex(entity.getFacilityType()));
         facility.setImgSrc(entity.getImgSrc());
-        
+
         return facility;
     }
 

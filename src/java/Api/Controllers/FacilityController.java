@@ -47,7 +47,7 @@ public class FacilityController extends HttpServlet {
         String id = request.getParameter("id");
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
-       
+
         switch (action) {
 
             case "getMarketplaceItem":
@@ -59,15 +59,18 @@ public class FacilityController extends HttpServlet {
                 switch (facilityType) {
                     case "villa":
                         request.setAttribute("facilities", facilities);
-                        request.getRequestDispatcher("Admin/FacilityManagement/Villa/ListVilla.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/FacilityManagement/Villa/ListVilla.jsp").forward(request,
+                                response);
                         break;
                     case "house":
                         request.setAttribute("facilities", facilities);
-                        request.getRequestDispatcher("Admin/FacilityManagement/House/ListHouse.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/FacilityManagement/House/ListHouse.jsp").forward(request,
+                                response);
                         break;
                     case "room":
                         request.setAttribute("facilities", facilities);
-                        request.getRequestDispatcher("Admin/FacilityManagement/Room/ListRoom.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/FacilityManagement/Room/ListRoom.jsp").forward(request,
+                                response);
                         break;
                     default:
                         response.sendRedirect("Admin/FacilityManagement/ListFacility.jsp");
@@ -81,6 +84,9 @@ public class FacilityController extends HttpServlet {
                 request.getRequestDispatcher("pages/Facility/FacilityDetails.jsp").forward(request, response);
                 break;
 
+            case "getListMaintenance":
+                break;
+
             case "delete":
                 employeeService.deleteEmployee(id);
                 String message = "Delete employee successfully!";
@@ -89,7 +95,8 @@ public class FacilityController extends HttpServlet {
                 break;
 
             default:
-                request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request,
+                        response);
         }
     }
 
@@ -123,19 +130,23 @@ public class FacilityController extends HttpServlet {
                     request.setAttribute("error", String.join(" - ", validationErrors));
                 }
                 if (facilityType.equals("villa")) {
-                    
-                    request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request, response);
+
+                    request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request,
+                            response);
                 } else if (facilityType.equals("house")) {
-                    request.getRequestDispatcher("Admin/FacilityManagement/House/CreateHouse.jsp").forward(request, response);
+                    request.getRequestDispatcher("Admin/FacilityManagement/House/CreateHouse.jsp").forward(request,
+                            response);
                 } else {
-                    request.getRequestDispatcher("Admin/FacilityManagement/Room/CreateRoom.jsp").forward(request, response);
+                    request.getRequestDispatcher("Admin/FacilityManagement/Room/CreateRoom.jsp").forward(request,
+                            response);
                 }
 
                 break;
 
             default:
 
-                request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp?").forward(request, response);
+                request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp?").forward(request,
+                        response);
         }
     }
 
