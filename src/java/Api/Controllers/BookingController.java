@@ -41,8 +41,15 @@ public class BookingController extends HttpServlet {
 
         String action = request.getParameter("action");
         switch (action) {
-            case "getAllBooking":
-                request.setAttribute("bookings", bookings);
+            case "getMyBooking":
+
+                User user = SessionUtils.getUserFromSession(request);
+                if (user == null) {
+                    response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+                    return;
+                }
+                java.util.List<Booking> myBookings = bookingService.getBookingsOfCustomer(user.getCustomerId());
+                request.setAttribute("bookings", myBookings);
                 request.getRequestDispatcher("pages/MyBooking.jsp").forward(request, response);
                 break;
             case "getAll":

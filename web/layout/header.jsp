@@ -52,7 +52,7 @@
                         >
                     </c:if>
                     <c:if test="${sessionScope.User.userRole == UserRole.User}">
-                        <a href="/ResortHub/CustomerBooking" class="text-sm font-semibold leading-6 text-gray-900"
+                        <a href="/ResortHub/BookingController?action=getMyBooking" class="text-sm font-semibold leading-6 text-gray-900"
                            >My Bookings</a
                         >
                     </c:if>
