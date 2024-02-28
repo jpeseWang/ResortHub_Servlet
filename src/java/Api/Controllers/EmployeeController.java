@@ -74,7 +74,7 @@ public class EmployeeController extends HttpServlet {
 
                         String message = "Create employee successfully!";
                         request.setAttribute("message", message);
-                        request.getRequestDispatcher("Admin/EmployeeManagement/SuccessToast.jsp").forward(request, response);
+                        request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
                         return;
                     } catch (ConflictException ex) {
                         request.setAttribute("error", ex.getMessage());
@@ -94,15 +94,17 @@ public class EmployeeController extends HttpServlet {
                         employeeService.updateEmployee(id, updateEmployeeDto);
                         String message = "Update employee successfully!";
                         request.setAttribute("message", message);
-                        request.getRequestDispatcher("Admin/EmployeeManagement/SuccessToast.jsp").forward(request, response);
+                        request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
 
                     } catch (ConflictException ex) {
                         request.setAttribute("error", ex.getMessage());
-                        request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
+                        request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request,
+                                response);
                     }
                 } else {
                     request.setAttribute("error", String.join(", ", validationErrors));
-                    request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
+                    request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request,
+                            response);
                 }
 
                 break;

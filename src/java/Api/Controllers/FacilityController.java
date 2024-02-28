@@ -87,9 +87,11 @@ public class FacilityController extends HttpServlet {
 
             case "getListMaintenance":
 
-                java.util.List<MaintenanceFacility> maintenanceFacilityList = facilityService.getFacilitiesForMaintenance(2024, 2);
+                java.util.List<MaintenanceFacility> maintenanceFacilityList = facilityService
+                        .getFacilitiesForMaintenance(2024, 2);
                 request.setAttribute("maintenanceFacility", maintenanceFacilityList);
-                request.getRequestDispatcher("Admin/FacilityManagement/ListFacilityMaintenance.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/FacilityManagement/ListFacilityMaintenance.jsp").forward(request,
+                        response);
                 break;
 
             case "delete":
