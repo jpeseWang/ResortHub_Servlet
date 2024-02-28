@@ -21,36 +21,41 @@
                 </div>
               
             </div>
-            <ul role="list" class="divide-y divide-gray-100 mx-6 mt-4">
-                <li class="flex items-center justify-between gap-x-9 py-5">
-                    <div class="min-w-0">
-                        <div class="flex items-start gap-x-3">
-                            <p class="text-sm font-semibold leading-6 text-gray-900">GraphQL API</p>
-                            <p class="rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">Complete</p>
-                        </div>
-                        <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                            <p class="whitespace-nowrap">Due on <time datetime="2023-03-17T00:00Z">March 17, 2023</time></p>
-                            <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 fill-current">
-                            <circle cx="1" cy="1" r="1" />
-                            </svg>
-                            <p class="truncate">Created by Leslie Alexander</p>
+            
+            
+          <div class="px-4 sm:px-6 lg:px-8">
+
+                <div class="mt-8 flow-root">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <table class="min-w-full divide-y divide-gray-300">
+                                <thead>
+                                    <tr class="divide-x divide-gray-200">
+                                        <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Facility ID</th>
+                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Customer ID</th>
+                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Start Date</th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-0">End Date</th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-0">Booking Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    
+                                    <c:forEach items="${bookings}" var="c">
+                                        <tr class="divide-x divide-gray-200">
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">${c.facilityId}</td>
+                                        <td class="whitespace-nowrap p-4 text-sm text-gray-500">${c.customerId}</td>
+                                        <td class="whitespace-nowrap p-4 text-sm text-gray-500">${c.startDate}</td>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">${c.endDate}</td>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">${c.bookingDate}</td>
+                                    </tr>
+                                    </c:forEach>
+                              
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="flex flex-none items-center gap-x-4">
-                        <a href="#" class="hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block">View project<span class="sr-only">, GraphQL API</span></a>
-                        <div class="relative flex-none">
-                            <button type="button" class="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900" id="options-menu-0-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="sr-only">Open options</span>
-                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z" />
-                                </svg>
-                            </button>
-
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
+                </div>
+            </div>
 
         </div>
 
