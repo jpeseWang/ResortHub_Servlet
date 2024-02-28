@@ -77,6 +77,42 @@ public abstract class RepositoryBase<TEntity> {
         }
     }
 
+    protected int executeNonQueryReturnsId(String query, List<Object> params) {
+        System.out.println("[Query]: " + query);
+        if (!params.isEmpty()) {
+            System.out.println("[Params]: " + params.toString());
+        }
+
+        Connection conn = null;
+
+        int insertedId = -1;
+
+        try {
+            conn = DbConnection.get();
+
+            if (conn == null) {
+                throw new NullPointerException("Database connection has not been set up successfully.");
+            }
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            setParamsForQuery(ps, params);
+            ps.executeUpdate();
+
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                insertedId = generatedKeys.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error executing query: " + ex.getMessage());
+        } finally {
+            if (conn != null)
+                DbConnection.close(conn);
+        }
+
+        return insertedId;
+    }
+
     protected List<TEntity> executeQuery(String query, List<Object> params) {
         System.out.println("[Query]: " + query);
         if (!params.isEmpty()) {
