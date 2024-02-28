@@ -19,7 +19,8 @@ public class ConvertUtils {
 
     public static BigDecimal convertStringToBigDecimal(String decimalStr) {
         if (decimalStr != null && !decimalStr.isEmpty()) {
-            String sanitizedDecimalStr = decimalStr.replace(",", ".");
+            String sanitizedDecimalStr = decimalStr.replace(",", ".").trim();
+            System.out.println(sanitizedDecimalStr);
             return new BigDecimal(sanitizedDecimalStr);
         }
         return null;
