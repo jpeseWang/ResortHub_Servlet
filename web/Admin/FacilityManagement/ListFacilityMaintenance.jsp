@@ -11,8 +11,8 @@
     <body>
 
        
-
-        <div class="px-4 sm:px-6 lg:px-8">
+<%@ include file="../AdminNav.jsp" %>
+        <div class="px-4 sm:px-6 lg:px-8 mt-6">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Facility Maintenance</h1>
@@ -53,22 +53,22 @@
                     
                                       <c:choose>
                     
-                                        <c:when test="${c.usageCount} < 4">
+                                        <c:when test="${c.usageCount < 4}">
                                             <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-green-900 dark:text-green-300">Normal</span>
                                         </c:when>
                     
-                                        <c:when test="${c.usageCount} == 4">
+                                        <c:when test="${c.usageCount == 4}">
                                             <span class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-yellow-900 dark:text-yellow-300">Warning</span>
                                         </c:when>
                     
-                                        <c:when test="${c.usageCount} >= 5">
+                                        <c:when test="${c.usageCount >= 5}">
                                             <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-red-900 dark:text-red-300">Need Maintenance</span>
                                         </c:when>
                     
                                       </c:choose>
                     
                                       
-                                      <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-green-900 dark:text-green-300">Normal</span>
+                                     
                                       </td>
 
                                     </tr>

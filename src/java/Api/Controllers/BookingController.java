@@ -5,6 +5,7 @@
 package Api.Controllers;
 
 import Domain.DTOs.BookingDto.CreateBookingDto;
+import Domain.DTOs.BookingDto.CreateRentalContractDto;
 import Domain.Enums.UserRole;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Employee;
@@ -12,6 +13,7 @@ import Domain.Models.User;
 import Services.EmployeeService;
 import Services.BookingService;
 import Domain.Models.Booking;
+import Services.RentalContractService;
 import Utils.SessionUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -70,7 +72,9 @@ public class BookingController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        BookingService BookingService = new BookingService();
+        String facilityType = request.getParameter("facilityType");
+        String totalPrice = request.getParameter("total");
+        BookingService bookingService = new BookingService();
         switch (action) {
             case "createBooking":
                 CreateBookingDto createBookingDto = new CreateBookingDto(request);
@@ -84,14 +88,27 @@ public class BookingController extends HttpServlet {
                     return;
                 }
                 createBookingDto.setCustomerId(user.getCustomerId());
-                BookingService.createBooking(createBookingDto);
-                String message = "Create booking successfully!";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
+                int bookingID = bookingService.createBooking(createBookingDto);
+
+                if (facilityType == "Room") {
+                    String message = "Create booking successfully!";
+                    request.setAttribute("message", message);
+                    request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("bookingID", bookingID);
+                    request.setAttribute("totalPrice", totalPrice);
+                    request.getRequestDispatcher("pages/Facility/ContractForm.jsp").forward(request, response);
+                }
 
                 break;
 
             case "createContract":
+                CreateRentalContractDto dto = new CreateRentalContractDto(request);
+                RentalContractService rentalContractService = new RentalContractService();
+                rentalContractService.createRentalContract(dto);
+                String message = "Create contract successfully!";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
 
                 break;
 

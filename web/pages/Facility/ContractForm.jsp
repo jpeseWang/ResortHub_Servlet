@@ -33,144 +33,151 @@
         <script type="text/javascript"><%@include file="MarketplaceScript.js" %></script>
 
         <%@ include file="/layout/header.jsp" %>
-        <c:set var="c" value="${facility}"/>
+        <c:set var="c" value="${totalPrice}"/>
+        <c:set var="e" value="${bookingID}"/>
         <div class="bg-white">
             <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-              <!-- Product details -->
-              <div class="lg:max-w-lg lg:self-end">
-                <nav aria-label="Breadcrumb">
-                  <ol role="list" class="flex items-center space-x-2">
-                    <li>
-                      <div class="flex items-center text-sm">
-                        <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Facility Contract </a>
-                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="ml-2 h-5 w-5 flex-shrink-0 text-gray-300">
-                          <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                        </svg>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex items-center text-sm">
-                        <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Villa</a>
-                      </div>
-                    </li>
-                  </ol>
-                </nav>
-          
-                <div class="mt-4">
-                  <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everyday Ruck Snack</h1>
-                </div>
-          
-                <section aria-labelledby="information-heading" class="mt-4">
-                  <h2 id="information-heading" class="sr-only">Product information</h2>
-          
-                  <div class="flex items-center">
-                    <p class="text-lg text-gray-900 sm:text-xl">$220</p>
-          
-                    <div class="ml-4 border-l border-gray-300 pl-4">
-                      <h2 class="sr-only">Reviews</h2>
-                      <div class="flex items-center">
-                        <div>
-                        
-                          <p class="sr-only">4 out of 5 stars</p>
-                        </div>
-                        <p class="ml-2 text-sm text-gray-500">1624 reviews</p>
-                      </div>
-                    </div>
-                  </div>
-          
-                  <div class="mt-4 space-y-6">
-                    <p class="text-base text-gray-500">Don&#039;t compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.</p>
-                  </div>
-          
-                  <div class="mt-6 flex items-center">
-                    <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                    </svg>
-                    <p class="ml-2 text-sm text-gray-500">In stock and ready to sign</p>
-                  </div>
-                </section>
-              </div>
-          
-              <!-- Product image -->
-              <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-                <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
-                  <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlsbGF8ZW58MHx8MHx8fDA%3D" alt="Model wearing light green backpack with black canvas straps and front zipper pouch." class="h-full w-full object-cover object-center">
-                </div>
-              </div>
-          
-              <!-- Product form -->
-              <div class="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-                <section aria-labelledby="options-heading">
-                  <h2 id="options-heading" class="sr-only">Product options</h2>
-          
-                  <form>
-                    <div class="sm:flex sm:justify-between">
-                      <!-- Size selector -->
-                      <fieldset>
-                        <legend class="block text-sm font-medium text-gray-700">Size</legend>
-                        <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                          <!-- Active: "ring-2 ring-indigo-500" -->
-                          <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
-                            <input type="radio" name="size-choice" value="18L" class="sr-only" aria-labelledby="size-choice-0-label" aria-describedby="size-choice-0-description">
-                            <p id="size-choice-0-label" class="text-base font-medium text-gray-900">18L</p>
-                            <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">Perfect for a reasonable amount of snacks.</p>
-                           
-                            <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
-                          </div>
-                        
-                          <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
-                            <input type="radio" name="size-choice" value="20L" class="sr-only" aria-labelledby="size-choice-1-label" aria-describedby="size-choice-1-description">
-                            <p id="size-choice-1-label" class="text-base font-medium text-gray-900">20L</p>
-                            <p id="size-choice-1-description" class="mt-1 text-sm text-gray-500">Enough room for a serious amount of snacks.</p>
-                           
-                            <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
-                          </div>
-                        </div>
-                      </fieldset>
-                      
-                    </div>
-                    <div class="sm:flex sm:justify-between mt-4">
-                        <!-- Size selector -->
-                        <fieldset>
-                          <legend class="block text-sm font-medium text-gray-700">ID</legend>
-                          <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-1">
-                            <!-- Active: "ring-2 ring-indigo-500" -->
-                            <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
-                              <input type="radio" name="size-choice" value="18L" class="sr-only" aria-labelledby="size-choice-0-label" aria-describedby="size-choice-0-description">
-                              <p id="size-choice-0-label" class="text-base font-medium text-gray-900">18L</p>
-                              <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">Perfect for a reasonable amount of snacks.</p>
-                             
-                              <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
-                            </div>
-                          
-                          </div>
-                        </fieldset>
-                        
-                      </div>
+                <!-- Product details -->
+                <div class="lg:max-w-lg lg:self-end">
+                    <nav aria-label="Breadcrumb">
+                        <ol role="list" class="flex items-center space-x-2">
+                            <li>
+                                <div class="flex items-center text-sm">
+                                    <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Facility Contract </a>
+                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="ml-2 h-5 w-5 flex-shrink-0 text-gray-300">
+                                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+                                    </svg>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex items-center text-sm">
+                                    <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Villa</a>
+                                </div>
+                            </li>
+                        </ol>
+                    </nav>
+
                     <div class="mt-4">
-                      <a href="#" class="group inline-flex text-sm text-gray-500 hover:text-gray-700">
-                        <span>Have question about contract term?</span>
-                        <svg class="ml-2 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                        </svg>
-                      </a>
+                        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create contract</h1>
                     </div>
-                    <div class="mt-10">
-                      <button type="submit" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Create contract</button>
+
+                    <section aria-labelledby="information-heading" class="mt-4">
+                        <h2 id="information-heading" class="sr-only">Product information</h2>
+
+                        <!--                        <div class="flex items-center">
+                                                    <p class="text-lg text-gray-900 sm:text-xl">$220</p>
+                        
+                                                    <div class="ml-4 border-l border-gray-300 pl-4">
+                                                        <h2 class="sr-only">Reviews</h2>
+                                                        <div class="flex items-center">
+                                                            <div>
+                        
+                                                                <p class="sr-only">4 out of 5 stars</p>
+                                                            </div>
+                                                            <p class="ml-2 text-sm text-gray-500">1624 reviews</p>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+
+                        <div class="mt-4 space-y-6">
+                            <p class="text-base text-gray-500">Don&#039;t compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.</p>
+                        </div>
+
+                        <div class="mt-6 flex items-center">
+                            <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                            </svg>
+                            <p class="ml-2 text-sm text-gray-500">In stock and ready to sign</p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Product image -->
+                <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+                    <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+                        <img src="https://plus.unsplash.com/premium_photo-1661752229232-96232a11c62b?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Model wearing light green backpack with black canvas straps and front zipper pouch." class="h-full w-full object-cover object-center">
                     </div>
-                    <div class="mt-6 text-center">
-                      <a href="#" class="group inline-flex text-base font-medium">
-                        <svg class="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                        </svg>
-                        <span class="text-gray-500 hover:text-gray-700">Lifetime Guarantee</span>
-                      </a>
-                    </div>
-                  </form>
-                </section>
-              </div>
+                </div>
+
+                <!-- Product form -->
+                <div class="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+                    <section aria-labelledby="options-heading">
+                        <h2 id="options-heading" class="sr-only">Product options</h2>
+
+
+                        <!--                    <div class="sm:flex sm:justify-between">
+                                               Size selector 
+                                              <fieldset>
+                                                <legend class="block text-sm font-medium text-gray-700">Size</legend>
+                                                <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                                   Active: "ring-2 ring-indigo-500" 
+                                                  <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
+                                                    <input type="radio" name="size-choice" value="18L" class="sr-only" aria-labelledby="size-choice-0-label" aria-describedby="size-choice-0-description">
+                                                    <p id="size-choice-0-label" class="text-base font-medium text-gray-900">18L</p>
+                                                    <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">Perfect for a reasonable amount of snacks.</p>
+                                                   
+                                                    <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
+                                                  </div>
+                                                
+                                                  <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
+                                                    <input type="radio" name="size-choice" value="20L" class="sr-only" aria-labelledby="size-choice-1-label" aria-describedby="size-choice-1-description">
+                                                    <p id="size-choice-1-label" class="text-base font-medium text-gray-900">20L</p>
+                                                    <p id="size-choice-1-description" class="mt-1 text-sm text-gray-500">Enough room for a serious amount of snacks.</p>
+                                                   
+                                                    <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
+                                                  </div>
+                                                </div>
+                                              </fieldset>
+                                              
+                                            </div>-->
+                        <form 
+                            name="BookingController"
+                            method="POST"
+                            action="/ResortHub/BookingController?action=createContract">
+                            <input class="hidden" value="${e}" name="BookingId"/>
+                            <input class="hidden" value="${c}" name="TotalAmount"/>
+                            <div>Booking ID: ${e}</div>
+
+
+                            <input
+                                type="text"
+                                name="Deposit"
+                                placeholder="Deposit ($)"
+                                required
+                                class="block w-1/2 rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+                                />
+                            <dl class="mt-6 space-y-4">
+
+                                <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                    <dt class="text-base font-medium text-gray-900">Total fee</dt>
+                                    <dd class="text-base font-medium text-gray-900">${c}$</dd>
+                                </div>
+                            </dl>
+
+                            <div class="mt-4">
+                                <a href="#" class="group inline-flex text-sm text-gray-500 hover:text-gray-700">
+                                    <span>Have question about contract term?</span>
+                                    <svg class="ml-2 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="mt-10">
+                                <button type="submit" class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Create contract</button>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <a href="#" class="group inline-flex text-base font-medium">
+                                    <svg class="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                    </svg>
+                                    <span class="text-gray-500 hover:text-gray-700">Lifetime Guarantee</span>
+                                </a>
+                            </div>
+                        </form>
+                    </section>
+                </div>
             </div>
-          </div>
+        </div>
 
 
 
