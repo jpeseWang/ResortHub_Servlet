@@ -12,6 +12,8 @@
 
        
 <%@ include file="../AdminNav.jsp" %>
+            <a href="/ResortHub/Admin/FacilityManagement/ListFacility.jsp" class="pl-4 py-9 text-sm font-semibold leading-6 hover:text-indigo-500 text-gray-600"><span aria-hidden="true">←</span> Back to Facility main page</a>
+
         <div class="px-4 sm:px-6 lg:px-8 mt-6">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
