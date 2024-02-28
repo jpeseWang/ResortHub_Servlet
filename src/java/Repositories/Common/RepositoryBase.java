@@ -42,6 +42,14 @@ public abstract class RepositoryBase<TEntity> {
         return entities.size() != 0 ? entities.get(0) : null;
     }
 
+    protected List<TEntity> getListByValue(String columnName, Object value) {
+        String query = String.format("SELECT TOP 1 * FROM %s WHERE %s = ?;", getTableName(), columnName);
+        List<Object> params = new ArrayList<>();
+        params.add(value);
+
+        return executeQuery(query, params);
+    }
+
     protected void deleteById(String id) {
         String query = String.format("DELETE FROM %s WHERE Id = ?;", getTableName());
         List<Object> params = new ArrayList<>();

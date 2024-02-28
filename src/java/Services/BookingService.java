@@ -50,6 +50,16 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         return booking;
     }
 
+    public List<Booking> getBookingsOfUser(String customerId) {
+        List<Booking> bookings = new ArrayList<>();
+        List<BookingEntity> entities = super.getListByValue("CustomerId", customerId);
+
+        for (BookingEntity entity : entities)
+            bookings.add(mapEntityToBooking(entity));
+
+        return bookings;
+    }
+
     public List<Booking> getBookingsByYear(int year) {
         String query = String.format(
                 "SELECT * FROM %s WHERE YEAR(BookingDate) = %d ORDER BY BookingDate DESC, StartDate DESC, EndDate ASC;",
