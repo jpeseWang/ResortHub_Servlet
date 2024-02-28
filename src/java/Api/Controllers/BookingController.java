@@ -41,7 +41,10 @@ public class BookingController extends HttpServlet {
 
         String action = request.getParameter("action");
         switch (action) {
-
+            case "getAllBooking":
+                request.setAttribute("bookings", bookings);
+                request.getRequestDispatcher("pages/MyBooking.jsp").forward(request, response);
+                break;
             case "getAll":
                 request.setAttribute("bookings", bookings);
                 request.getRequestDispatcher("Admin/BookingManagement/ListBooking.jsp").forward(request, response);

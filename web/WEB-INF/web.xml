@@ -44,6 +44,10 @@
         <servlet-name>PromotionController</servlet-name>
         <servlet-class>Api.Controllers.PromotionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerBooking</servlet-name>
+        <servlet-class>CustomerBooking</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeController</servlet-name>
         <url-pattern>/EmployeeController</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>PromotionController</servlet-name>
         <url-pattern>/PromotionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerBooking</servlet-name>
+        <url-pattern>/CustomerBooking</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
