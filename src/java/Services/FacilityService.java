@@ -22,8 +22,6 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
     private HouseService houseService;
     private RoomService roomService;
 
-    private BookingService bookingService;
-
     @Override
     protected String getTableName() {
         return "Facilities";
@@ -83,7 +81,10 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         for (Booking booking : bookings) {
             String facilityId = booking.getFacilityId();
             facilityUsageCountMap.put(facilityId, facilityUsageCountMap.getOrDefault(facilityId, 0) + 1);
-            facilityIdToNameMap.putIfAbsent(facilityId, booking.getFacility().getName());
+            Facility facility = this.getFacilityById(facilityId);
+            if (facility != null) {
+                facilityIdToNameMap.putIfAbsent(facilityId, facility.getName());
+            }
         }
 
         List<MaintenanceFacility> maintenanceFacilities = new ArrayList<>();
