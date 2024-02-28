@@ -4,7 +4,10 @@
  */
 
 import Domain.Models.Booking;
+import Domain.Models.User;
 import Services.BookingService;
+import Utils.SessionUtils;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,10 +25,10 @@ public class CustomerBooking extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,20 +47,26 @@ public class CustomerBooking extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         BookingService bookingService = new BookingService();
-        java.util.List<Booking> bookings = bookingService.getAllBookings();
+        User user = SessionUtils.getUserFromSession(request);
+        if (user == null) {
+            response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
+            return;
+        }
+        java.util.List<Booking> bookings = bookingService.getBookingsOfCustomer(user.getCustomerId());
         request.setAttribute("bookings", bookings);
         request.getRequestDispatcher("pages/MyBooking.jsp").forward(request, response);
 
@@ -66,15 +75,15 @@ public class CustomerBooking extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          BookingService bookingService = new BookingService();
+        BookingService bookingService = new BookingService();
         java.util.List<Booking> bookings = bookingService.getAllBookings();
         request.setAttribute("bookings", bookings);
         request.getRequestDispatcher("pages/MyBooking.jsp").forward(request, response);

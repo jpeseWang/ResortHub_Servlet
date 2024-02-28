@@ -50,7 +50,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         return booking;
     }
 
-    public List<Booking> getBookingsOfUser(String customerId) {
+    public List<Booking> getBookingsOfCustomer(String customerId) {
         List<Booking> bookings = new ArrayList<>();
         List<BookingEntity> entities = super.getListByValue("CustomerId", customerId);
 

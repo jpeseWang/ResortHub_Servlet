@@ -43,7 +43,7 @@ public abstract class RepositoryBase<TEntity> {
     }
 
     protected List<TEntity> getListByValue(String columnName, Object value) {
-        String query = String.format("SELECT TOP 1 * FROM %s WHERE %s = ?;", getTableName(), columnName);
+        String query = String.format("SELECT * FROM %s WHERE %s = ?;", getTableName(), columnName);
         List<Object> params = new ArrayList<>();
         params.add(value);
 
