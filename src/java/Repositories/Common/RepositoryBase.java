@@ -97,11 +97,11 @@ public abstract class RepositoryBase<TEntity> {
             PreparedStatement ps = conn.prepareStatement(query);
 
             setParamsForQuery(ps, params);
-            ps.executeUpdate();
 
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                insertedId = generatedKeys.getInt(1);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                insertedId = rs.getInt("Id");
             }
         } catch (SQLException ex) {
             System.err.println("Error executing query: " + ex.getMessage());
