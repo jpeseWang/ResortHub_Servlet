@@ -37,27 +37,29 @@ public class BookingController extends HttpServlet {
             throws ServletException, IOException {
 
         BookingService bookingService = new BookingService();
-        PageQueryDto pageQueryDto = new PageQueryDto(request);
-
-        PageDto<Booking> bookingsPage = bookingService.getAllBookings(pageQueryDto);
-        List<Booking> bookings = bookingsPage.getData();
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
         switch (action) {
             case "getMyBooking":
-
                 User user = SessionUtils.getUserFromSession(request);
                 if (user == null) {
                     response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
                     return;
                 }
-                java.util.List<Booking> myBookings = bookingService.getBookingsOfCustomer(user.getCustomerId());
-                request.setAttribute("bookings", myBookings);
+                PageQueryDto pageQueryDto = new PageQueryDto(request);
+                PageDto<Booking> pageDto = bookingService.getBookingsOfCustomer(pageQueryDto,
+                        user.getCustomerId());
+                request.setAttribute("bookings", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("pages/MyBooking.jsp").forward(request, response);
                 break;
+
             case "getAll":
-                request.setAttribute("bookings", bookings);
+                PageQueryDto pageQueryDto = new PageQueryDto(request);
+                PageDto<Booking> pageDto = bookingService.getAllBookings(pageQueryDto);
+                request.setAttribute("bookings", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("Admin/BookingManagement/ListBooking.jsp").forward(request, response);
                 break;
 

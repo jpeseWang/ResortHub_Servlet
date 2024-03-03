@@ -59,14 +59,20 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         return booking;
     }
 
-    public List<Booking> getBookingsOfCustomer(String customerId) {
+    public PageDto<Booking> getBookingsOfCustomer(PageQueryDto dto, String customerId) {
         List<Booking> bookings = new ArrayList<>();
-        List<BookingEntity> entities = super.getListByValue("CustomerId", customerId);
+        List<BookingEntity> entities = super.getAllWithOffset(String.format("CustomerId = '%s'", customerId),
+                dto.getOffset(),
+                dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount(String.format("CustomerId = '%s'", customerId));
 
         for (BookingEntity entity : entities)
             bookings.add(mapEntityToBooking(entity));
 
-        return bookings;
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(bookings, meta);
     }
 
     public List<Booking> getBookingsByYear(int year) {
