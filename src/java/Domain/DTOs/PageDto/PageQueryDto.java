@@ -1,6 +1,8 @@
 package Domain.DTOs.PageDto;
 
 import Domain.Enums.Order;
+import Utils.ConvertUtils;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class PageQueryDto {
     private Order order = Order.ASC;
@@ -21,6 +23,11 @@ public class PageQueryDto {
         this.page = page;
         this.pageSize = pageSize;
         this.order = order;
+    }
+
+    public PageQueryDto(HttpServletRequest request) {
+        page = ConvertUtils.convertStringToInt(request.getParameter("Page"));
+        pageSize = ConvertUtils.convertStringToInt(request.getParameter("PageSize"));
     }
 
     public Order getOrder() {
