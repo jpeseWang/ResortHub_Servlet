@@ -180,7 +180,7 @@ public abstract class RepositoryBase<TEntity> {
     }
 
     protected int getTotalCount() {
-        String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s", getTableName());
+        String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s;", getTableName());
 
         System.out.println("[Query]: " + query);
 
@@ -212,7 +212,7 @@ public abstract class RepositoryBase<TEntity> {
     }
 
     protected int getTotalCount(String whereClause) {
-        String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s WHERE %s", getTableName(), whereClause);
+        String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s WHERE %s;", getTableName(), whereClause);
 
         System.out.println("[Query]: " + query);
 
