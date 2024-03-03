@@ -11,6 +11,15 @@ public class CreateVoucherRecipientCustomersDto {
     private int numTwentyPercentDiscountVouchers;
     private int numFiftyPercentDiscountVouchers;
 
+    public CreateVoucherRecipientCustomersDto(int year, int month, int numTenPercentDiscountVouchers,
+            int numTwentyPercentDiscountVouchers, int numFiftyPercentDiscountVouchers) {
+        this.year = year;
+        this.month = month;
+        this.numTenPercentDiscountVouchers = numTenPercentDiscountVouchers;
+        this.numTwentyPercentDiscountVouchers = numTwentyPercentDiscountVouchers;
+        this.numFiftyPercentDiscountVouchers = numFiftyPercentDiscountVouchers;
+    }
+
     public CreateVoucherRecipientCustomersDto(HttpServletRequest request) {
         month = ConvertUtils.convertStringToInt(request.getParameter("Month"));
         year = ConvertUtils.convertStringToInt(request.getParameter("Year"));

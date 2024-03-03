@@ -104,13 +104,10 @@ ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERE
 
 -- Update VoucherRecipientCustomers
 CREATE TABLE "VoucherRecipientCustomers" (
+    "Id" INT IDENTITY(1,1) NOT NULL,
     "Year" INT NOT NULL,
     "Month" INT NOT NULL,
     "CustomerId" NVARCHAR(7) NOT NULL,
     "CustomerFullName" NVARCHAR(255) NOT NULL,
     "VoucherType" INT NOT NULL
 );
-
-ALTER TABLE "VoucherRecipientCustomers"
-ADD CONSTRAINT "PK_VoucherRecipientCustomers" 
-PRIMARY KEY ("Year", "Month", "CustomerId");
