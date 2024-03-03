@@ -1,56 +1,54 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
  */
 package Services;
 
 import Domain.DTOs.BookingDto.CreateBookingDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageQueryDto;
+import Domain.Enums.Order;
 import Domain.Models.Booking;
 import Repositories.Entities.BookingEntity;
 import java.sql.ResultSet;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author jpesewang
  */
 public class BookingServiceTest {
-    
+
     public BookingServiceTest() {
     }
-    
-    @BeforeAll
+
+    @BeforeClass
     public static void setUpClass() {
     }
-    
-    @AfterAll
+
+    @AfterClass
     public static void tearDownClass() {
     }
-    
-    @BeforeEach
+
+    @Before
     public void setUp() {
     }
-    
-    @AfterEach
+
+    @After
     public void tearDown() {
     }
 
-    /**
-     * Test of getTableName method, of class BookingService.
-     */
     @Test
     public void testGetTableName() {
         System.out.println("getTableName");
         BookingService instance = new BookingService();
-        String expResult = "";
+        String expResult = "Bookings";
         String result = instance.getTableName();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -78,13 +76,17 @@ public class BookingServiceTest {
     @Test
     public void testGetAllBookings() {
         System.out.println("getAllBookings");
-        PageQueryDto dto = null;
+        int page = 1;
+        int pageSize = 10;
+        Order order = Order.DESC;
+        PageQueryDto dto = new PageQueryDto(page, pageSize, order);
         BookingService instance = new BookingService();
-        PageDto<Booking> expResult = null;
+
         PageDto<Booking> result = instance.getAllBookings(dto);
-        assertEquals(expResult, result);
+        assertNotNull(result);
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -93,11 +95,14 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingById() {
         System.out.println("getBookingById");
-        String id = "2";
+        String id = "23";
         BookingService instance = new BookingService();
+        Booking expectedBooking = new Booking();
+        expectedBooking.setId(Integer.parseInt(id));
         Booking expResult = null;
         Booking result = instance.getBookingById(id);
-        assertEquals(expResult, result);
+
+        assertEquals(expectedBooking.getId(), result.getId());
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -108,10 +113,11 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingsOfCustomer() {
         System.out.println("getBookingsOfCustomer");
+        PageQueryDto dto = null;
         String customerId = "";
         BookingService instance = new BookingService();
-        List<Booking> expResult = null;
-        List<Booking> result = instance.getBookingsOfCustomer(customerId);
+        PageDto<Booking> expResult = null;
+        PageDto<Booking> result = instance.getBookingsOfCustomer(dto, customerId);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -175,5 +181,5 @@ public class BookingServiceTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }
