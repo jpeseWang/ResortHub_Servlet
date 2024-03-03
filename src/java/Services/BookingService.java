@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Domain.DTOs.BookingDto.CreateBookingDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageMetaDto;
+import Domain.DTOs.PageDto.PageQueryDto;
+import Domain.Enums.Order;
 import Domain.Exceptions.NotFoundException;
 import Domain.Models.Booking;
 import Repositories.Common.RepositoryBase;
@@ -30,14 +34,19 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         facilityService = new FacilityService();
     }
 
-    public List<Booking> getAllBookings() {
+    public PageDto<Booking> getAllBookings(PageQueryDto dto) {
         List<Booking> bookings = new ArrayList<>();
-        List<BookingEntity> entities = super.getAll();
+        List<BookingEntity> entities = super.getAllWithOffset(dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount();
 
-        for (BookingEntity entity : entities)
+        for (BookingEntity entity : entities) {
             bookings.add(mapEntityToBooking(entity));
+        }
 
-        return bookings;
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(bookings, meta);
     }
 
     public Booking getBookingById(String id) {

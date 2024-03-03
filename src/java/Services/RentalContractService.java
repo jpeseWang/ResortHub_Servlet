@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Domain.DTOs.BookingDto.CreateRentalContractDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageMetaDto;
+import Domain.DTOs.PageDto.PageQueryDto;
+import Domain.Enums.Order;
 import Domain.Models.RentalContract;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.RentalContractEntity;
@@ -27,14 +31,19 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         bookingService = new BookingService();
     }
 
-    public List<RentalContract> getAllRentalContracts() {
+    public PageDto<RentalContract> getAllRentalContracts(PageQueryDto dto) {
         List<RentalContract> rentalContracts = new ArrayList<>();
-        List<RentalContractEntity> entities = super.getAll();
+        List<RentalContractEntity> entities = super.getAllWithOffset(dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount();
 
-        for (RentalContractEntity entity : entities)
+        for (RentalContractEntity entity : entities) {
             rentalContracts.add(mapEntityToRentalContract(entity));
+        }
 
-        return rentalContracts;
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(rentalContracts, meta);
     }
 
     public RentalContract getRentalContractById(String id) {

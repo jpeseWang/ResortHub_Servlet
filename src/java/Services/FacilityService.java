@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageMetaDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.FacilityType;
+import Domain.Enums.Order;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Booking;
 import Domain.Models.Facility;
@@ -38,15 +42,19 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         roomService = new RoomService();
     }
 
-    public List<Facility> getAllFacilities() {
+    public PageDto<Facility> getAllFacilities(PageQueryDto dto) {
         List<Facility> facilities = new ArrayList<>();
-        List<FacilityEntity> entities = super.getAll();
+        List<FacilityEntity> entities = super.getAllWithOffset(dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount();
 
         for (FacilityEntity entity : entities) {
             facilities.add(mapEntityToFacility(entity));
         }
 
-        return facilities;
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(facilities, meta);
     }
 
     public Facility getFacilityById(String id) {

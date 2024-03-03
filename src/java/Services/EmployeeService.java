@@ -7,6 +7,10 @@ import java.util.List;
 
 import Domain.DTOs.EmployeeDto.CreateEmployeeDto;
 import Domain.DTOs.EmployeeDto.UpdateEmployeeDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageMetaDto;
+import Domain.DTOs.PageDto.PageQueryDto;
+import Domain.Enums.Order;
 import Domain.Enums.PositionType;
 import Domain.Enums.QualificationType;
 import Domain.Exceptions.ConflictException;
@@ -27,14 +31,19 @@ public class EmployeeService extends RepositoryBase<EmployeeEntity> {
         return new EmployeeEntity(rs);
     }
 
-    public List<Employee> getAllEmployees() {
+    public PageDto<Employee> getAllEmployees(PageQueryDto dto) {
         List<Employee> employees = new ArrayList<>();
-        List<EmployeeEntity> entities = super.getAll();
+        List<EmployeeEntity> entities = super.getAllWithOffset(dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount();
 
-        for (EmployeeEntity entity : entities)
+        for (EmployeeEntity entity : entities) {
             employees.add(mapEntityToEmployee(entity));
+        }
 
-        return employees;
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(employees, meta);
     }
 
     public Employee getEmployeeById(String id) {

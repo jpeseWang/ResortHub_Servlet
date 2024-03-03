@@ -7,7 +7,11 @@ import java.util.List;
 
 import Domain.DTOs.CustomerDto.CreateCustomerDto;
 import Domain.DTOs.CustomerDto.UpdateCustomerDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageMetaDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.CustomerType;
+import Domain.Enums.Order;
 import Domain.Exceptions.ConflictException;
 import Domain.Exceptions.NotFoundException;
 import Domain.Models.Customer;
@@ -26,15 +30,19 @@ public class CustomerService extends RepositoryBase<CustomerEntity> {
         return new CustomerEntity(rs);
     }
 
-    public List<Customer> getAllCustomers() {
+    public PageDto<Customer> getAllCustomers(PageQueryDto dto) {
         List<Customer> customers = new ArrayList<>();
-        List<CustomerEntity> entities = super.getAll();
+        List<CustomerEntity> entities = super.getAllWithOffset(dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount();
 
         for (CustomerEntity entity : entities) {
             customers.add(mapEntityToCustomer(entity));
         }
 
-        return customers;
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(customers, meta);
     }
 
     public Customer getCustomerById(String id) {

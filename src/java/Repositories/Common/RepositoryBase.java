@@ -58,6 +58,14 @@ public abstract class RepositoryBase<TEntity> {
         executeNonQuery(query, params);
     }
 
+    protected List<TEntity> getAllWithOffset(int offset, int pageSize, boolean isAscending) {
+        String query = String.format("SELECT * FROM %s;", getTableName());
+        query += " ORDER BY Id " + (isAscending ? "ASC" : "DESC");
+        query += " OFFSET " + offset + " ROWS FETCH NEXT " + pageSize + " ROWS ONLY;";
+
+        return executeQuery(query, new ArrayList<>());
+    }
+
     protected void executeNonQuery(String query, List<Object> params) {
         System.out.println("[Query]: " + query);
         if (!params.isEmpty()) {
@@ -156,6 +164,38 @@ public abstract class RepositoryBase<TEntity> {
         }
 
         return entities;
+    }
+
+    protected int getTotalCount() {
+        String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s", getTableName());
+
+        System.out.println("[Query]: " + query);
+
+        int count = 0;
+        Connection conn = null;
+
+        try {
+            conn = DbConnection.get();
+
+            if (conn == null) {
+                throw new NullPointerException("Database connection has not been set up successfully.");
+            }
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt("TotalCount");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error executing query: " + ex.getMessage());
+        } finally {
+            if (conn != null)
+                DbConnection.close(conn);
+        }
+
+        return count;
     }
 
     private void setParamsForQuery(PreparedStatement ps, List<Object> params) throws SQLException {
