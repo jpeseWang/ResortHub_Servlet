@@ -4,14 +4,14 @@ import Utils.ConvertUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-public class GetListOfVoucherRecipientCustomersDto {
+public class CreateVoucherRecipientCustomersDto {
     private int month;
     private int year;
     private int numTenPercentDiscountVouchers;
     private int numTwentyPercentDiscountVouchers;
     private int numFiftyPercentDiscountVouchers;
 
-    public GetListOfVoucherRecipientCustomersDto(HttpServletRequest request) {
+    public CreateVoucherRecipientCustomersDto(HttpServletRequest request) {
         month = ConvertUtils.convertStringToInt(request.getParameter("Month"));
         year = ConvertUtils.convertStringToInt(request.getParameter("Year"));
         numTenPercentDiscountVouchers = ConvertUtils

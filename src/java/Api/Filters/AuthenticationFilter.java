@@ -1,8 +1,6 @@
 package Api.Filters;
 
-import Domain.Common.PageRegistry;
 import java.io.IOException;
-import java.util.Arrays;
 
 import Domain.Enums.UserRole;
 import Domain.Models.User;

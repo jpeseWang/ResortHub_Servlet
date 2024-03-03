@@ -22,6 +22,11 @@ public abstract class RepositoryBase<TEntity> {
         return executeQuery(query, new ArrayList<>());
     }
 
+    protected List<TEntity> getAll(String whereClause) {
+        String query = String.format("SELECT * FROM %s WHERE %s;", getTableName(), whereClause);
+        return executeQuery(query, new ArrayList<>());
+    }
+
     protected TEntity getById(Object id) {
         String query = String.format("SELECT TOP 1 * FROM %s WHERE Id = ?;", getTableName());
         List<Object> params = new ArrayList<>();
@@ -59,7 +64,15 @@ public abstract class RepositoryBase<TEntity> {
     }
 
     protected List<TEntity> getAllWithOffset(int offset, int pageSize, boolean isAscending) {
-        String query = String.format("SELECT * FROM %s;", getTableName());
+        String query = String.format("SELECT * FROM %s", getTableName());
+        query += " ORDER BY Id " + (isAscending ? "ASC" : "DESC");
+        query += " OFFSET " + offset + " ROWS FETCH NEXT " + pageSize + " ROWS ONLY;";
+
+        return executeQuery(query, new ArrayList<>());
+    }
+
+    protected List<TEntity> getAllWithOffset(String whereClause, int offset, int pageSize, boolean isAscending) {
+        String query = String.format("SELECT * FROM %s WHERE %s", getTableName(), whereClause);
         query += " ORDER BY Id " + (isAscending ? "ASC" : "DESC");
         query += " OFFSET " + offset + " ROWS FETCH NEXT " + pageSize + " ROWS ONLY;";
 
@@ -168,6 +181,38 @@ public abstract class RepositoryBase<TEntity> {
 
     protected int getTotalCount() {
         String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s", getTableName());
+
+        System.out.println("[Query]: " + query);
+
+        int count = 0;
+        Connection conn = null;
+
+        try {
+            conn = DbConnection.get();
+
+            if (conn == null) {
+                throw new NullPointerException("Database connection has not been set up successfully.");
+            }
+
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt("TotalCount");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error executing query: " + ex.getMessage());
+        } finally {
+            if (conn != null)
+                DbConnection.close(conn);
+        }
+
+        return count;
+    }
+
+    protected int getTotalCount(String whereClause) {
+        String query = String.format("SELECT COUNT(*) AS TotalCount FROM %s WHERE %s", getTableName(), whereClause);
 
         System.out.println("[Query]: " + query);
 

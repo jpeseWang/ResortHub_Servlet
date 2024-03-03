@@ -96,12 +96,21 @@ ALTER TABLE
 ALTER TABLE
     "RentalContracts" ADD CONSTRAINT "rentalcontracts_bookingid_foreign" FOREIGN KEY("BookingId") REFERENCES "Bookings"("Id");
 
-
-
-
 ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
 ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
 ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
+-- Update VoucherRecipientCustomers
+CREATE TABLE "VoucherRecipientCustomers" (
+    "Year" INT NOT NULL,
+    "Month" INT NOT NULL,
+    "CustomerId" NVARCHAR(7) NOT NULL,
+    "CustomerFullName" NVARCHAR(255) NOT NULL,
+    "VoucherType" INT NOT NULL
+);
+
+ALTER TABLE "VoucherRecipientCustomers"
+ADD CONSTRAINT "PK_VoucherRecipientCustomers" 
+PRIMARY KEY ("Year", "Month", "CustomerId");
