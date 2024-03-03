@@ -44,7 +44,7 @@
 
                                     <!-- More posts... -->
                                     <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80 hover:opacity-80">
-                                        <a href="/ResortHub/Admin/PromotionManagement/CustomersGetVoucher/GetVoucherForm.jsp">
+                                        <a href="/ResortHub/Admin/PromotionManagement/CustomersGetVoucher/ListCustomersGetVoucher.jsp">
                                             <img src="https://images.unsplash.com/photo-1494426383302-7b9d36a1a028?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dm91Y2hlcnxlbnwwfHwwfHx8MA%3D%3D" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
                                             <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
                                             <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>

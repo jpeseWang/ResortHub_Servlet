@@ -82,7 +82,7 @@
 
                         <!--                        Booking-->
                         <a
-                            href="/ResortHub/BookingController?action=getAll"
+                            href="/ResortHub/BookingController?action=getAll&page=1&pageSize=10"
                             class="border-transparent text-gray-400 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium"
                             >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-2">

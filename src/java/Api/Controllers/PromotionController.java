@@ -4,7 +4,7 @@
  */
 package Api.Controllers;
 
-import Domain.DTOs.CustomerDto.GetListOfVoucherRecipientCustomersDto;
+import Domain.DTOs.CustomerDto.CreateVoucherRecipientCustomersDto;
 import Domain.Models.Booking;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,29 +46,28 @@ public class PromotionController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-         PromotionService promotionService = new PromotionService();
-        BookingService bookingService = new BookingService();
-        String action = request.getParameter("action");
-
-        switch (action) {
-
-            case "ListCustomersGetVoucher":
-                GetListOfVoucherRecipientCustomersDto getListOfVoucherRecipientCustomersDto = new GetListOfVoucherRecipientCustomersDto(request);
-                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.getListOfVoucherRecipientCustomers(getListOfVoucherRecipientCustomersDto);
-                request.setAttribute("useServices", voucherRecipientCustomers);
-                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersGetVoucher.jsp").forward(request, response);
-                break;
-
-            case "ListCustomersUseService":
-                java.util.List<Booking> bookings = bookingService.getBookingsByYear(2024);
-                request.setAttribute("bookings", bookings);
-                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
-                break;
-
-            default:
-                request.getRequestDispatcher("Admin/PromotionManagement/ListPromotion.jsp").forward(request, response);
-        }
-
+//         PromotionService promotionService = new PromotionService();
+//        BookingService bookingService = new BookingService();
+//        String action = request.getParameter("action");
+//
+//        switch (action) {
+//
+//            case "ListCustomersGetVoucher":
+//                CreateVoucherRecipientCustomersDto createVoucherRecipientCustomersDto = new CreateVoucherRecipientCustomersDto(request);
+//                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.getListOfVoucherRecipientCustomers(createVoucherRecipientCustomersDto);
+//                request.setAttribute("useServices", voucherRecipientCustomers);
+//                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersGetVoucher.jsp").forward(request, response);
+//                break;
+//
+//            case "ListCustomersUseService":
+//                java.util.List<Booking> bookings = bookingService.getBookingsByYear(2024);
+//                request.setAttribute("bookings", bookings);
+//                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
+//                break;
+//
+//            default:
+//                request.getRequestDispatcher("Admin/PromotionManagement/ListPromotion.jsp").forward(request, response);
+//        }
     }
 
     @Override
@@ -81,8 +80,15 @@ public class PromotionController extends HttpServlet {
         switch (action) {
 
             case "ListCustomersGetVoucher":
-                GetListOfVoucherRecipientCustomersDto getListOfVoucherRecipientCustomersDto = new GetListOfVoucherRecipientCustomersDto(request);
-                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.getListOfVoucherRecipientCustomers(getListOfVoucherRecipientCustomersDto);
+//                GetListOfVoucherRecipientCustomersDto getListOfVoucherRecipientCustomersDto = new GetListOfVoucherRecipientCustomersDto(request);
+//                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.getListOfVoucherRecipientCustomers(getListOfVoucherRecipientCustomersDto);
+//                request.setAttribute("useServices", voucherRecipientCustomers);
+                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
+                break;
+
+            case "CreateVouchers":
+                CreateVoucherRecipientCustomersDto createVoucherRecipientCustomersDto = new CreateVoucherRecipientCustomersDto(request);
+                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.createVoucherRecipientCustomers(createVoucherRecipientCustomersDto);
                 request.setAttribute("useServices", voucherRecipientCustomers);
                 request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
                 break;

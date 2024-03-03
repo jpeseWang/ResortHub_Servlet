@@ -6,6 +6,8 @@ package Api.Controllers;
 
 import Domain.DTOs.BookingDto.CreateBookingDto;
 import Domain.DTOs.BookingDto.CreateRentalContractDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.UserRole;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Employee;
@@ -21,6 +23,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class BookingController extends HttpServlet {
 
@@ -32,13 +35,14 @@ public class BookingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
 
         BookingService bookingService = new BookingService();
-        java.util.List<Booking> bookings = bookingService.getAllBookings();
+        PageQueryDto pageQueryDto = new PageQueryDto(request);
+
+        PageDto<Booking> bookingsPage = bookingService.getAllBookings(pageQueryDto);
+        List<Booking> bookings = bookingsPage.getData();
 
         String id = request.getParameter("id");
-
         String action = request.getParameter("action");
         switch (action) {
             case "getMyBooking":

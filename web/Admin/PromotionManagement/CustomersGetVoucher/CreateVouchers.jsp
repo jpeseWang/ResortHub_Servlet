@@ -51,9 +51,6 @@
                                 class="block w-full rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
 
-
-
-
                         </div>
                     </div>
 
@@ -81,9 +78,8 @@
                             class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
 
-                            <span>View voucher</span>
+                            <span>Create</span>
                         </button>
-                        <!-- <p class="my-2 text-red-500 font-medium"> {error && error}</p> -->
                     </div>
                 </form>
 

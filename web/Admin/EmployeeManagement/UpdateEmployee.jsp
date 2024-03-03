@@ -49,12 +49,21 @@
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-900">Gender</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            <input value="${c.gender}" name="Gender" type="text"/></dd>
-                    </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-900">Identification number</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            <input value="${c.idNumber}" name="IdNumber"  type="text"/></dd>
+
+
+                            <select name="Gender"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+
+                                <option value="Male" <c:if test="${c.gender eq 'Male'}">selected</c:if>>Male</option>
+                                <option value="2" <c:if test="${c.gender eq 'Female'}">selected</c:if>>Female</option>
+
+                                </select>
+                            </dd>
+
+                        </div>
+                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-900">Identification number</dt>
+                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                <input value="${c.idNumber}" name="IdNumber"  type="text"/></dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-900">Phone number</dt>
