@@ -40,6 +40,9 @@ public class BookingController extends HttpServlet {
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
+
+        PageQueryDto pageQueryDto;
+        PageDto<Booking> pageDto;
         switch (action) {
             case "getMyBooking":
                 User user = SessionUtils.getUserFromSession(request);
@@ -47,8 +50,8 @@ public class BookingController extends HttpServlet {
                     response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
                     return;
                 }
-                PageQueryDto pageQueryDto = new PageQueryDto(request);
-                PageDto<Booking> pageDto = bookingService.getBookingsOfCustomer(pageQueryDto,
+                pageQueryDto = new PageQueryDto(request);
+                pageDto = bookingService.getBookingsOfCustomer(pageQueryDto,
                         user.getCustomerId());
                 request.setAttribute("bookings", pageDto.getData());
                 request.setAttribute("meta", pageDto.getMeta());
@@ -56,8 +59,8 @@ public class BookingController extends HttpServlet {
                 break;
 
             case "getAll":
-                PageQueryDto pageQueryDto = new PageQueryDto(request);
-                PageDto<Booking> pageDto = bookingService.getAllBookings(pageQueryDto);
+                pageQueryDto = new PageQueryDto(request);
+                pageDto = bookingService.getAllBookings(pageQueryDto);
                 request.setAttribute("bookings", pageDto.getData());
                 request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("Admin/BookingManagement/ListBooking.jsp").forward(request, response);
