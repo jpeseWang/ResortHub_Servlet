@@ -15,6 +15,14 @@ public class CreateBookingDto {
     private String customerId;
     private String facilityId;
 
+     public CreateBookingDto(Date bookingDate, Date startDate, Date endDate, String customerId, String facilityId) {
+        this.bookingDate = bookingDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.customerId = customerId;
+        this.facilityId = facilityId;
+    }
+    
     public CreateBookingDto(HttpServletRequest request) {
         bookingDate = ConvertUtils.convertStringToDate(request.getParameter("BookingDate"));
         startDate = ConvertUtils.convertStringToDate(request.getParameter("StartDate"));

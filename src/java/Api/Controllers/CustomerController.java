@@ -12,7 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import Api.Validators.CustomerValidator;
 import Domain.DTOs.CustomerDto.CreateCustomerDto;
 import Domain.DTOs.CustomerDto.UpdateCustomerDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Exceptions.ConflictException;
+import Domain.Models.Booking;
 import Domain.Models.Customer;
 import Domain.Models.Employee;
 import Services.CustomerService;
@@ -24,7 +27,8 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
         CustomerService customerService = new CustomerService();
 
-        List<Customer> customers = customerService.getAllCustomers();
+        PageQueryDto pageQueryDto;
+        PageDto<Customer> pageDto;
 
         String id = request.getParameter("id");
 
@@ -32,7 +36,11 @@ public class CustomerController extends HttpServlet {
         switch (action) {
 
             case "getAll":
-                request.setAttribute("customers", customers);
+                
+                pageQueryDto = new PageQueryDto(request);
+                pageDto = customerService.getAllCustomers(pageQueryDto);
+                request.setAttribute("customers", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("Admin/CustomerManagement/ListCustomer.jsp").forward(request, response);
                 break;
 

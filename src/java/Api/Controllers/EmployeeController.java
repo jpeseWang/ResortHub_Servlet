@@ -11,7 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import Api.Validators.EmployeeValidator;
 import Domain.DTOs.EmployeeDto.CreateEmployeeDto;
 import Domain.DTOs.EmployeeDto.UpdateEmployeeDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Exceptions.ConflictException;
+import Domain.Models.Booking;
 import Domain.Models.Employee;
 import Services.EmployeeService;
 
@@ -20,16 +23,21 @@ public class EmployeeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         EmployeeService employeeService = new EmployeeService();
-        java.util.List<Employee> employees = employeeService.getAllEmployees();
+        PageQueryDto pageQueryDto;
+        PageDto<Employee> pageDto;
+        
         String id = request.getParameter("id");
 
         String action = request.getParameter("action");
         switch (action) {
-
+            
             case "getAll":
-                request.setAttribute("employees", employees);
+                pageQueryDto = new PageQueryDto(request);
+                pageDto = employeeService.getAllEmployees(pageQueryDto);
+                request.setAttribute("employees", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("Admin/EmployeeManagement/ListEmployee.jsp").forward(request, response);
                 break;
 

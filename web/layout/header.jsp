@@ -52,14 +52,14 @@
                         >
                     </c:if>
                     <c:if test="${sessionScope.User.userRole == UserRole.User}">
-                        <a href="/ResortHub/BookingController?action=getMyBooking" class="text-sm font-semibold leading-6 text-gray-900"
+                        <a href="/ResortHub/BookingController?action=getMyBooking&Page=1&PageSize=10" class="text-sm font-semibold leading-6 text-gray-900"
                            >My Bookings</a
                         >
                     </c:if>
                     <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
                        >Features</a
                     >
-                    <a href="http://localhost:8080/ResortHub/FacilityController?action=getMarketplaceItem" class="text-sm font-semibold leading-6 text-gray-900"
+                    <a href="http://localhost:8080/ResortHub/FacilityController?action=getMarketplaceItem&Page=1&PageSize=10" class="text-sm font-semibold leading-6 text-gray-900"
                        >Marketplace</a
                     >
                     <a href="#" class="text-sm font-semibold leading-6 text-gray-900"

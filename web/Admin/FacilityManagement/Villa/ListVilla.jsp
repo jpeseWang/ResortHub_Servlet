@@ -58,8 +58,6 @@
                                                         </c:forEach>
                                                     </select>
 
-
-
                                                     <div class="absolute right-0 top-0">
                                                         <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -92,9 +90,52 @@
                             </c:forEach>
 
                         </ul>
+                      
+                            
+                            
+                            
+                        
+                           <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+                            <div class="flex flex-1 justify-between sm:hidden">
+                                <c:if test="${meta.page > 1}">
+                                    
+                                    <a href='FacilityController?action=getAll&facilityType=villa&Page=${meta.page - 1}&PageSize=10' class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+                                </c:if>
+                                <c:if test="${meta.page < meta.pageSize && meta.page < meta.pageCount}">
+                                    <a href='FacilityController?action=getAll&facilityType=villa&Page=${meta.page + 1}&PageSize=10' class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+                                </c:if>
+                            </div>
+                            <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing page
+                                        <span class="font-medium">${meta.page}</span>
+                                       
+                                        of
+                                        <span class="font-medium">${meta.itemCount}</span>
+                                        results
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                                        <c:forEach begin="1" end="${meta.pageCount}" varStatus="page">
+                                            <c:choose>
+                                                <c:when test="${page.index == meta.page}">
+                                                    <a href="#" aria-current="page" class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">${page.index}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href='FacilityController?action=getAll&facilityType=villa&Page=${page.index}&PageSize=10' class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">${page.index}</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
                     </section>
 
-                 
+
                     <!-- Order summary -->
                     <section aria-labelledby="summary-heading" class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
                         <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Villa Management summary</h2>

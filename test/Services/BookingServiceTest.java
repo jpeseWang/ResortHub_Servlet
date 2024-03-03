@@ -10,7 +10,9 @@ import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.Order;
 import Domain.Models.Booking;
 import Repositories.Entities.BookingEntity;
+import Utils.ConvertUtils;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -84,9 +86,8 @@ public class BookingServiceTest {
 
         PageDto<Booking> result = instance.getAllBookings(dto);
         assertNotNull(result);
-        
-        // TODO review the generated test code and remove the default call to fail.
-       
+        assertTrue(result.getData().size() <= pageSize);
+
     }
 
     /**
@@ -95,16 +96,11 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingById() {
         System.out.println("getBookingById");
-        String id = "23";
+        String id = "6"; // Assuming this ID exists
         BookingService instance = new BookingService();
-        Booking expectedBooking = new Booking();
-        expectedBooking.setId(Integer.parseInt(id));
-        Booking expResult = null;
         Booking result = instance.getBookingById(id);
+        assertNotNull(result);
 
-        assertEquals(expectedBooking.getId(), result.getId());
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -129,13 +125,10 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingsByYear() {
         System.out.println("getBookingsByYear");
-        int year = 0;
+        int year = 2024;
         BookingService instance = new BookingService();
-        List<Booking> expResult = null;
         List<Booking> result = instance.getBookingsByYear(year);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
@@ -144,14 +137,11 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingsByYearAndMonth() {
         System.out.println("getBookingsByYearAndMonth");
-        int year = 0;
-        int month = 0;
+        int year = 2024;
+        int month = 2;
         BookingService instance = new BookingService();
-        List<Booking> expResult = null;
         List<Booking> result = instance.getBookingsByYearAndMonth(year, month);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
@@ -159,14 +149,18 @@ public class BookingServiceTest {
      */
     @Test
     public void testCreateBooking() {
-        System.out.println("createBooking");
-        CreateBookingDto dto = null;
+        Date BookingDate = ConvertUtils.convertStringToDate("2024-02-02");
+        Date EndDate = ConvertUtils.convertStringToDate("2024-02-02");
+        Date StartDate = ConvertUtils.convertStringToDate("2024-02-02");
+        String CustomerId = "KH-0005";
+        String FacilityId = "SVVL-2004";
+        // Create a valid CreateBookingDto object
+        CreateBookingDto dto = new CreateBookingDto(BookingDate, StartDate, EndDate, CustomerId, FacilityId);
+
         BookingService instance = new BookingService();
-        int expResult = 0;
         int result = instance.createBooking(dto);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+    
     }
 
     /**

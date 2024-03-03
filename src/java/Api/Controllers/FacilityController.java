@@ -4,7 +4,10 @@ import Api.Validators.FacilityValidator;
 import Domain.DTOs.EmployeeDto.CreateEmployeeDto;
 import Domain.DTOs.EmployeeDto.UpdateEmployeeDto;
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Exceptions.ConflictException;
+import Domain.Models.Booking;
 import Domain.Models.Employee;
 import Domain.Models.Facility;
 import Domain.Models.MaintenanceFacility;
@@ -43,33 +46,40 @@ public class FacilityController extends HttpServlet {
         FacilityService facilityService = new FacilityService();
         EmployeeService employeeService = new EmployeeService();
 
-        java.util.List<Facility> facilities = facilityService.getAllFacilities();
+        PageQueryDto pageQueryDto;
+        PageDto<Facility> pageDto;
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
 
+        pageQueryDto = new PageQueryDto(request);
+        pageDto = facilityService.getAllFacilities(pageQueryDto);
         switch (action) {
 
             case "getMarketplaceItem":
-                request.setAttribute("facilities", facilities);
+                request.setAttribute("facilities", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
                 break;
             case "getAll":
 
                 switch (facilityType) {
                     case "villa":
-                        request.setAttribute("facilities", facilities);
+                        request.setAttribute("facilities", pageDto.getData());
+                        request.setAttribute("meta", pageDto.getMeta());
                         request.getRequestDispatcher("Admin/FacilityManagement/Villa/ListVilla.jsp").forward(request,
                                 response);
                         break;
                     case "house":
-                        request.setAttribute("facilities", facilities);
+                        request.setAttribute("facilities", pageDto.getData());
+                        request.setAttribute("meta", pageDto.getMeta());
                         request.getRequestDispatcher("Admin/FacilityManagement/House/ListHouse.jsp").forward(request,
                                 response);
                         break;
                     case "room":
-                        request.setAttribute("facilities", facilities);
+                        request.setAttribute("facilities", pageDto.getData());
+                        request.setAttribute("meta", pageDto.getMeta());
                         request.getRequestDispatcher("Admin/FacilityManagement/Room/ListRoom.jsp").forward(request,
                                 response);
                         break;
