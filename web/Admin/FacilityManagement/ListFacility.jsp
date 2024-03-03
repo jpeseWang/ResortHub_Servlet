@@ -21,7 +21,8 @@
                         <div class="mx-auto max-w-7xl px-6 lg:px-8">
                             <div class="mx-auto max-w-2xl text-center">
                                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">ResortHub's Facility</h2>
-                                <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p><button type="button" class="mt-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                <p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p>
+                                <button type="button" class="mt-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                                     <a href="/ResortHub/FacilityController?action=getListMaintenance">Facility maintenance</a>
                                     </button>
                             </div>

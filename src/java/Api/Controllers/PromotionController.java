@@ -5,6 +5,8 @@
 package Api.Controllers;
 
 import Domain.DTOs.CustomerDto.CreateVoucherRecipientCustomersDto;
+import Domain.DTOs.PageDto.PageDto;
+import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Models.Booking;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author jpesewang
  */
 public class PromotionController extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,74 +43,51 @@ public class PromotionController extends HttpServlet {
             out.println("</html>");
         }
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-//         PromotionService promotionService = new PromotionService();
-//        BookingService bookingService = new BookingService();
-//        String action = request.getParameter("action");
-//
-//        switch (action) {
-//
-//            case "ListCustomersGetVoucher":
-//                CreateVoucherRecipientCustomersDto createVoucherRecipientCustomersDto = new CreateVoucherRecipientCustomersDto(request);
-//                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.getListOfVoucherRecipientCustomers(createVoucherRecipientCustomersDto);
-//                request.setAttribute("useServices", voucherRecipientCustomers);
-//                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersGetVoucher.jsp").forward(request, response);
-//                break;
-//
-//            case "ListCustomersUseService":
-//                java.util.List<Booking> bookings = bookingService.getBookingsByYear(2024);
-//                request.setAttribute("bookings", bookings);
-//                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
-//                break;
-//
-//            default:
-//                request.getRequestDispatcher("Admin/PromotionManagement/ListPromotion.jsp").forward(request, response);
-//        }
+        
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PromotionService promotionService = new PromotionService();
         BookingService bookingService = new BookingService();
         String action = request.getParameter("action");
-
+        String year = request.getParameter("Year");
+        String month = request.getParameter("Month");
+        PageQueryDto pageQueryDto;
+        PageDto<VoucherRecipientCustomer> pageDto;
         switch (action) {
-
+            
             case "ListCustomersGetVoucher":
-//                GetListOfVoucherRecipientCustomersDto getListOfVoucherRecipientCustomersDto = new GetListOfVoucherRecipientCustomersDto(request);
-//                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.getListOfVoucherRecipientCustomers(getListOfVoucherRecipientCustomersDto);
-//                request.setAttribute("useServices", voucherRecipientCustomers);
+                pageQueryDto = new PageQueryDto(request);
+                pageDto = promotionService.getVoucherRecipientCustomers(pageQueryDto, Integer.parseInt(year), Integer.parseInt(month));
+                request.setAttribute("useServices", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
                 break;
-
+            
             case "CreateVouchers":
-                CreateVoucherRecipientCustomersDto createVoucherRecipientCustomersDto = new CreateVoucherRecipientCustomersDto(request);
-                java.util.List<VoucherRecipientCustomer> voucherRecipientCustomers = promotionService.createVoucherRecipientCustomers(createVoucherRecipientCustomersDto);
-                request.setAttribute("useServices", voucherRecipientCustomers);
+                CreateVoucherRecipientCustomersDto dto = new CreateVoucherRecipientCustomersDto((request));
+                promotionService.createVoucherRecipientCustomers(dto);
                 request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
                 break;
-
+            
             case "ListCustomersUseService":
                 java.util.List<Booking> bookings = bookingService.getBookingsByYear(2024);
                 request.setAttribute("bookings", bookings);
                 request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
                 break;
-
+            
             default:
                 request.getRequestDispatcher("Admin/PromotionManagement/ListPromotion.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+  
     @Override
     public String getServletInfo() {
         return "Short description";

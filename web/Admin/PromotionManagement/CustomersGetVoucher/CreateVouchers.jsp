@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.tailwindcss.com"></script>
         <title>JSP Page</title>
+
     </head>
     <body>
 
@@ -14,7 +15,7 @@
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img class="mx-auto h-12 w-auto" src="https://github.com/jpeseWang/ResortHub_Servlet/blob/main/web/assets/images/logo.png?raw=true" alt="Your Company" />
                 <h2 class="mt-4 text-center text-3xl font-bold tracking-tight text-gray-900">
-                    View customer voucher
+                    Create customer voucher
                 </h2>
             </div>
 
@@ -22,10 +23,10 @@
                 <form class="space-y-4"  
                       name="PromotionController"
                       method="POST"
-                      action="/ResortHub/PromotionController?action=ListCustomersGetVoucher">
+                      action="/ResortHub/PromotionController?action=CreateVouchers">
                     <div>
-                        <input   class="hidden" name="Month"   value="2" />
-                        <input   class="hidden" name="Year"   value="2024" />
+                        <input class="hidden" name="Month" id="currentMonth" />
+                        <input class="hidden" name="Year" id="currentYear" />
                         <div class="mt-2">
                             <input
 
@@ -85,6 +86,17 @@
 
             </div>
         </div>
+        <script>
+            // Get the current date
+            var currentDate = new Date();
 
+            // Get the current month and year
+            var currentMonth = currentDate.getMonth() + 1; // JavaScript months are zero-based, so we add 1
+            var currentYear = currentDate.getFullYear();
+
+            // Set the values of the input fields
+            document.getElementById('currentMonth').value = currentMonth;
+            document.getElementById('currentYear').value = currentYear;
+        </script>
     </body>
 </html>

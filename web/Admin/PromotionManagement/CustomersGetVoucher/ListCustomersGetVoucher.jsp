@@ -19,23 +19,21 @@
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Promotion</h1>
                     <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
                 </div>
-
-
-
+                <button type="button" class="mt-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                    <a href="/ResortHub/Admin/PromotionManagement/CustomersGetVoucher/CreateVouchers.jsp">Create voucher</a>
+                </button>
 
             </div>
             <form class="block sm:flex gap-x-4 mt-4"
                   name="PromotionController"
                   method="POST"
-                  action="/ResortHub/PromotionController?action=ListCustomersGetVoucher">
+                  action="/ResortHub/PromotionController?action=ListCustomersGetVoucher&Page=1&PageSize=10">
                 <div>
-                    <input class="hidden" name="Month" value="2" />
-                    <input class="hidden" name="Year" value="2024" />
                     <div class="">
                         <input
-                            name="NumTenPercentDiscountVouchers"
+                            name="Year"
                             type="text"
-                            placeholder="Number 10% Vouchers"
+                            placeholder="Year"
                             required
                             class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
@@ -45,34 +43,34 @@
                 <div>
                     <div class="">
                         <input
-                            name="NumTwentyPercentDiscountVouchers"
+                            name="Month"
                             type="text"
-                            placeholder="Number of 20% Vouchers"
+                            placeholder="Month"
                             required
                             class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                     </div>
                 </div>
-
-                <div>
-                    <div class="">
-                        <input
-                            name="NumFiftyPercentDiscountVouchers"
-                            type="text"
-                            placeholder="Number of 50% Vouchers"
-                            required
-                            class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                        <span class="text-red-400 font-medium text-base">${requestScope.error}</span>
-                    </div>
-                </div>
+                <!--
+                                <div>
+                                    <div class="">
+                                        <input
+                                            name="NumFiftyPercentDiscountVouchers"
+                                            type="text"
+                                            placeholder="Number of 50% Vouchers"
+                                            required
+                                            class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                        <span class="text-red-400 font-medium text-base">${requestScope.error}</span>
+                                    </div>
+                                </div>-->
 
                 <div>
                     <button
                         type="submit"
                         class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
-                        <span>Create voucher</span>
+                        <span>View vouchers</span>
                     </button>
 
                 </div>
