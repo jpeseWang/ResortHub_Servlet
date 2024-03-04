@@ -59,6 +59,17 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         return booking;
     }
 
+    public List<Booking> getBookingsOfContract(int contractId) {
+        List<Booking> bookings = new ArrayList<>();
+        List<BookingEntity> entities = super.getAll("ContractId = %d", contractId);
+
+        for (BookingEntity entity : entities) {
+            bookings.add(mapEntityToBooking(entity));
+        }
+
+        return bookings;
+    }
+
     public PageDto<Booking> getBookingsOfCustomer(PageQueryDto dto, String customerId) {
         List<Booking> bookings = new ArrayList<>();
         List<BookingEntity> entities = super.getAllWithOffset(String.format("CustomerId = '%s'", customerId),

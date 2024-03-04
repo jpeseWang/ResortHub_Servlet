@@ -50,7 +50,7 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         RentalContractEntity entity = super.getById(id);
         RentalContract rentalContract = mapEntityToRentalContract(entity);
 
-        rentalContract.setBooking(bookingService.getBookingById(id));
+        rentalContract.setBookings(bookingService.getBookingsOfContract(rentalContract.getId()));
 
         return rentalContract;
     }
@@ -65,9 +65,11 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         params.add(dto.getDeposit());
         params.add(dto.getTotalAmount());
 
-        super.executeNonQuery(query, params);
+        int contractId = super.executeNonQueryReturnsId(query, params);
 
-        
+        query = String.format("UPDATE Bookings SET ContractId = %d WHERE Id IN (%s);", contractId, bookingIdString);
+
+        super.executeNonQuery(query, new ArrayList<>());
     }
 
     private RentalContract mapEntityToRentalContract(RentalContractEntity entity) {

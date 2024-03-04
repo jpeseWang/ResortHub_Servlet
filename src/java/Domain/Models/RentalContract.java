@@ -1,12 +1,14 @@
 package Domain.Models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class RentalContract {
     private int id;
     private String customerId;
     private BigDecimal deposit;
     private BigDecimal totalAmount;
+    private List<Booking> bookings;
 
     public RentalContract() {
     }
@@ -28,6 +30,10 @@ public class RentalContract {
         return totalAmount;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -44,4 +50,8 @@ public class RentalContract {
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
+
+    private void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    } 
 }
