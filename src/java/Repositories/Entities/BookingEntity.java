@@ -19,7 +19,7 @@ public class BookingEntity {
         this.bookingDate = rs.getDate("BookingDate");
         this.startDate = rs.getDate("StartDate");
         this.endDate = rs.getDate("EndDate");
-        this.occupancy = rs.getint("Occupancy");
+        this.occupancy = rs.getInt("Occupancy");
         this.customerId = rs.getString("CustomerId");
         this.facilityId = rs.getString("FacilityId");
         this.contractId = rs.getString("ContractId");
