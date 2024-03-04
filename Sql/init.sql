@@ -97,8 +97,6 @@ ALTER TABLE
     "Rooms" ADD CONSTRAINT "rooms_id_primary" PRIMARY KEY("Id");
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_customerid_foreign" FOREIGN KEY("CustomerId") REFERENCES "Customers"("Id");
-ALTER TABLE
-    "RentalContracts" ADD CONSTRAINT "rentalcontracts_bookingid_foreign" FOREIGN KEY("BookingId") REFERENCES "Bookings"("Id");
 
 ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
