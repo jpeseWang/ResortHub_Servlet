@@ -13,14 +13,7 @@ CREATE TABLE "Villas"(
 );
 ALTER TABLE
     "Villas" ADD CONSTRAINT "villas_id_primary" PRIMARY KEY("Id");
-CREATE TABLE "RentalContracts"(
-    "Id" INT IDENTITY(1,1) NOT NULL,
-    "BookingId" INT NOT NULL,
-    "Deposit" DECIMAL(18, 2) NOT NULL,
-    "TotalAmount" DECIMAL(18, 2) NOT NULL
-);
-ALTER TABLE
-    "RentalContracts" ADD CONSTRAINT "rentalcontracts_id_primary" PRIMARY KEY("Id");
+
 CREATE TABLE "Customers"(
     "Id" NVARCHAR(7) NOT NULL,
     "FullName" NVARCHAR(255) NOT NULL,
@@ -71,11 +64,22 @@ CREATE TABLE "Bookings"(
     "BookingDate" DATE NOT NULL,
     "StartDate" DATE NOT NULL,
     "EndDate" DATE NOT NULL,
+    "Occupancy" INT NOT NULL,
     "CustomerId" NVARCHAR(7) NOT NULL,
-    "FacilityId" NVARCHAR(9) NOT NULL
+    "FacilityId" NVARCHAR(9) NOT NULL,
+    "ContractId" INT NOT NULL
 );
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_id_primary" PRIMARY KEY("Id");
+
+CREATE TABLE "RentalContracts"(
+    "Id" INT IDENTITY(1,1) NOT NULL,
+    "CustomerId" NVARCHAR(7) NOT NULL,
+    "Deposit" DECIMAL(18, 2) NOT NULL,
+    "TotalAmount" DECIMAL(18, 2) NOT NULL
+);
+ALTER TABLE
+    "RentalContracts" ADD CONSTRAINT "rentalcontracts_id_primary" PRIMARY KEY("Id");
 CREATE TABLE "Users"(
     "Id" INT IDENTITY(1,1) NOT NULL,
     "Username" NVARCHAR(255) NOT NULL,
