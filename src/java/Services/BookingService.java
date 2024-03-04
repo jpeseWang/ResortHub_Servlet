@@ -61,7 +61,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
 
     public List<Booking> getBookingsOfContract(int contractId) {
         List<Booking> bookings = new ArrayList<>();
-        List<BookingEntity> entities = super.getAll("ContractId = %d", contractId);
+        List<BookingEntity> entities = super.getAll(String.format("ContractId = %d", contractId));
 
         for (BookingEntity entity : entities) {
             bookings.add(mapEntityToBooking(entity));

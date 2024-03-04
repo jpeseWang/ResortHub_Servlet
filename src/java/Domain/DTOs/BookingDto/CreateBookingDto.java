@@ -12,21 +12,25 @@ public class CreateBookingDto {
     private Date bookingDate;
     private Date startDate;
     private Date endDate;
+    private int occupancy;
     private String customerId;
     private String facilityId;
 
-     public CreateBookingDto(Date bookingDate, Date startDate, Date endDate, String customerId, String facilityId) {
+    public CreateBookingDto(Date bookingDate, Date startDate, Date endDate, int occupancy, String customerId,
+            String facilityId) {
         this.bookingDate = bookingDate;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.occupancy = occupancy;
         this.customerId = customerId;
         this.facilityId = facilityId;
     }
-    
+
     public CreateBookingDto(HttpServletRequest request) {
         bookingDate = ConvertUtils.convertStringToDate(request.getParameter("BookingDate"));
         startDate = ConvertUtils.convertStringToDate(request.getParameter("StartDate"));
         endDate = ConvertUtils.convertStringToDate(request.getParameter("EndDate"));
+        occupancy = ConvertUtils.convertStringToInt(request.getParameter("Occupancy"));
         customerId = request.getParameter("CustomerId");
         facilityId = request.getParameter("FacilityId");
     }
@@ -42,6 +46,10 @@ public class CreateBookingDto {
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public int getOccupancy() {
+        return occupancy;
     }
 
     public String getCustomerId() {
@@ -63,6 +71,10 @@ public class CreateBookingDto {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public void setOccupancy(int occupancy) {
+        this.occupancy = occupancy;
     }
 
     public void setCustomerId(String customerId) {
