@@ -46,6 +46,22 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         return new PageDto<>(rentalContracts, meta);
     }
 
+    public PageDto<RentalContract> getRentalContractsOfCustomers(PageQueryDto dto, String customerId) {
+        List<RentalContract> rentalContracts = new ArrayList<>();
+        List<RentalContractEntity> entities = super.getAllWithOffset(String.format("CustomerId = '%s'", customerId),
+                dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount(String.format("CustomerId = '%s'", customerId));
+
+        for (RentalContractEntity entity : entities) {
+            rentalContracts.add(mapEntityToRentalContract(entity));
+        }
+
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(rentalContracts, meta);
+    }
+
     public RentalContract getRentalContractById(String id) {
         RentalContractEntity entity = super.getById(id);
         RentalContract rentalContract = mapEntityToRentalContract(entity);
