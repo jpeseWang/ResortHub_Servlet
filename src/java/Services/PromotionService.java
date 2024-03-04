@@ -52,6 +52,22 @@ public class PromotionService extends RepositoryBase<VoucherRecipientCustomerEnt
         return new PageDto<>(voucherRecipientCustomers, meta);
     }
 
+    public PageDto<VoucherRecipientCustomer> getVouchersOfCustomer(PageQueryDto dto, String customerId) {
+        List<VoucherRecipientCustomer> voucherRecipientCustomers = new ArrayList<>();
+        List<VoucherRecipientCustomerEntity> entities = super.getAllWithOffset(
+                String.format("CustomerId = '%s'", customerId), dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount(String.format("CustomerId = '%s'", customerId));
+
+        for (VoucherRecipientCustomerEntity entity : entities) {
+            voucherRecipientCustomers.add(mapEntityToVoucherRecipientCustomer(entity));
+        }
+
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(voucherRecipientCustomers, meta);
+    }
+
     public void createVoucherRecipientCustomers(CreateVoucherRecipientCustomersDto dto) {
         String query = String.format(
                 "INSERT INTO %s (Year,Month,CustomerId,CustomerFullName,VoucherType)",
