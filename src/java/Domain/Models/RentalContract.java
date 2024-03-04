@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 
 public class RentalContract {
     private int id;
-    private int bookingId;
-    private Booking booking;
+    private String customerId;
     private BigDecimal deposit;
     private BigDecimal totalAmount;
 
@@ -17,12 +16,8 @@ public class RentalContract {
         return id;
     }
 
-    public int getBookingId() {
-        return bookingId;
-    }
-
-    public Booking getBooking() {
-        return booking;
+    public String getCustomerId() {
+        return customerId;
     }
 
     public BigDecimal getDeposit() {
@@ -38,12 +33,8 @@ public class RentalContract {
         this.id = id;
     }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public void setDeposit(BigDecimal deposit) {

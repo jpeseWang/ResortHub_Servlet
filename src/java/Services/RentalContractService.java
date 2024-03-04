@@ -55,23 +55,25 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         return rentalContract;
     }
 
-    public void createRentalContract(CreateRentalContractDto dto) {
+    public void createRentalContract(CreateRentalContractDto dto, String customerId, String bookingIdString) {
         String query = String.format(
-                "INSERT INTO %s (BookingId,Deposit,TotalAmount) VALUES (?,?,?);",
+                "INSERT INTO %s (CustomerId,Deposit,TotalAmount) VALUES (?,?,?);",
                 getTableName());
 
         List<Object> params = new ArrayList<>();
-        params.add(dto.getBookingId());
+        params.add(customerId);
         params.add(dto.getDeposit());
         params.add(dto.getTotalAmount());
 
         super.executeNonQuery(query, params);
+
+        
     }
 
     private RentalContract mapEntityToRentalContract(RentalContractEntity entity) {
         RentalContract rentalContract = new RentalContract();
         rentalContract.setId(entity.getId());
-        rentalContract.setBookingId(entity.getBookingId());
+        rentalContract.setCustomerId(entity.getCustomerId());
         rentalContract.setDeposit(entity.getDeposit());
         rentalContract.setTotalAmount(entity.getTotalAmount());
 

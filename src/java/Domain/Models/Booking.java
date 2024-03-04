@@ -7,8 +7,10 @@ public class Booking {
     private Date bookingDate;
     private Date startDate;
     private Date endDate;
+    private int occupancy;
     private String customerId;
     private String facilityId;
+    private String contractId;
     private Customer customer;
     private Facility facility;
 
@@ -32,12 +34,20 @@ public class Booking {
         return endDate;
     }
 
+    public int getOccupancy() {
+        return occupancy;
+    }
+
     public String getCustomerId() {
         return customerId;
     }
 
     public String getFacilityId() {
         return facilityId;
+    }
+
+    public String getContractId() {
+        return contractId;
     }
 
     public Customer getCustomer() {
@@ -65,12 +75,20 @@ public class Booking {
         this.endDate = endDate;
     }
 
+    public void setOccupancy(int occupancy) {
+        this.occupancy = occupancy;
+    }
+
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
     public void setFacilityId(String facilityId) {
         this.facilityId = facilityId;
+    }
+
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
     }
 
     public void setCustomer(Customer customer) {

@@ -105,13 +105,14 @@ public class BookingService extends RepositoryBase<BookingEntity> {
 
     public int createBooking(CreateBookingDto dto) {
         String query = String.format(
-                "INSERT INTO %s (BookingDate,StartDate,EndDate,CustomerId,FacilityId) OUTPUT INSERTED.Id VALUES (?,?,?,?,?);",
+                "INSERT INTO %s (BookingDate,StartDate,EndDate,Occupancy,CustomerId,FacilityId) OUTPUT INSERTED.Id VALUES (?,?,?,?,?,?);",
                 getTableName());
 
         List<Object> params = new ArrayList<>();
         params.add(dto.getBookingDate());
         params.add(dto.getStartDate());
         params.add(dto.getEndDate());
+        params.add(dto.getOccupancy());
         params.add(dto.getCustomerId());
         params.add(dto.getFacilityId());
 
@@ -137,8 +138,10 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         booking.setBookingDate(entity.getBookingDate());
         booking.setStartDate(entity.getStartDate());
         booking.setEndDate(entity.getEndDate());
+        booking.setOccupancy(entity.getOccupancy());
         booking.setCustomerId(entity.getCustomerId());
         booking.setFacilityId(entity.getFacilityId());
+        booking.setContractId(entity.getContractId());
 
         return booking;
     }

@@ -67,7 +67,7 @@ CREATE TABLE "Bookings"(
     "Occupancy" INT NOT NULL,
     "CustomerId" NVARCHAR(7) NOT NULL,
     "FacilityId" NVARCHAR(9) NOT NULL,
-    "ContractId" INT NOT NULL
+    "ContractId" INT NOT NULL DEFAULT 0
 );
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_id_primary" PRIMARY KEY("Id");

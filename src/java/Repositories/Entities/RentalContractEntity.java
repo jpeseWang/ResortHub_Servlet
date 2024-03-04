@@ -6,13 +6,13 @@ import java.sql.SQLException;
 
 public class RentalContractEntity {
     private int id;
-    private int bookingId;
+    private String customerId;
     private BigDecimal deposit;
     private BigDecimal totalAmount;
 
     public RentalContractEntity(ResultSet rs) throws SQLException {
         this.id = rs.getInt("Id");
-        this.bookingId = rs.getInt("BookingId");
+        this.customerId = rs.getString("CustomerId");
         this.deposit = rs.getBigDecimal("Deposit");
         this.totalAmount = rs.getBigDecimal("TotalAmount");
     }
@@ -22,8 +22,8 @@ public class RentalContractEntity {
         return id;
     }
 
-    public int getBookingId() {
-        return bookingId;
+    public String getCustomerId() {
+        return customerId;
     }
 
     public BigDecimal getDeposit() {
