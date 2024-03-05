@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="Domain.DTOs.EmployeeDto.CreateEmployeeDto" %>
 
 <%
@@ -14,17 +15,17 @@
     </head>
     <body>
         <%@ include file="../AdminNav.jsp" %>
-
+        <c:set var="c" value="${customers}"/>
         <div class="space-y-10 divide-y divide-gray-900/10 mx-6 mt-12">
             <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
                 <div class="px-4 sm:px-0">
-                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create new Employee</h2>
+                    <h2 class="text-base font-semibold leading-7 text-gray-900">Create new Bookings</h2>
                     <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so be careful what you share.</p>
                     <% String error = (String) request.getAttribute("error");%>
                     <span class="text-red-400 font-medium text-lg"><%= error != null ? error : ""%></span>
                 </div>
-                
-                
+
+
                 <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2"
                       name="CreateEmployee"
                       method="POST"
@@ -33,41 +34,39 @@
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                             <div class="sm:col-span-4">
-                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Employee ID</label>
+                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Customer ID</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input <% if (formData != null) {%>value="<%= formData.getId()%>"<% } %> type="text" name="Id" placeholder="Ex: NV-0000" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+<!--                                        <input <% if (formData != null) {%>value="<%= formData.getId()%>"<% } %> type="text" name="Id" placeholder="Ex: NV-0000" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >-->
+
+                                        <select id="quantity-0" name="quantity-0" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+                                            <c:forEach items="${customers}" var="c">
+                                                <option value="${c.id}">${c.id} 
+                                                
+                                               
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="sm:col-span-4">
-                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Full name</label>
+                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Facility ID</label>
                                 <div class="mt-2">
                                     <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input  <% if (formData != null) {%>value="<%= formData.getFullName()%>"<% } %> type="text" name="FullName" placeholder="Ex: Tran Quang Huy" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
+                                        <select id="quantity-0" name="quantity-0" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+                                            <c:forEach items="${facilities}" var="c">
+                                                <option value="${c.id}">${c.id}</option>
+                                            </c:forEach>
+                                        </select>                                    
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-4">
-                                <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Birthday</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                        <input type="date" name="BirthDate" id="website" class="block flex-1 border-0 bg-transparent py-1.5 px-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" >
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="sm:col-span-4">
-                                <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Gender</label>
-                                <div class="mt-2">
-                                    <select <% if (formData != null) {%>value="<%= formData.getGender()%>"<% } %> id="country" name="Gender" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                        <option>Male</option>
-                                        <option>Female</option>                          
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="sm:col-span-3">
                                 <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Identification Number</label>

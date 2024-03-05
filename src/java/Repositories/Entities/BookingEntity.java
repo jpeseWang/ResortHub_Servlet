@@ -52,6 +52,14 @@ public class BookingEntity {
         return occupancy;
     }
 
+    public BigDecimal getRentalCost(){
+        return rentalCost;
+    }
+    
+    public String getImgSrc(){
+        return imgSrc;
+    }
+    
     public String getCustomerId() {
         return customerId;
     }
@@ -85,6 +93,14 @@ public class BookingEntity {
         this.occupancy = occupancy;
     }
 
+     public void setRentalCost(BigDecimal rentalCost) {
+        this.rentalCost = rentalCost;
+    }
+     
+      public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+    
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
@@ -97,6 +113,6 @@ public class BookingEntity {
         this.contractId = contractId;
     }
 
-    // Other methods
+    
 }
 

@@ -71,7 +71,7 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
         return rentalContract;
     }
 
-    public void createRentalContract(CreateRentalContractDto dto, String customerId, String bookingIdString) {
+    public void createRentalContract(CreateRentalContractDto dto) {
         String query = String.format(
                 "INSERT INTO %s (CustomerId,Deposit,TotalAmount) VALUES (?,?,?);",
                 getTableName());
