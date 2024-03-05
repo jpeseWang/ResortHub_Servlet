@@ -121,6 +121,17 @@ public class BookingController extends HttpServlet {
 
                 break;
 
+                case "reviewContract":
+                String bookingIds = request.getParameter("BookingIds");
+                String totalPrice = request.getParameter("TotalPrice");
+                String quantity = request.getParameter("Quantity");
+
+                request.setAttribute("bookingIDs", bookingIds);
+                request.setAttribute("totalPrice", totalPrice);
+
+                request.getRequestDispatcher("Admin/BookingManagement/CreateContract.jsp").forward(request, response);
+                break; 
+
             case "createContract":
                 CreateRentalContractDto dto = new CreateRentalContractDto(request);
                 RentalContractService rentalContractService = new RentalContractService();
@@ -128,9 +139,10 @@ public class BookingController extends HttpServlet {
                 String message = "Create contract successfully!";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
-
                 break;
 
+
+                  
             default:
 
         }

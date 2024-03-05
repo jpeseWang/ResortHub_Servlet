@@ -19,20 +19,24 @@
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Bookings</h1>
                     <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
                 </div>
-                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add booking</button>
-                </div>
+                
+                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex gap-x-4">
+                    <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add booking</button>
+                    <button type="button" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create Contract</button>
+                
+                  </div>
             </div>
-
+      
             <div class="px-4 sm:px-6 lg:px-8">
-
+      
                 <div class="mt-8 flow-root">
                     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                             <table class="min-w-full divide-y divide-gray-300">
                                 <thead>
                                     <tr class="divide-x divide-gray-200">
-                                        <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-0">Facility ID</th>
+                                      <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                                        <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">Facility ID</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Customer ID</th>
                                         <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Start Date</th>
                                         <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-0">End Date</th>
@@ -40,18 +44,23 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-
+      
                                     <c:forEach items="${bookings}" var="c">
                                         <tr class="divide-x divide-gray-200">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">${c.facilityId}</td>
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">
+                                            
+                                            <input type="checkbox" class="accent-pink-300 focus:accent-pink-500 w-[18px] h-[18px] ml-4" ></td>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900">${c.facilityId}</td>
                                             <td class="whitespace-nowrap p-4 text-sm text-gray-500">${c.customerId}</td>
                                             <td class="whitespace-nowrap p-4 text-sm text-gray-500">${c.startDate}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">${c.endDate}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">${c.bookingDate}</td>
                                         </tr>
+      
+                                        
                                     </c:forEach>
-
-
+      
+      
                                     <!-- More people... -->
                                 </tbody>
                             </table>
@@ -83,12 +92,12 @@
                                     </a>
                                 </div>
                             </nav>
-
+      
                         </div>
                     </div>
                 </div>
             </div>
-
+      
         </div>
 
         <%@ include file="/layout/footer.jsp" %>
