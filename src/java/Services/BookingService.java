@@ -150,6 +150,8 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         booking.setStartDate(entity.getStartDate());
         booking.setEndDate(entity.getEndDate());
         booking.setOccupancy(entity.getOccupancy());
+        booking.setRentalCost(entity.getRentalCost());
+        booking.setImgSrc(entity.getImgSrc());
         booking.setCustomerId(entity.getCustomerId());
         booking.setFacilityId(entity.getFacilityId());
         booking.setContractId(entity.getContractId());

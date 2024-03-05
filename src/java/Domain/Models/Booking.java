@@ -1,5 +1,6 @@
 package Domain.Models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Booking {
@@ -8,6 +9,8 @@ public class Booking {
     private Date startDate;
     private Date endDate;
     private int occupancy;
+    private BigDecimal rentalCost;
+    private String imgSrc;
     private String customerId;
     private String facilityId;
     private String contractId;
@@ -36,6 +39,14 @@ public class Booking {
 
     public int getOccupancy() {
         return occupancy;
+    }
+
+    public BigDecimal getRentalCost() {
+        return rentalCost;
+    }
+
+    public String getImgSrc() {
+        return imgSrc;
     }
 
     public String getCustomerId() {
@@ -77,6 +88,14 @@ public class Booking {
 
     public void setOccupancy(int occupancy) {
         this.occupancy = occupancy;
+    }
+
+    public void setRentalCost(BigDecimal rentalCost) {
+        this.rentalCost = rentalCost;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
     }
 
     public void setCustomerId(String customerId) {

@@ -65,6 +65,8 @@ CREATE TABLE "Bookings"(
     "StartDate" DATE NOT NULL,
     "EndDate" DATE NOT NULL,
     "Occupancy" INT NOT NULL,
+    "RentalCost" DECIMAL(18, 2) NOT NULL,
+    "ImgSrc" NVARCHAR(255),
     "CustomerId" NVARCHAR(7) NOT NULL,
     "FacilityId" NVARCHAR(9) NOT NULL,
     "ContractId" INT NOT NULL DEFAULT 0
