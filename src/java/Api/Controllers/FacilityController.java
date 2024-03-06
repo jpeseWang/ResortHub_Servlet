@@ -8,9 +8,11 @@ import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Booking;
+import Domain.Models.Customer;
 import Domain.Models.Employee;
 import Domain.Models.Facility;
 import Domain.Models.MaintenanceFacility;
+import Services.CustomerService;
 import Services.EmployeeService;
 import Services.FacilityService;
 import java.io.IOException;
@@ -45,16 +47,20 @@ public class FacilityController extends HttpServlet {
             throws ServletException, IOException {
         FacilityService facilityService = new FacilityService();
         EmployeeService employeeService = new EmployeeService();
+        CustomerService customerService = new CustomerService();
 
         PageQueryDto pageQueryDto;
         PageDto<Facility> pageDto;
+        PageDto<Customer> customerPageDto;
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
 
         pageQueryDto = new PageQueryDto(request);
+
         pageDto = facilityService.getAllFacilities(pageQueryDto);
+        customerPageDto = customerService.getAllCustomers(pageQueryDto);
         switch (action) {
 
             case "getMarketplaceItem":
@@ -90,8 +96,10 @@ public class FacilityController extends HttpServlet {
                 break;
 
             case "getById":
+                customerPageDto = customerService.getAllCustomers(pageQueryDto);
                 Facility facility = facilityService.getFacilityById(id);
                 request.setAttribute("facility", facility);
+                request.setAttribute("customers", customerPageDto.getData());
                 request.getRequestDispatcher("pages/Facility/FacilityDetails.jsp").forward(request, response);
                 break;
 

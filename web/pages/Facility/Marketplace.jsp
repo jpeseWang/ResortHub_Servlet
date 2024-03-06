@@ -311,7 +311,7 @@
 
                             <c:forEach items="${facilities}" var="c">
                                 <div class="facility-item" data-type="${c.facilityType}">
-                                    <a href="/ResortHub/FacilityController?action=getById&id=${c.id}" class="group">
+                                    <a href="/ResortHub/FacilityController?action=getById&id=${c.id}&Page=1&PageSize=90" class="group">
                                         <div class="max-w-[300px] max-h-[200px] overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                                             <img src="${c.imgSrc}" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-scale-down object-center group-hover:opacity-75">
                                         </div>
@@ -320,8 +320,6 @@
                                     </a>
                                 </div>
                             </c:forEach>
-
-
 
 
                         </div>

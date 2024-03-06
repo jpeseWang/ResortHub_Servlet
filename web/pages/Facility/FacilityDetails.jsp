@@ -101,12 +101,41 @@
                               method="POST"
                               action="/ResortHub/BookingController?action=createBooking&total=${c.rentalCost}">
                             <input name="BookingDate" value="0" class="hidden"/>
-                            <input name="CustomerId" value="0" class="hidden"/>
                             <input name="FacilityId" value="${c.id}" class="hidden"/>
+                           
+
+                            <c:if test="${sessionScope.User.userRole == UserRole.User}">
+                                <div>
+                                    <input name="CustomerId" value="${sessionScope.User.customerId}" class="hidden"/>
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.User.userRole == UserRole.Admin}">
+                                <div>
+                                    <h3 class="text-sm font-medium text-gray-900">Customer ID</h3>
+
+                                    <select id="quantity-0" name="CustomerId" 
+                                            class="block w-[220px] h-[38px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4">
+                                        <c:forEach items="${customers}" var="cus">
+                                            <option value="${cus.id}">${cus.id}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </c:if>
+
+
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900">Occupancy Quantity</h3>
+                                <select id="quantity-0" name="Occupancy" 
+                                        class="block w-[220px] h-[38px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4">
+
+                                    <c:forEach begin="1" end="${c.maxOccupancy}" varStatus="loop">
+                                        <option value="${loop.index}">${loop.index}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
 
                             <div>
                                 <h3 class="text-sm font-medium text-gray-900">Check in date</h3>
-
                                 <input
                                     type="date"
                                     name="StartDate"
@@ -117,11 +146,9 @@
 
                             <div>
                                 <h3 class="text-sm font-medium text-gray-900">Check out date</h3>
-
                                 <input
                                     type="date"
                                     name="EndDate"
-
                                     required
                                     class="block w-[220px]  rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
                                     />
@@ -131,8 +158,8 @@
 
 
                             <div class="mt-10 flex">
-                                
-                              
+
+
                                 <button type="submit" class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">Book now</button>
 
                                 <button type="button" class="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500">

@@ -15,6 +15,7 @@ public class CreateBookingDto {
     private int occupancy;
     private String customerId;
     private String facilityId;
+    
 
     public CreateBookingDto(Date bookingDate, Date startDate, Date endDate, int occupancy, String customerId,
             String facilityId) {

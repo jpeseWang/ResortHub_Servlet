@@ -12,6 +12,7 @@ import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.Order;
 import Domain.Exceptions.NotFoundException;
 import Domain.Models.Booking;
+import Domain.Models.Facility;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.BookingEntity;
 

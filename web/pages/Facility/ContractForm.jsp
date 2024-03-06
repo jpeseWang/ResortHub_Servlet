@@ -49,11 +49,7 @@
                                     </svg>
                                 </div>
                             </li>
-                            <li>
-                                <div class="flex items-center text-sm">
-                                    <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Villa</a>
-                                </div>
-                            </li>
+
                         </ol>
                     </nav>
 
@@ -64,23 +60,12 @@
                     <section aria-labelledby="information-heading" class="mt-4">
                         <h2 id="information-heading" class="sr-only">Product information</h2>
 
-                        <!--                        <div class="flex items-center">
-                                                    <p class="text-lg text-gray-900 sm:text-xl">$220</p>
-                        
-                                                    <div class="ml-4 border-l border-gray-300 pl-4">
-                                                        <h2 class="sr-only">Reviews</h2>
-                                                        <div class="flex items-center">
-                                                            <div>
-                        
-                                                                <p class="sr-only">4 out of 5 stars</p>
-                                                            </div>
-                                                            <p class="ml-2 text-sm text-gray-500">1624 reviews</p>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-
                         <div class="mt-4 space-y-6">
-                            <p class="text-base text-gray-500">Don&#039;t compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.</p>
+                            <p class="text-base text-gray-500">
+
+                                Facility ID
+
+                            </p>
                         </div>
 
                         <div class="mt-6 flex items-center">
@@ -105,52 +90,28 @@
                         <h2 id="options-heading" class="sr-only">Product options</h2>
 
 
-                        <!--                    <div class="sm:flex sm:justify-between">
-                                               Size selector 
-                                              <fieldset>
-                                                <legend class="block text-sm font-medium text-gray-700">Size</legend>
-                                                <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                                   Active: "ring-2 ring-indigo-500" 
-                                                  <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
-                                                    <input type="radio" name="size-choice" value="18L" class="sr-only" aria-labelledby="size-choice-0-label" aria-describedby="size-choice-0-description">
-                                                    <p id="size-choice-0-label" class="text-base font-medium text-gray-900">18L</p>
-                                                    <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">Perfect for a reasonable amount of snacks.</p>
-                                                   
-                                                    <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
-                                                  </div>
-                                                
-                                                  <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none">
-                                                    <input type="radio" name="size-choice" value="20L" class="sr-only" aria-labelledby="size-choice-1-label" aria-describedby="size-choice-1-description">
-                                                    <p id="size-choice-1-label" class="text-base font-medium text-gray-900">20L</p>
-                                                    <p id="size-choice-1-description" class="mt-1 text-sm text-gray-500">Enough room for a serious amount of snacks.</p>
-                                                   
-                                                    <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
-                                                  </div>
-                                                </div>
-                                              </fieldset>
-                                              
-                                            </div>-->
                         <form 
                             name="BookingController"
                             method="POST"
                             action="/ResortHub/BookingController?action=createContract">
-                            <input class="hidden" value="${e}" name="BookingId"/>
-                            <input class="hidden" value="${c}" name="TotalAmount"/>
-                            <div>Booking ID: ${e}</div>
+                            <input class="hidden" value="${bookingIDs}" name="BookingIds"/>
+                            <input class="hidden" value="${totalPrice}" name="TotalAmount"/>
 
+                            <div>Booking ID: ${bookingIDs}</div>
 
-                            <input
-                                type="text"
-                                name="Deposit"
-                                placeholder="Deposit ($)"
-                                required
-                                class="block w-1/2 rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
-                                />
+                            
+                                <input
+                                    type="text"
+                                    name="Deposit"
+                                    placeholder="Deposit ($)"
+                                    required
+                                    class="block w-1/2 rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 my-4"
+                                    />
                             <dl class="mt-6 space-y-4">
 
                                 <div class="flex items-center justify-between border-t border-gray-200 pt-4">
                                     <dt class="text-base font-medium text-gray-900">Total fee</dt>
-                                    <dd class="text-base font-medium text-gray-900">${c}$</dd>
+                                    <dd class="text-base font-medium text-gray-900">${totalPrice}$</dd>
                                 </div>
                             </dl>
 
