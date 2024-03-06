@@ -129,7 +129,7 @@ public abstract class RepositoryBase<TEntity> {
 
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 insertedId = rs.getInt("Id");
             }
         } catch (SQLException ex) {

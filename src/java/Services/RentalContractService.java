@@ -73,7 +73,7 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
 
     public void createRentalContract(CreateRentalContractDto dto, String customerId) {
         String query = String.format(
-                "INSERT INTO %s (CustomerId,Deposit,TotalAmount) VALUES (?,?,?);",
+                "INSERT INTO %s (CustomerId,Deposit,TotalAmount) OUTPUT INSERTED.Id VALUES (?,?,?);",
                 getTableName());
 
         List<Object> params = new ArrayList<>();
