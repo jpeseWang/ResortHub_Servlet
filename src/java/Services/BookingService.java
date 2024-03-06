@@ -115,8 +115,9 @@ public class BookingService extends RepositoryBase<BookingEntity> {
     }
 
     public int createBooking(CreateBookingDto dto) {
+        Facility facility = facilityService.getFacilityById(dto.getFacilityId());
         String query = String.format(
-                "INSERT INTO %s (BookingDate,StartDate,EndDate,Occupancy,CustomerId,FacilityId) OUTPUT INSERTED.Id VALUES (?,?,?,?,?,?);",
+                "INSERT INTO %s (BookingDate,StartDate,EndDate,Occupancy,RentalCost,ImgSrc,CustomerId,FacilityId) OUTPUT INSERTED.Id VALUES (?,?,?,?,?,?,?,?);",
                 getTableName());
 
         List<Object> params = new ArrayList<>();
@@ -124,6 +125,8 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         params.add(dto.getStartDate());
         params.add(dto.getEndDate());
         params.add(dto.getOccupancy());
+        params.add(facility.getRentalCost());
+        params.add(facility.getImgSrc());
         params.add(dto.getCustomerId());
         params.add(dto.getFacilityId());
 
