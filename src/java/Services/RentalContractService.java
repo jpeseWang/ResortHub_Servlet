@@ -83,7 +83,7 @@ public class RentalContractService extends RepositoryBase<RentalContractEntity> 
 
         int contractId = super.executeNonQueryReturnsId(query, params);
 
-        query = String.format("UPDATE Bookings SET ContractId = %d WHERE Id IN (%s);", contractId, bookingIdString);
+        query = String.format("UPDATE Bookings SET ContractId = %d WHERE Id IN (%s);", contractId, dto.getBookingIds());
 
         super.executeNonQuery(query, new ArrayList<>());
     }

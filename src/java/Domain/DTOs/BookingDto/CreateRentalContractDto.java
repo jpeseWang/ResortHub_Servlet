@@ -7,19 +7,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import Utils.ConvertUtils;
 
 public class CreateRentalContractDto {
-    private int bookingId;
+    private String bookingIds;
     private BigDecimal deposit;
     private BigDecimal totalAmount;
 
     public CreateRentalContractDto(HttpServletRequest request) {
-        bookingId = ConvertUtils.convertStringToInt(request.getParameter("BookingId"));
+        bookingIds = request.getParameter("BookingIds");
         deposit = ConvertUtils.convertStringToBigDecimal(request.getParameter("Deposit"));
         totalAmount = ConvertUtils.convertStringToBigDecimal(request.getParameter("TotalAmount"));
     }
 
     // Getters
-    public int getBookingId() {
-        return bookingId;
+    public String getBookingIds() {
+        return bookingIds;
     }
 
     public BigDecimal getDeposit() {
@@ -31,8 +31,8 @@ public class CreateRentalContractDto {
     }
 
     // Setters
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
+    public void setBookingIds(String bookingIds) {
+        this.bookingIds = bookingIds;
     }
 
     public void setDeposit(BigDecimal deposit) {
