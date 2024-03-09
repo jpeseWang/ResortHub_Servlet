@@ -14,19 +14,7 @@
         <title>Facility Details</title>
         <script src="pages/Facility/MarketplaceScript.js"></script>
         <script>
-            // Get the current date
-            var currentDate = new Date();
 
-            // Format the date to yyyy-mm-dd
-            var year = currentDate.getFullYear();
-            var month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Adding 1 to month since it's zero-indexed
-            var day = ('0' + currentDate.getDate()).slice(-2);
-            var formattedDate = year + '-' + month + '-' + day;
-
-            // Set the formatted date as the value of BookingDate input field
-            window.onload = function () {
-                document.getElementsByName('BookingDate')[0].value = formattedDate;
-            };
         </script>
     </head>
     <body>
@@ -100,9 +88,9 @@
                               name="BookingController"
                               method="POST"
                               action="/ResortHub/BookingController?action=createBooking&total=${c.rentalCost}">
-                            <input name="BookingDate" value="0" class="hidden"/>
+                            <input name="BookingDate" class="hidden"/>
                             <input name="FacilityId" value="${c.id}" class="hidden"/>
-                           
+
 
                             <c:if test="${sessionScope.User.userRole == UserRole.User}">
                                 <div>
@@ -201,14 +189,70 @@
                                     </div>
                                 </div>
 
-                                <!-- More sections... -->
                             </div>
                         </section>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
 
+
+            // Get the current date
+            var currentDate = new Date();
+
+            // Format the date to yyyy-mm-dd
+            var year = currentDate.getFullYear();
+            var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            var day = ('0' + currentDate.getDate()).slice(-2);
+            var formattedDate = year + '-' + month + '-' + day;
+
+
+
+//Check in and out validation
+            function validateDates() {
+                var startDate = document.getElementsByName('StartDate')[0].value;
+                var endDate = document.getElementsByName('EndDate')[0].value;
+
+
+                var today = new Date();
+                var startDateObj = new Date(startDate);
+                var endDateObj = new Date(endDate);
+
+
+                if (startDateObj < today) {
+                    alert("Check-in date cannot be in the past.");
+                    return false;
+                }
+
+
+                if (endDateObj < today) {
+                    alert("Check-out date cannot be in the past.");
+                    return false;
+                }
+
+
+                if (startDateObj >= endDateObj) {
+                    alert("Check-out date must be after the check-in date.");
+                    return false;
+                }
+
+                return true;
+            }
+
+
+            window.onload = function () {
+                var currentDate = new Date();
+                var year = currentDate.getFullYear();
+                var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+                var day = ('0' + currentDate.getDate()).slice(-2);
+                var formattedDate = year + '-' + month + '-' + day;
+                document.getElementsByName('BookingDate')[0].value = formattedDate;
+            };
+
+
+
+        </script>
 
 
         <%@ include file="/layout/footer.jsp" %>

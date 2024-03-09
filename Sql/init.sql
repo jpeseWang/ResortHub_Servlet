@@ -117,7 +117,7 @@ CREATE TABLE "VoucherRecipientCustomers" (
 );
 
 -- Update version 2
-CREATE TABLE "CustomerFeedbacks" {
+CREATE TABLE "CustomerFeedbacks" (
     "Id" INT IDENTITY(1,1) NOT NULL,
     "BookingId" INT NOT NULL,
     "FacilityId" NVARCHAR(9) NOT NULL, 
@@ -126,4 +126,4 @@ CREATE TABLE "CustomerFeedbacks" {
     "StarRating" INT NOT NULL,
     "Description" NVARCHAR(MAX) NOT NULL,
     CONSTRAINT PK_CustomerFeedbacks PRIMARY KEY ("Id")
-}
+)

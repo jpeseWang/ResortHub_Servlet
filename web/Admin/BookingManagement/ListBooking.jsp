@@ -66,7 +66,7 @@
                                             <td class="rentalCost whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">${c.rentalCost * c.occupancy}$</td>
                                         </tr>
                                     </c:forEach>
-                                    <input name="BookingIds" value="14,15,16" class="hidden"/>
+                                    <input name="BookingIds" value="1,2,3" class="hidden"/>
                                     <!--                                    <input name="BookingIds" id="selectedFacilities" class="hidden"/>-->
                                     <input name="totalPrice" id="totalPrice" class="hidden"/>
                                 </form>

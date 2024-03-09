@@ -99,7 +99,7 @@
                                             <a href="#" class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600" aria-current="page">${page.index}</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href='ViewServlet?page=${page.index}' class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">${page.index}</a>
+                                            <a href='EmployeeController?action=getAll&Page=${page.index}&PageSize=10' class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">${page.index}</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
