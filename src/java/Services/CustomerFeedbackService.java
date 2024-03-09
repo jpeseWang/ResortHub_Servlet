@@ -47,7 +47,7 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
 
         PageMetaDto meta = new PageMetaDto(dto, itemCount);
 
-        return new PageDto<>(customers, meta);
+        return new PageDto<>(customerFeedbacks, meta);
     }
 
     public PageDto<CustomerFeedback> getFeedbacksOfCustomer(PageQueryDto dto, String customerId) {
@@ -62,7 +62,7 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
 
         PageMetaDto meta = new PageMetaDto(dto, itemCount);
 
-        return new PageDto<>(customers, meta);
+        return new PageDto<>(customerFeedbacks, meta);
     }
 
     public FeedbackSummary getFeedbackSummaryOfFacility(String facilityId) {
@@ -91,7 +91,7 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
         params.add(dto.getStarRating());
         params.add(dto.getDescription());
 
-        return super.executeNonQuery(query, params);
+        super.executeNonQuery(query, params);
     }
 
     private double calculateAverageStarRating(List<CustomerFeedbackEntity> entities) {
@@ -101,9 +101,7 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
 
         double totalStarRating = 0.0;
         for (CustomerFeedbackEntity entity : entities) {
-            if (entity.getStarRating() != null) {
-                totalStarRating += entity.getStarRating();
-            }
+            totalStarRating += entity.getStarRating();
         }
 
         return totalStarRating / entities.size();
