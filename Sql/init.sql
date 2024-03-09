@@ -1,3 +1,6 @@
+
+-- Facility
+
 CREATE TABLE "Houses"(
     "Id" NVARCHAR(9) NOT NULL,
     "StandardRoom" NVARCHAR(255) NOT NULL,
@@ -5,6 +8,7 @@ CREATE TABLE "Houses"(
 );
 ALTER TABLE
     "Houses" ADD CONSTRAINT "houses_id_primary" PRIMARY KEY("Id");
+
 CREATE TABLE "Villas"(
     "Id" NVARCHAR(9) NOT NULL,
     "StandardRoom" NVARCHAR(255) NOT NULL,
@@ -14,6 +18,35 @@ CREATE TABLE "Villas"(
 ALTER TABLE
     "Villas" ADD CONSTRAINT "villas_id_primary" PRIMARY KEY("Id");
 
+CREATE TABLE "Rooms"(
+    "Id" NVARCHAR(9) NOT NULL,
+    "FreeService" NVARCHAR(255) NOT NULL
+);
+ALTER TABLE
+    "Rooms" ADD CONSTRAINT "rooms_id_primary" PRIMARY KEY("Id");
+
+CREATE TABLE "Facilities"(
+    "Id" NVARCHAR(9) NOT NULL,
+    "Name" NVARCHAR(255) NOT NULL,
+    "Area" FLOAT NOT NULL,
+    "RentalCost" DECIMAL(18, 2) NOT NULL,
+    "MaxOccupancy" INT NOT NULL,
+    "RentType" NVARCHAR(50) NOT NULL,
+    "FacilityType" INT NOT NULL,
+    "ImgSrc" NVARCHAR(255)
+);
+ALTER TABLE
+    "Facilities" ADD CONSTRAINT "facilities_id_primary" PRIMARY KEY("Id");
+
+ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_villa_foreign" FOREIGN KEY ("Id") REFERENCES "Villas" ("Id") ON DELETE CASCADE;
+ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_house_foreign" FOREIGN KEY ("Id") REFERENCES "Houses" ("Id") ON DELETE CASCADE;
+ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_room_foreign" FOREIGN KEY ("Id") REFERENCES "Rooms" ("Id") ON DELETE CASCADE;
+
+ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
+
+-- Customer
 CREATE TABLE "Customers"(
     "Id" NVARCHAR(7) NOT NULL,
     "FullName" NVARCHAR(255) NOT NULL,
@@ -27,24 +60,9 @@ CREATE TABLE "Customers"(
 );
 ALTER TABLE
     "Customers" ADD CONSTRAINT "customers_id_primary" PRIMARY KEY("Id");
-CREATE TABLE "Facilities"(
-    "Id" NVARCHAR(9) NOT NULL,
-    "Name" NVARCHAR(255) NOT NULL,
-    "Area" FLOAT NOT NULL,
-    "RentalCost" DECIMAL(18, 2) NOT NULL,
-    "MaxOccupancy" INT NOT NULL,
-    "RentType" NVARCHAR(50) NOT NULL,
-    "FacilityType" INT NOT NULL,
-    "ImgSrc" NVARCHAR(255)
-);
-ALTER TABLE
-    "Facilities" ADD CONSTRAINT "facilities_id_primary" PRIMARY KEY("Id");
--- Foreign key constraints with ON DELETE CASCADE
 
-ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_villa_foreign" FOREIGN KEY ("Id") REFERENCES "Villas" ("Id") ON DELETE CASCADE;
-ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_house_foreign" FOREIGN KEY ("Id") REFERENCES "Houses" ("Id") ON DELETE CASCADE;
-ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_room_foreign" FOREIGN KEY ("Id") REFERENCES "Rooms" ("Id") ON DELETE CASCADE;
 
+-- Employee
 CREATE TABLE "Employees"(
     "Id" NVARCHAR(7) NOT NULL,
     "FullName" NVARCHAR(255) NOT NULL,
@@ -59,6 +77,8 @@ CREATE TABLE "Employees"(
 );
 ALTER TABLE
     "Employees" ADD CONSTRAINT "employees_id_primary" PRIMARY KEY("Id");
+
+-- Booking   
 CREATE TABLE "Bookings"(
     "Id" INT IDENTITY(1,1) NOT NULL,
     "BookingDate" DATE NOT NULL,
@@ -74,6 +94,8 @@ CREATE TABLE "Bookings"(
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_id_primary" PRIMARY KEY("Id");
 
+
+-- Rental Contracts
 CREATE TABLE "RentalContracts"(
     "Id" INT IDENTITY(1,1) NOT NULL,
     "CustomerId" NVARCHAR(7) NOT NULL,
@@ -82,6 +104,8 @@ CREATE TABLE "RentalContracts"(
 );
 ALTER TABLE
     "RentalContracts" ADD CONSTRAINT "rentalcontracts_id_primary" PRIMARY KEY("Id");
+
+-- User    
 CREATE TABLE "Users"(
     "Id" INT IDENTITY(1,1) NOT NULL,
     "Username" NVARCHAR(255) NOT NULL,
@@ -89,22 +113,13 @@ CREATE TABLE "Users"(
     "UserRole" INT NOT NULL,
     "CustomerId" NVARCHAR(7)
 );
+
 ALTER TABLE
     "Users" ADD CONSTRAINT "users_id_primary" PRIMARY KEY("Id");
-CREATE TABLE "Rooms"(
-    "Id" NVARCHAR(9) NOT NULL,
-    "FreeService" NVARCHAR(255) NOT NULL
-);
-ALTER TABLE
-    "Rooms" ADD CONSTRAINT "rooms_id_primary" PRIMARY KEY("Id");
+
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_customerid_foreign" FOREIGN KEY("CustomerId") REFERENCES "Customers"("Id");
 
-ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
-
-ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
-
-ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 
 -- Update VoucherRecipientCustomers
 CREATE TABLE "VoucherRecipientCustomers" (
@@ -116,7 +131,7 @@ CREATE TABLE "VoucherRecipientCustomers" (
     "VoucherType" INT NOT NULL
 );
 
--- Update version 2
+-- Customer Feedbacks
 CREATE TABLE "CustomerFeedbacks" (
     "Id" INT IDENTITY(1,1) NOT NULL,
     "BookingId" INT NOT NULL,
