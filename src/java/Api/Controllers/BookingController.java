@@ -8,6 +8,7 @@ import Domain.DTOs.BookingDto.CreateBookingDto;
 import Domain.DTOs.BookingDto.CreateRentalContractDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageQueryDto;
+import Domain.Enums.UserRole;
 import Domain.Models.User;
 import Services.BookingService;
 import Domain.Models.Booking;
@@ -19,7 +20,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 
 public class BookingController extends HttpServlet {
 
@@ -40,13 +40,14 @@ public class BookingController extends HttpServlet {
 
         PageQueryDto pageQueryDto;
         PageDto<Booking> pageDto;
-     
+
         PageDto<RentalContract> rentalContractPageDto;
 
         pageQueryDto = new PageQueryDto(request);
+        User user = SessionUtils.getUserFromSession(request);
         switch (action) {
             case "getMyBooking":
-                User user = SessionUtils.getUserFromSession(request);
+
                 if (user == null) {
                     response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
                     return;
@@ -60,7 +61,6 @@ public class BookingController extends HttpServlet {
                 break;
 
             case "getAll":
-
                 pageDto = bookingService.getAllBookings(pageQueryDto);
                 request.setAttribute("bookings", pageDto.getData());
                 request.setAttribute("meta", pageDto.getMeta());
@@ -68,10 +68,8 @@ public class BookingController extends HttpServlet {
                 break;
 
             case "getAllContract":
-
                 rentalContractPageDto = rentalContractService.getAllRentalContracts(pageQueryDto);
                 request.setAttribute("rentalContract", rentalContractPageDto.getData());
-
                 request.setAttribute("meta", rentalContractPageDto.getMeta());
                 request.getRequestDispatcher("Admin/BookingManagement/ListContract.jsp").forward(request, response);
                 break;
@@ -79,7 +77,7 @@ public class BookingController extends HttpServlet {
             case "getById":
                 Booking booking = bookingService.getBookingById(id);
                 request.setAttribute("booking", booking);
-                request.getRequestDispatcher("Admin/EmployeeManagement/UpdateEmployee.jsp").forward(request, response);
+                request.getRequestDispatcher("pages/BookingDetails.jsp").forward(request, response);
                 break;
 
             case "getContractById":
@@ -108,12 +106,12 @@ public class BookingController extends HttpServlet {
         String action = request.getParameter("action");
         BookingService bookingService = new BookingService();
         CreateRentalContractDto dto = new CreateRentalContractDto(request);
+        User user = SessionUtils.getUserFromSession(request);
         RentalContractService rentalContractService = new RentalContractService();
         switch (action) {
             case "createBooking":
                 CreateBookingDto createBookingDto = new CreateBookingDto(request);
 
-                User user = SessionUtils.getUserFromSession(request);
                 if (user == null) {
                     response.sendRedirect("/ResortHub/components/Unauthorized.jsp");
                     return;
@@ -129,13 +127,17 @@ public class BookingController extends HttpServlet {
                 String bookingIds = request.getParameter("BookingIds");
                 request.setAttribute("bookingIDs", bookingIds);
                 request.setAttribute("totalPrice", totalPrice);
-
                 request.getRequestDispatcher("pages/Facility/ContractForm.jsp").forward(request, response);
                 break;
 
             case "createContract":
-//                String customerId = request.getParameter("CustomerId");
-                String customerId = "KH-0007";
+                String customerId;
+                if ((user.getUserRole() == UserRole.Admin)) {
+                    customerId = "KH-0000";
+                } else {
+                    customerId = user.getCustomerId();
+                }
+
                 rentalContractService.createRentalContract(dto, customerId);
                 String contractMessage = "Create contract successfully!";
                 request.setAttribute("message", contractMessage);

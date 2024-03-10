@@ -26,74 +26,72 @@
                         <ul role="list" class="divide-y divide-gray-200 border-b border-t border-gray-200">
 
                             <c:forEach items="${facilities}" var="c">
-                                <c:if test="${c.facilityType eq 'Room'}">
-                                    <li class="flex py-6 sm:py-10">
-                                        <div class="flex-shrink-0">
-                                            <img src="${c.imgSrc}" alt="Front of men&#039;s Basic Tee in sienna." class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
-                                        </div>
 
-                                        <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
-                                            <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
-                                                <div>
-                                                    <div class="flex justify-between">
-                                                        <h3 class="text-sm">
-                                                            <a href="#" class="font-medium text-gray-700 hover:text-gray-800">${c.name}</a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="mt-1 flex text-sm">
-                                                        <p class="text-gray-500">${c.facilityType}</p>
-                                                        <p class="ml-4 border-l border-gray-200 pl-4 text-gray-500">${c.rentType}</p>
-                                                    </div>
-                                                    <p class="mt-1 text-sm font-medium text-gray-900">$${c.rentalCost}</p>
+                                <li class="flex py-6 sm:py-10">
+                                    <div class="flex-shrink-0">
+                                        <img src="${c.imgSrc}" alt="Front of men&#039;s Basic Tee in sienna." class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
+                                    </div>
+
+                                    <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
+                                        <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
+                                            <div>
+                                                <div class="flex justify-between">
+                                                    <h3 class="text-sm">
+                                                        <a href="#" class="font-medium text-gray-700 hover:text-gray-800">${c.name}</a>
+                                                    </h3>
                                                 </div>
-
-                                                <div class="mt-4 sm:mt-0 sm:pr-9">
-                                                    <label for="quantity-0" class="sr-only">Quantity, Basic Tee</label>
-                                                    <select id="quantity-0" name="quantity-0" class="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
-
-                                                        <c:forEach begin="1" end="${c.maxOccupancy}" varStatus="loop">
-                                                            <option value="${loop.index}">${loop.index}</option>
-                                                        </c:forEach>
-                                                    </select>
-
-
-
-                                                    <div class="absolute right-0 top-0">
-                                                        <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                            </svg>
-
-
-                                                        </button>
-                                                        <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
-                                                            <span class="sr-only">Remove</span>
-                                                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                            <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
+                                                <div class="mt-1 flex text-sm">
+                                                    <p class="text-gray-500">${c.facilityType}</p>
+                                                    <p class="ml-4 border-l border-gray-200 pl-4 text-gray-500">${c.rentType}</p>
                                                 </div>
+                                                <p class="mt-1 text-sm font-medium text-gray-900">$${c.rentalCost}</p>
                                             </div>
 
-                                            <p class="mt-4 flex space-x-2 text-sm text-gray-700">
-                                                <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                </svg>
-                                                <span>Available</span>
-                                            </p>
-                                        </div>
-                                    </li>
+                                            <div class="mt-4 sm:mt-0 sm:pr-9">
+                                                <label for="quantity-0" class="sr-only">Quantity, Basic Tee</label>
+                                                <select id="quantity-0" name="quantity-0" class="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
 
-                                </c:if>
-                                    
+                                                    <c:forEach begin="1" end="${c.maxOccupancy}" varStatus="loop">
+                                                        <option value="${loop.index}">${loop.index}</option>
+                                                    </c:forEach>
+                                                </select>
+
+                                                <div class="absolute right-0 top-0">
+                                                    <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg>
+
+
+                                                    </button>
+                                                    <button type="button" class="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500">
+                                                        <span class="sr-only">Remove</span>
+                                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="mt-4 flex space-x-2 text-sm text-gray-700">
+                                            <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                                            </svg>
+                                            <span>Available</span>
+                                        </p>
+                                    </div>
+                                </li>
+
+
+
                             </c:forEach>
 
                         </ul>
-                          <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+                        <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
                             <div class="flex flex-1 justify-between sm:hidden">
                                 <c:if test="${meta.page > 1}">
-                                    
+
                                     <a href='FacilityController?action=getAll&facilityType=room&Page=${meta.page - 1}&PageSize=10' class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
                                 </c:if>
                                 <c:if test="${meta.page < meta.pageSize && meta.page < meta.pageCount}">
@@ -105,7 +103,7 @@
                                     <p class="text-sm text-gray-700">
                                         Showing page
                                         <span class="font-medium">${meta.page}</span>
-                                       
+
                                         of
                                         <span class="font-medium">${meta.itemCount}</span>
                                         results
@@ -135,7 +133,7 @@
                         <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Room Management summary</h2>
 
                         <dl class="mt-6 space-y-4">
-                           
+
                             <div class="flex items-center justify-between border-t border-gray-200 pt-4">
                                 <dt class="text-base font-medium text-gray-900">Total Facility</dt>
                                 <dd class="text-base font-medium text-gray-900">${facilities.size()}</dd>

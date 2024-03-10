@@ -17,13 +17,14 @@
 
 
 
-              <div class="px-4 sm:px-0 my-6">
-                                    <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">My booking history</h1>
-                                    <p class="mt-2 text-sm text-gray-500">Check the status of recent orders, manage returns, and download invoices.</p>
-                                </div>
-            
+            <div class="px-4 sm:px-0 my-6">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">My booking history</h1>
+                <p class="mt-2 text-sm text-gray-500">Check the status of recent orders, manage returns, and download invoices.</p>
+            </div>
+
             <c:forEach items="${bookings}" var="c">
-                          <div class="flex py-6 sm:py-10">
+                
+                <div class="flex py-6 sm:py-10">
                     <div class="min-w-0 flex-1 lg:flex lg:flex-col">
                         <div class="lg:flex-1">
                             <div class="sm:flex">
@@ -40,9 +41,12 @@
                                     <p class="text-indigo-600 hover:text-indigo-500"> <span class="text-gray-500 font-regular">From:</span> ${c.endDate}</p>
                                 </div>
                             </div>
+                                <button type="button" class="mt-4 rounded bg-white px-2 py-1 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                    <a href="/ResortHub/BookingController?action=getById&id=1">Details</a>
+                                    </button>
                         </div>
                         <div class="mt-6 font-medium">
-                            <p>#${c.facilityId}</p>
+                            <p>#${c.id}</p>
                         </div>
                     </div>
                     <div class="ml-4 flex-shrink-0 sm:order-first sm:m-0 sm:mr-6">
