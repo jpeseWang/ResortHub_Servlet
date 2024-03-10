@@ -123,7 +123,7 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
     private FeedbackSummary mapFacilityToFeedbackSummary(Facility facility, List<CustomerFeedbackEntity> entities) {
         FeedbackSummary feedbackSummary = new FeedbackSummary();
         feedbackSummary.setFacilityId(facility.getId());
-        feedbackSummary.setName(facility.getName());
+        feedbackSummary.setFacilityName(facility.getName());
         feedbackSummary.setImgSrc(facility.getImgSrc());
         feedbackSummary.setArea(facility.getArea());
         feedbackSummary.setRentalCost(facility.getRentalCost());

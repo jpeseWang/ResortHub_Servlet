@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class FeedbackSummary {
     private String facilityId;
-    private String name;
+    private String facilityName;
     private String imgSrc;
     private float area;
     private BigDecimal rentalCost;
@@ -19,8 +19,8 @@ public class FeedbackSummary {
         return facilityId;
     }
 
-    public String getName() {
-        return name;
+    public String getFacilityName() {
+        return facilityName;
     }
 
     public String getImgSrc() {
@@ -48,8 +48,8 @@ public class FeedbackSummary {
         this.facilityId = facilityId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFacilityName(String facilityName) {
+        this.facilityName = facilityName;
     }
 
     public void setImgSrc(String imgSrc) {

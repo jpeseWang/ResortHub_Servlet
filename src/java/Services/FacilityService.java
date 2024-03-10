@@ -57,6 +57,22 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         return new PageDto<>(facilities, meta);
     }
 
+    public PageDto<Facility> getAllFacilities(PageQueryDto dto, FacilityType facilityType) {
+        List<Facility> facilities = new ArrayList<>();
+        List<FacilityEntity> entities = super.getAllWithOffset(
+                String.format("FacilityType = %d", facilityType.getIndex()), dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount();
+
+        for (FacilityEntity entity : entities) {
+            facilities.add(mapEntityToFacility(entity));
+        }
+
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(facilities, meta);
+    }
+
     public Facility getFacilityById(String id) {
         FacilityEntity entity = super.getById(id);
         Facility facility = mapEntityToFacility(entity);
