@@ -38,10 +38,6 @@ CREATE TABLE "Facilities"(
 ALTER TABLE
     "Facilities" ADD CONSTRAINT "facilities_id_primary" PRIMARY KEY("Id");
 
-ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_villa_foreign" FOREIGN KEY ("Id") REFERENCES "Villas" ("Id") ON DELETE CASCADE;
-ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_house_foreign" FOREIGN KEY ("Id") REFERENCES "Houses" ("Id") ON DELETE CASCADE;
-ALTER TABLE "Facilities" ADD CONSTRAINT "facilities_room_foreign" FOREIGN KEY ("Id") REFERENCES "Rooms" ("Id") ON DELETE CASCADE;
-
 ALTER TABLE "Villas" ADD CONSTRAINT "villas_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 ALTER TABLE "Houses" ADD CONSTRAINT "houses_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
 ALTER TABLE "Rooms" ADD CONSTRAINT "rooms_facility_fk" FOREIGN KEY ("Id") REFERENCES "Facilities"("Id");
