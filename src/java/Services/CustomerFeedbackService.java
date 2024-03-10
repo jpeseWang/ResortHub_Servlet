@@ -10,16 +10,16 @@ import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageMetaDto;
 import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.Order;
-import Domain.Exceptions.ConflictException;
-import Domain.Exceptions.NotFoundException;
 import Domain.Models.Customer;
 import Domain.Models.CustomerFeedback;
+import Domain.Models.Facility;
 import Domain.Models.FeedbackSummary;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.CustomerFeedbackEntity;
 
 public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEntity> {
     private CustomerService customerService;
+    private FacilityService facilityService;
 
     @Override
     protected String getTableName() {
@@ -33,11 +33,13 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
 
     public CustomerFeedbackService() {
         customerService = new CustomerService();
+        facilityService = new FacilityService();
     }
 
     public PageDto<CustomerFeedback> getFeedbacksOfFacility(PageQueryDto dto, String facilityId) {
         List<CustomerFeedback> customerFeedbacks = new ArrayList<>();
-        List<CustomerFeedbackEntity> entities = super.getAllWithOffset(String.format("FacilityId = '%s'", facilityId), dto.getOffset(), dto.getPageSize(),
+        List<CustomerFeedbackEntity> entities = super.getAllWithOffset(String.format("FacilityId = '%s'", facilityId),
+                dto.getOffset(), dto.getPageSize(),
                 dto.getOrder() == Order.ASC);
         int itemCount = super.getTotalCount(String.format("FacilityId = '%s'", facilityId));
 
@@ -52,7 +54,8 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
 
     public PageDto<CustomerFeedback> getFeedbacksOfCustomer(PageQueryDto dto, String customerId) {
         List<CustomerFeedback> customerFeedbacks = new ArrayList<>();
-        List<CustomerFeedbackEntity> entities = super.getAllWithOffset(String.format("CustomerId = '%s'", customerId), dto.getOffset(), dto.getPageSize(),
+        List<CustomerFeedbackEntity> entities = super.getAllWithOffset(String.format("CustomerId = '%s'", customerId),
+                dto.getOffset(), dto.getPageSize(),
                 dto.getOrder() == Order.ASC);
         int itemCount = super.getTotalCount(String.format("CustomerId = '%s'", customerId));
 
@@ -67,13 +70,10 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
 
     public FeedbackSummary getFeedbackSummaryOfFacility(String facilityId) {
         List<CustomerFeedbackEntity> entities = super.getAll(String.format("FacilityId = '%s'", facilityId));
-        
-        FeedbackSummary feedbackSummary = new FeedbackSummary();
-        feedbackSummary.setFacilityId(facilityId);
-        feedbackSummary.setAverageStarRating(calculateAverageStarRating(entities));
-        feedbackSummary.setNumberOfFeedbacks(entities.size());
 
-        return feedbackSummary;
+        Facility facility = facilityService.getFacilityById(facilityId);
+
+        return mapFacilityToFeedbackSummary(facility, entities);
     }
 
     public void createCustomerFeedback(CreateCustomerFeedbackDto dto, String customerId) {
@@ -82,7 +82,7 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
                 getTableName());
 
         Customer customer = customerService.getCustomerById(customerId);
-        
+
         List<Object> params = new ArrayList<>();
         params.add(dto.getBookingId());
         params.add(dto.getFacilityId());
@@ -118,5 +118,18 @@ public class CustomerFeedbackService extends RepositoryBase<CustomerFeedbackEnti
         customerFeedback.setDescription(entity.getDescription());
 
         return customerFeedback;
+    }
+
+    private FeedbackSummary mapFacilityToFeedbackSummary(Facility facility, List<CustomerFeedbackEntity> entities) {
+        FeedbackSummary feedbackSummary = new FeedbackSummary();
+        feedbackSummary.setFacilityId(facility.getId());
+        feedbackSummary.setName(facility.getName());
+        feedbackSummary.setImgSrc(facility.getImgSrc());
+        feedbackSummary.setArea(facility.getArea());
+        feedbackSummary.setRentalCost(facility.getRentalCost());
+        feedbackSummary.setAverageStarRating(calculateAverageStarRating(entities));
+        feedbackSummary.setNumberOfFeedbacks(entities.size());
+
+        return feedbackSummary;
     }
 }

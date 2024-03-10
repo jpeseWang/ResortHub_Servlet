@@ -89,7 +89,8 @@ CREATE TABLE "Bookings"(
 );
 ALTER TABLE
     "Bookings" ADD CONSTRAINT "bookings_id_primary" PRIMARY KEY("Id");
-
+ALTER TABLE
+    "Bookings" ADD CONSTRAINT "bookings_customerid_foreign" FOREIGN KEY("CustomerId") REFERENCES "Customers"("Id");
 
 -- Rental Contracts
 CREATE TABLE "RentalContracts"(
@@ -112,10 +113,6 @@ CREATE TABLE "Users"(
 
 ALTER TABLE
     "Users" ADD CONSTRAINT "users_id_primary" PRIMARY KEY("Id");
-
-ALTER TABLE
-    "Bookings" ADD CONSTRAINT "bookings_customerid_foreign" FOREIGN KEY("CustomerId") REFERENCES "Customers"("Id");
-
 
 -- Update VoucherRecipientCustomers
 CREATE TABLE "VoucherRecipientCustomers" (
