@@ -12,7 +12,10 @@ import Domain.Enums.UserRole;
 import Domain.Models.User;
 import Services.BookingService;
 import Domain.Models.Booking;
+import Domain.Models.CustomerFeedback;
+import Domain.Models.Facility;
 import Domain.Models.RentalContract;
+import Services.CustomerFeedbackService;
 import Services.RentalContractService;
 import Utils.SessionUtils;
 import java.io.IOException;
@@ -34,13 +37,15 @@ public class BookingController extends HttpServlet {
 
         BookingService bookingService = new BookingService();
         RentalContractService rentalContractService = new RentalContractService();
+        CustomerFeedbackService customerFeedbackService = new CustomerFeedbackService();
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
+        String facilityId = request.getParameter("facilityId");
 
         PageQueryDto pageQueryDto;
         PageDto<Booking> pageDto;
-
+        PageDto<CustomerFeedback> customerFeedback;
         PageDto<RentalContract> rentalContractPageDto;
 
         pageQueryDto = new PageQueryDto(request);
@@ -75,7 +80,10 @@ public class BookingController extends HttpServlet {
                 break;
 
             case "getById":
+                customerFeedback = customerFeedbackService.getFeedbacksOfFacility(pageQueryDto, facilityId);
                 Booking booking = bookingService.getBookingById(id);
+                request.setAttribute("feedback", customerFeedback.getData());
+
                 request.setAttribute("booking", booking);
                 request.getRequestDispatcher("pages/BookingDetails.jsp").forward(request, response);
                 break;

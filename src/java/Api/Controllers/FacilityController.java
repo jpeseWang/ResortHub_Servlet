@@ -10,7 +10,9 @@ import Domain.Enums.FacilityType;
 import Domain.Enums.UserRole;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Customer;
+import Domain.Models.CustomerFeedback;
 import Domain.Models.Facility;
+import Domain.Models.FeedbackSummary;
 import Domain.Models.MaintenanceFacility;
 import Domain.Models.User;
 import Services.CustomerFeedbackService;
@@ -50,9 +52,11 @@ public class FacilityController extends HttpServlet {
             throws ServletException, IOException {
         FacilityService facilityService = new FacilityService();
         CustomerService customerService = new CustomerService();
+        CustomerFeedbackService customerFeedbackService = new CustomerFeedbackService();
 
         PageQueryDto pageQueryDto;
         PageDto<Facility> pageDto;
+        PageDto<CustomerFeedback> customerFeedback;
         PageDto<Customer> customerPageDto;
 
         String id = request.getParameter("id");
@@ -103,10 +107,13 @@ public class FacilityController extends HttpServlet {
             case "getById":
                 customerPageDto = customerService.getAllCustomers(pageQueryDto);
                 Facility facility = facilityService.getFacilityById(id);
+                customerFeedback = customerFeedbackService.getFeedbacksOfFacility(pageQueryDto, id);
+                request.setAttribute("feedback", customerFeedback.getData());
                 request.setAttribute("facility", facility);
                 request.setAttribute("customers", customerPageDto.getData());
                 request.getRequestDispatcher("pages/Facility/FacilityDetails.jsp").forward(request, response);
                 break;
+
 
             case "getListMaintenance":
 
@@ -116,7 +123,11 @@ public class FacilityController extends HttpServlet {
                 request.getRequestDispatcher("Admin/FacilityManagement/ListFacilityMaintenance.jsp").forward(request,
                         response);
                 break;
+            case "getCustomerFeedBack":
 
+                request.setAttribute("meta", pageDto.getMeta());
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                break;
             default:
                 request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request,
                         response);
@@ -126,18 +137,16 @@ public class FacilityController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         FacilityService facilityService = new FacilityService();
         CustomerFeedbackService customerFeedbackService = new CustomerFeedbackService();
         FacilityValidator facilityValidator = new FacilityValidator();
 
-        
-        
         List<String> validationErrors;
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
-        
-         User user = SessionUtils.getUserFromSession(request);
+
+        User user = SessionUtils.getUserFromSession(request);
         switch (action) {
             case "create":
                 CreateFacilityDto createFacilityDto = new CreateFacilityDto(request);
@@ -157,27 +166,26 @@ public class FacilityController extends HttpServlet {
                 } else {
                     request.setAttribute("error", String.join(" - ", validationErrors));
                 }
-            switch (facilityType) {
-                case "villa":
-                    request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request,
-                            response);
-                    break;
-                case "house":
-                    request.getRequestDispatcher("Admin/FacilityManagement/House/CreateHouse.jsp").forward(request,
-                            response);
-                    break;
-                default:
-                    request.getRequestDispatcher("Admin/FacilityManagement/Room/CreateRoom.jsp").forward(request,
-                            response);
-                    break;
-            }
+                switch (facilityType) {
+                    case "villa":
+                        request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request,
+                                response);
+                        break;
+                    case "house":
+                        request.getRequestDispatcher("Admin/FacilityManagement/House/CreateHouse.jsp").forward(request,
+                                response);
+                        break;
+                    default:
+                        request.getRequestDispatcher("Admin/FacilityManagement/Room/CreateRoom.jsp").forward(request,
+                                response);
+                        break;
+                }
                 break;
 
-                
             case "createCustomerFeedback":
-                   CreateCustomerFeedbackDto dto = new CreateCustomerFeedbackDto(request);
-                   
-                       String customerId;
+                CreateCustomerFeedbackDto dto = new CreateCustomerFeedbackDto(request);
+
+                String customerId;
                 if ((user.getUserRole() == UserRole.Admin)) {
                     customerId = "KH-0000";
                 } else {

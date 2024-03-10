@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                                 <button type="button" class="mt-4 rounded bg-white px-2 py-1 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                                    <a href="/ResortHub/BookingController?action=getById&id=1">Details</a>
+                                    <a href="/ResortHub/BookingController?action=getById&id=${c.id}&facilityId=${c.facilityId}">Details</a>
                                     </button>
                         </div>
                         <div class="mt-6 font-medium">
