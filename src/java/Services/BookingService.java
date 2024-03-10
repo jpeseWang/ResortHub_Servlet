@@ -150,6 +150,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
 
     private Booking mapEntityToBooking(BookingEntity entity) {
         Booking booking = new Booking();
+        booking.setId(entity.getId());
         booking.setBookingDate(entity.getBookingDate());
         booking.setStartDate(entity.getStartDate());
         booking.setEndDate(entity.getEndDate());
