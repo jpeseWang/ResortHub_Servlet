@@ -25,7 +25,7 @@
                         <ul role="list" class="divide-y divide-gray-200 border-b border-t border-gray-200">
 
                             <c:forEach items="${facilities}" var="c">
-                                <c:if test="${c.facilityType eq 'House'}">
+                              
                                     <li class="flex py-6 sm:py-10">
                                         <div class="flex-shrink-0">
                                             <img src="${c.imgSrc}" alt="Front of men&#039;s Basic Tee in sienna." class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
@@ -83,8 +83,6 @@
                                             </p>
                                         </div>
                                     </li>
-
-                                </c:if>
 
                             </c:forEach>
 
