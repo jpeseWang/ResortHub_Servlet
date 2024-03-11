@@ -134,4 +134,18 @@ CREATE TABLE "CustomerFeedbacks" (
     "StarRating" INT NOT NULL,
     "Description" NVARCHAR(MAX) NOT NULL,
     CONSTRAINT PK_CustomerFeedbacks PRIMARY KEY ("Id")
-)
+);
+
+-- Stories
+CREATE TABLE "Stories" (
+    "Id" INT IDENTITY(1,1) NOT NULL,
+    "PostDate" DATE NOT NULL,
+    "FacilityId" NVARCHAR(9) NOT NULL,
+    "FacilityName" NVARCHAR(255) NOT NULL,
+    "CustomerId" NVARCHAR(7) NOT NULL,
+    "CustomerName" NVARCHAR(255) NOT NULL,
+    "CustomerStatus" INT NOT NULL,
+    "Title" NVARCHAR(255) NOT NULL,
+    "Description" NVARCHAR(1024) NOT NULL,
+    CONSTRAINT PK_Stories PRIMARY KEY ("Id")
+);
