@@ -16,7 +16,10 @@ import Domain.Models.Story;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.StoryEntity;
 
-public class storieservice extends RepositoryBase<StoryEntity> {
+public class StoryService extends RepositoryBase<StoryEntity> {
+
+    private CustomerService customerService;
+    private FacilityService facilityService;
 
     @Override
     protected String getTableName() {
@@ -26,6 +29,11 @@ public class storieservice extends RepositoryBase<StoryEntity> {
     @Override
     protected StoryEntity createEntityFromResultSet(ResultSet rs) throws SQLException {
         return new StoryEntity(rs);
+    }
+
+    public StoryService() {
+        customerService = new CustomerService();
+        facilityService = new FacilityService();
     }
 
     public PageDto<Story> getAllStories(PageQueryDto dto) {
@@ -66,17 +74,20 @@ public class storieservice extends RepositoryBase<StoryEntity> {
         return mapEntityToStory(entity);
     }
 
-    public void createStory(CreateStoryDto dto){
+    public void createStory(CreateStoryDto dto, String customerId, String facilityId) {
         String query = String.format(
                 "INSERT INTO %s (PostDate,FacilityId,FacilityName,CustomerId,CustomerName,CustomerStatus,Title,Description) VALUES (?,?,?,?,?,?,?,?);",
                 getTableName());
 
+        Customer customer = customerService.getCustomerById(customerId);
+        Facility facility = facilityService.getFacilityById(facilityId);
+
         List<Object> params = new ArrayList<>();
         params.add(dto.getPostDate());
-        params.add(dto.getFacilityId());
-        params.add(dto.getFacilityName());
-        params.add(dto.getCustomerId());
-        params.add(dto.getCustomerName());
+        params.add(facility.getId());
+        params.add(facility.getName());
+        params.add(customer.getId());
+        params.add(customer.getFullName());
         params.add(dto.getCustomerStatus().getIndex());
         params.add(dto.getTitle());
         params.add(dto.getDescription());
