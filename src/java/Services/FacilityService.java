@@ -81,16 +81,16 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
 
         // Add additional filter criteria based on FilterFacilitiesDto
         if (filterDto.getMinArea() > 0 && filterDto.getMaxArea() > 0) {
-            whereClause += String.format(" AND Area >= %f AND Area <= %f", filterDto.getMinArea(), filterDto.getMaxArea());
+            whereClause += (whereClause.isEmpty() ? "" : " AND ") + String.format("Area >= %f AND Area <= %f", filterDto.getMinArea(), filterDto.getMaxArea());
         }
 
         if (filterDto.getMinRentalCost() != null && filterDto.getMaxRentalCost() != null) {
-            whereClause += String.format(" AND RentalCost >= %s AND RentalCost <= %s",
+            whereClause += (whereClause.isEmpty() ? "" : " AND ") + String.format("RentalCost >= %s AND RentalCost <= %s",
                     filterDto.getMinRentalCost(), filterDto.getMaxRentalCost());
         }
 
         if (filterDto.getLowerMaxOccupancy() > 0 && filterDto.getUpperMaxOccupancy() > 0) {
-            whereClause += String.format(" AND MaxOccupancy >= %d AND MaxOccupancy <= %d",
+            whereClause += (whereClause.isEmpty() ? "" : " AND ") + String.format("MaxOccupancy >= %d AND MaxOccupancy <= %d",
                     filterDto.getLowerMaxOccupancy(), filterDto.getUpperMaxOccupancy());
         }
         
