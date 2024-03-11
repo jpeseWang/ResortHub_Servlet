@@ -60,7 +60,7 @@ public class Story {
         this.id = id;
     }
 
-    public void setPostDate(Date postingDate) {
+    public void setPostDate(Date postDate) {
         this.postDate = postDate;
     }
 
