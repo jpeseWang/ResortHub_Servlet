@@ -10,8 +10,9 @@ import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageMetaDto;
 import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.Enums.CustomerStatus;
-import Domain.Exceptions.ConflictException;
-import Domain.Exceptions.NotFoundException;
+import Domain.Enums.Order;
+import Domain.Models.Customer;
+import Domain.Models.Facility;
 import Domain.Models.Story;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.StoryEntity;
@@ -54,7 +55,8 @@ public class StoryService extends RepositoryBase<StoryEntity> {
     public PageDto<Story> getStoriesByYearAndMonth(PageQueryDto dto, int year, int month) {
         List<Story> stories = new ArrayList<>();
 
-        List<StoryEntity> entities = super.getAllWithOffset(String.format("YEAR(PostDate) = %d AND MONTH(PostDate) = %d", year, month),
+        List<StoryEntity> entities = super.getAllWithOffset(
+                String.format("YEAR(PostDate) = %d AND MONTH(PostDate) = %d", year, month),
                 dto.getOffset(), dto.getPageSize(),
                 dto.getOrder() == Order.ASC);
         int itemCount = super.getTotalCount(String.format("YEAR(PostDate) = %d AND MONTH(PostDate) = %d", year, month));
