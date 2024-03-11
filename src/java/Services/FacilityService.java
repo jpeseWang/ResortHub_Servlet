@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
+import Domain.DTOs.FacilityDto.FilterFacilitiesDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageMetaDto;
 import Domain.DTOs.PageDto.PageQueryDto;
@@ -62,7 +63,41 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         List<FacilityEntity> entities = super.getAllWithOffset(
                 String.format("FacilityType = %d", facilityType.getIndex()), dto.getOffset(), dto.getPageSize(),
                 dto.getOrder() == Order.ASC);
-        int itemCount = super.getTotalCount();
+        int itemCount = super.getTotalCount(String.format("FacilityType = %d", facilityType.getIndex()));
+
+        for (FacilityEntity entity : entities) {
+            facilities.add(mapEntityToFacility(entity));
+        }
+
+        PageMetaDto meta = new PageMetaDto(dto, itemCount);
+
+        return new PageDto<>(facilities, meta);
+    }
+
+    public PageDto<Facility> filterFacilities(PageQueryDto queryDto, FilterFacilitiesDto filterDto) {
+        List<Facility> facilities = new ArrayList<>();
+
+        String whereClause = "";
+
+        // Add additional filter criteria based on FilterFacilitiesDto
+        if (filterDto.getMinArea() > 0 && filterDto.getMaxArea() > 0) {
+            whereClause += String.format(" AND Area >= %f AND Area <= %f", filterDto.getMinArea(), filterDto.getMaxArea());
+        }
+
+        if (filterDto.getMinRentalCost() != null && filterDto.getMaxRentalCost() != null) {
+            whereClause += String.format(" AND RentalCost >= %s AND RentalCost <= %s",
+                    filterDto.getMinRentalCost(), filterDto.getMaxRentalCost());
+        }
+
+        if (filterDto.getLowerMaxOccupancy() > 0 && filterDto.getUpperMaxOccupancy() > 0) {
+            whereClause += String.format(" AND MaxOccupancy >= %d AND MaxOccupancy <= %d",
+                    filterDto.getLowerMaxOccupancy(), filterDto.getUpperMaxOccupancy());
+        }
+        
+        List<FacilityEntity> entities = super.getAllWithOffset(
+                whereClause, dto.getOffset(), dto.getPageSize(),
+                dto.getOrder() == Order.ASC);
+        int itemCount = super.getTotalCount(whereClause);
 
         for (FacilityEntity entity : entities) {
             facilities.add(mapEntityToFacility(entity));
