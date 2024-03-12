@@ -22,9 +22,9 @@
 
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex gap-x-4">
                     <a href="/ResortHub/BookingController?action=getAllContract&Page=1&PageSize=10" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">List Contract</button>
-                    <a href="/ResortHub/FacilityController?action=getMarketplaceItem&Page=1&PageSize=10" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add booking</a>
-                    <button onclick="printData()" type="submit" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create Contract</button>
-                   
+                        <a href="/ResortHub/FacilityController?action=getMarketplaceItem&Page=1&PageSize=10" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Add booking</a>
+                        <button onclick="handleCreateContract()" type="submit" class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create Contract</button>
+
                 </div>
             </div>
 
@@ -66,8 +66,8 @@
                                             <td class="rentalCost whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">${c.rentalCost * c.occupancy}$</td>
                                         </tr>
                                     </c:forEach>
-                                    <input name="BookingIds" value="1,2,3" class="hidden"/>
-                                    <!--                                    <input name="BookingIds" id="selectedFacilities" class="hidden"/>-->
+
+                                    <input name="BookingIds" id="selectedFacilities" class="hidden"/>
                                     <input name="totalPrice" id="totalPrice" class="hidden"/>
                                 </form>
 
@@ -75,34 +75,6 @@
                             </table>
 
 
-                            <!--                            <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
-                                                            <div class="-mt-px flex w-0 flex-1">
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
-                                                                    <svg class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                    <path fill-rule="evenodd" d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z" clip-rule="evenodd" />
-                                                                    </svg>
-                                                                    Previous
-                                                                </a>
-                                                            </div>
-                                                            <div class="hidden md:-mt-px md:flex">
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">1</a>
-                                                                 Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" 
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600" aria-current="page">2</a>
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">3</a>
-                                                                <span class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500">...</span>
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">8</a>
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">9</a>
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">10</a>
-                                                            </div>
-                                                            <div class="-mt-px flex w-0 flex-1 justify-end">
-                                                                <a href="#" class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
-                                                                    Next
-                                                                    <svg class="ml-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                    <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </nav>-->
 
                         </div>
                     </div>
@@ -112,46 +84,14 @@
         </div>
         <script>
 
-            document.addEventListener('DOMContentLoaded', function () {
-                // Add an event listener to the button
-                document.getElementById('createContractBtn').addEventListener('click', function () {
-                    // Submit the form when the button is clicked
-                    document.getElementById('contractForm').submit();
-                });
-
-                document.getElementById('contractForm').addEventListener('submit', function (event) {
-                    event.preventDefault(); // Prevent default form submission
-
-                    var selectedFacilities = [];
-                    var totalPrice = 0;
-
-                    // Loop through each checkbox and gather selected facilities and calculate total price
-                    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                    checkboxes.forEach(function (checkbox) {
-                        var row = checkbox.closest('tr');
-                        var facilityId = row.querySelector('.facilityId').textContent;
-                        var rentalCost = parseFloat(row.querySelector('.rentalCost').textContent.replace('$', ''));
-                        selectedFacilities.push(facilityId);
-                        totalPrice += rentalCost;
-                    });
-
-                    // Set the values to the hidden inputs
-                    document.getElementById('selectedFacilities').value = JSON.stringify(selectedFacilities);
-                    document.getElementById('totalPrice').value = totalPrice;
-
-                    // Submit the form
-                    this.submit();
-                });
-            });
-
+//            
 
             function parseArrayToString(array) {
-                // Join the array elements into a single string
                 var result = array.join(", ");
                 return result;
             }
 
-            function printData() {
+            function handleCreateContract() {
                 var selectedFacilities = [];
                 var totalPrice = 0;
 
@@ -167,6 +107,7 @@
 
                 console.log(parseArrayToString(selectedFacilities))
                 console.log(totalPrice)
+                document.getElementById('selectedFacilities').value = parseArrayToString(selectedFacilities)
                 document.getElementById('totalPrice').value = totalPrice;
                 document.getElementById('contractForm').submit();
             }

@@ -40,7 +40,7 @@
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
                                     
-                                    <c:forEach items="${bookings}" var="c">
+                                    <c:forEach items="${useServices}" var="c">
                                         <tr class="divide-x divide-gray-200">
                                         <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">${c.facilityId}</td>
                                         <td class="whitespace-nowrap p-4 text-sm text-gray-500">${c.customerId}</td>

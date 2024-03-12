@@ -74,7 +74,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         return new PageDto<>(facilities, meta);
     }
 
-    public PageDto<Facility> filterFacilities(PageQueryDto queryDto, FilterFacilitiesDto filterDto) {
+    public PageDto<Facility> filterFacilities(PageQueryDto queryDto,FacilityType facilityType, FilterFacilitiesDto filterDto) {
         List<Facility> facilities = new ArrayList<>();
 
         String whereClause = String.format("FacilityType = %d", facilityType.getIndex());
