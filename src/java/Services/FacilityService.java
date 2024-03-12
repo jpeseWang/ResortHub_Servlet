@@ -77,23 +77,20 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
     public PageDto<Facility> filterFacilities(PageQueryDto queryDto, FilterFacilitiesDto filterDto) {
         List<Facility> facilities = new ArrayList<>();
 
-        String whereClause = "";
+        String whereClause = String.format("FacilityType = %d", facilityType.getIndex());
 
         // Add additional filter criteria based on FilterFacilitiesDto
         if (filterDto.getMinArea() > 0 && filterDto.getMaxArea() > 0) {
-            whereClause += (whereClause.isEmpty() ? "" : " AND ")
-                    + String.format("Area >= %f AND Area <= %f", filterDto.getMinArea(), filterDto.getMaxArea());
+            whereClause += String.format(" AND Area >= %f AND Area <= %f", filterDto.getMinArea(), filterDto.getMaxArea());
         }
 
         if (filterDto.getMinRentalCost() != null && filterDto.getMaxRentalCost() != null) {
-            whereClause += (whereClause.isEmpty() ? "" : " AND ")
-                    + String.format("RentalCost >= %s AND RentalCost <= %s",
+            whereClause += String.format(" AND RentalCost >= %s AND RentalCost <= %s",
                             filterDto.getMinRentalCost(), filterDto.getMaxRentalCost());
         }
 
         if (filterDto.getLowerMaxOccupancy() > 0 && filterDto.getUpperMaxOccupancy() > 0) {
-            whereClause += (whereClause.isEmpty() ? "" : " AND ")
-                    + String.format("MaxOccupancy >= %d AND MaxOccupancy <= %d",
+            whereClause += String.format(" AND MaxOccupancy >= %d AND MaxOccupancy <= %d",
                             filterDto.getLowerMaxOccupancy(), filterDto.getUpperMaxOccupancy());
         }
 
