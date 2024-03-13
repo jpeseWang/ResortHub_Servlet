@@ -48,6 +48,8 @@ public class PromotionController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
+        
     }
     
     @Override
@@ -67,7 +69,7 @@ public class PromotionController extends HttpServlet {
                 pageDto = promotionService.getVoucherRecipientCustomers(pageQueryDto, Integer.parseInt(year), Integer.parseInt(month));
                 request.setAttribute("useServices", pageDto.getData());
                 request.setAttribute("meta", pageDto.getMeta());
-                request.getRequestDispatcher("Admin/PromotionManagement/CustomersUseService/ListCustomersUseService.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/PromotionManagement/CustomersGetVoucher/ListCustomersGetVoucher.jsp").forward(request, response);
                 break;
             
             case "CreateVouchers":

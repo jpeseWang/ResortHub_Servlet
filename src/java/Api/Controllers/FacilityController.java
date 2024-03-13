@@ -6,19 +6,20 @@ import Domain.DTOs.CustomerFeedbackDto.CreateCustomerFeedbackDto;
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageQueryDto;
+import Domain.DTOs.StoryDto.CreateStoryDto;
 import Domain.Enums.FacilityType;
 import Domain.Enums.UserRole;
 import Domain.Exceptions.ConflictException;
 import Domain.Models.Customer;
 import Domain.Models.CustomerFeedback;
 import Domain.Models.Facility;
-import Domain.Models.FeedbackSummary;
 import Domain.Models.MaintenanceFacility;
+import Domain.Models.Story;
 import Domain.Models.User;
 import Services.CustomerFeedbackService;
 import Services.CustomerService;
-import Services.EmployeeService;
 import Services.FacilityService;
+import Services.StoryService;
 import Utils.SessionUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +27,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 import java.util.List;
 
 public class FacilityController extends HttpServlet {
@@ -52,12 +54,14 @@ public class FacilityController extends HttpServlet {
             throws ServletException, IOException {
         FacilityService facilityService = new FacilityService();
         CustomerService customerService = new CustomerService();
+        StoryService storyService = new StoryService();
         CustomerFeedbackService customerFeedbackService = new CustomerFeedbackService();
 
         PageQueryDto pageQueryDto;
         PageDto<Facility> pageDto;
         PageDto<CustomerFeedback> customerFeedback;
         PageDto<Customer> customerPageDto;
+        PageDto<Story> storyDto;
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
@@ -114,22 +118,38 @@ public class FacilityController extends HttpServlet {
                 request.getRequestDispatcher("pages/Facility/FacilityDetails.jsp").forward(request, response);
                 break;
 
-
             case "getListMaintenance":
+                String yearParam = request.getParameter("Year");
+                String monthParam = request.getParameter("Month");
+
+                // Get current year and month if parameters are not provided
+                Calendar calendar = Calendar.getInstance();
+                int currentYear = calendar.get(Calendar.YEAR);
+                int currentMonth = calendar.get(Calendar.MONTH) + 1;
+
+                int year = (yearParam != null && !yearParam.isEmpty()) ? Integer.parseInt(yearParam) : currentYear;
+                int month = (monthParam != null && !monthParam.isEmpty()) ? Integer.parseInt(monthParam) : currentMonth;
 
                 java.util.List<MaintenanceFacility> maintenanceFacilityList = facilityService
-                        .getFacilitiesForMaintenance(2024, 2);
+                        .getFacilitiesForMaintenance(year, month);
                 request.setAttribute("maintenanceFacility", maintenanceFacilityList);
                 request.getRequestDispatcher("Admin/FacilityManagement/ListFacilityMaintenance.jsp").forward(request,
                         response);
                 break;
-            case "getCustomerFeedBack":
 
+            case "getCustomerFeedBack":
                 request.setAttribute("meta", pageDto.getMeta());
                 request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
                 break;
+
+            case "getStory":
+                storyDto = storyService.getAllStories(pageQueryDto);
+                request.setAttribute("story", storyDto.getData());
+                request.setAttribute("meta", storyDto.getMeta());
+                request.getRequestDispatcher("pages/Story/ListStory.jsp").forward(request, response);
+                break;
             default:
-                request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp").forward(request,
+                request.getRequestDispatcher("Admin/FacilityManagement/ListFacility.jsp").forward(request,
                         response);
         }
     }
@@ -140,11 +160,14 @@ public class FacilityController extends HttpServlet {
 
         FacilityService facilityService = new FacilityService();
         CustomerFeedbackService customerFeedbackService = new CustomerFeedbackService();
+        StoryService storyService = new StoryService();
         FacilityValidator facilityValidator = new FacilityValidator();
 
         List<String> validationErrors;
+        String customerId;
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
+        String facilityId = request.getParameter("facilityId");
 
         User user = SessionUtils.getUserFromSession(request);
         switch (action) {
@@ -185,7 +208,6 @@ public class FacilityController extends HttpServlet {
             case "createCustomerFeedback":
                 CreateCustomerFeedbackDto dto = new CreateCustomerFeedbackDto(request);
 
-                String customerId;
                 if ((user.getUserRole() == UserRole.Admin)) {
                     customerId = "KH-0000";
                 } else {
@@ -196,6 +218,20 @@ public class FacilityController extends HttpServlet {
                 request.setAttribute("message", contractMessage);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
                 break;
+
+            case "createStory":
+                if ((user.getUserRole() == UserRole.Admin)) {
+                    customerId = "KH-0000";
+                } else {
+                    customerId = user.getCustomerId();
+                }
+                CreateStoryDto storyDto = new CreateStoryDto(request);
+                storyService.createStory(storyDto, customerId, facilityId);
+                String storyMessage = "Create Story successfully!";
+                request.setAttribute("message", storyMessage);
+                request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
+                break;
+
             default:
 
                 request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp?").forward(request,

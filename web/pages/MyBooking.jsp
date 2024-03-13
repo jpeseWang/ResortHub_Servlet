@@ -23,7 +23,7 @@
             </div>
 
             <c:forEach items="${bookings}" var="c">
-                
+
                 <div class="flex py-6 sm:py-10">
                     <div class="min-w-0 flex-1 lg:flex lg:flex-col">
                         <div class="lg:flex-1">
@@ -41,9 +41,14 @@
                                     <p class="text-indigo-600 hover:text-indigo-500"> <span class="text-gray-500 font-regular">From:</span> ${c.endDate}</p>
                                 </div>
                             </div>
-                                <button type="button" class="mt-4 rounded bg-white px-2 py-1 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                                    <a href="/ResortHub/BookingController?action=getById&id=${c.id}&facilityId=${c.facilityId}">Details</a>
-                                    </button>
+                            <button type="button" class="mt-4 rounded bg-white px-2 py-1 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                <a href="/ResortHub/BookingController?action=getById&id=${c.id}&facilityId=${c.facilityId}">Details</a>
+                            </button>
+
+
+                            <button type="button" class="ml-4 rounded-md bg-indigo-50 px-2 py-1 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100">
+                                <a href="/ResortHub/pages/Story/CreateStory.jsp?facilityId=${c.facilityId}">Create Story</a>
+                            </button>
                         </div>
                         <div class="mt-6 font-medium">
                             <p>#${c.id}</p>
