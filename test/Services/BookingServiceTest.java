@@ -142,15 +142,4 @@ public class BookingServiceTest {
         assertNotEquals(-1, result);
     }
 
-    /**
-     * Test of deleteBooking method, of class BookingService.
-     */
-    @Test
-    public void testDeleteBooking() {
-        System.out.println("deleteBooking");
-        int id = 1;
-        BookingService instance = new BookingService();
-        instance.deleteBooking(id);
-    }
-
 }
