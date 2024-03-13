@@ -95,7 +95,7 @@ public class BookingController extends HttpServlet {
                 break;
 
             case "delete":
-                bookingService.deleteBooking(id);
+                bookingService.deleteBooking(Integer.parseInt(id));
                 String message = "Delete booking successfully!";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);

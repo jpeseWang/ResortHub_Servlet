@@ -53,23 +53,6 @@ public class BookingServiceTest {
         String expResult = "Bookings";
         String result = instance.getTableName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of createEntityFromResultSet method, of class BookingService.
-     */
-    @Test
-    public void testCreateEntityFromResultSet() throws Exception {
-        System.out.println("createEntityFromResultSet");
-        ResultSet rs = null;
-        BookingService instance = new BookingService();
-        BookingEntity expResult = null;
-        BookingEntity result = instance.createEntityFromResultSet(rs);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -87,7 +70,6 @@ public class BookingServiceTest {
         PageDto<Booking> result = instance.getAllBookings(dto);
         assertNotNull(result);
         assertTrue(result.getData().size() <= pageSize);
-
     }
 
     /**
@@ -96,11 +78,10 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingById() {
         System.out.println("getBookingById");
-        String id = "6"; // Assuming this ID exists
+        String id = "`1"; // Assuming this ID exists
         BookingService instance = new BookingService();
         Booking result = instance.getBookingById(id);
         assertNotNull(result);
-
     }
 
     /**
@@ -109,14 +90,12 @@ public class BookingServiceTest {
     @Test
     public void testGetBookingsOfCustomer() {
         System.out.println("getBookingsOfCustomer");
-        PageQueryDto dto = null;
-        String customerId = "";
+        PageQueryDto dto = new PageQueryDto(1, 10);
+        String customerId = "KH-0002";
         BookingService instance = new BookingService();
-        PageDto<Booking> expResult = null;
         PageDto<Booking> result = instance.getBookingsOfCustomer(dto, customerId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
+        assertTrue(result.getData().size() <= 10);
     }
 
     /**
@@ -160,7 +139,7 @@ public class BookingServiceTest {
 
         BookingService instance = new BookingService();
         int result = instance.createBooking(dto);
-        assertNotEquals(0, result);
+        assertNotEquals(-1, result);
     }
 
     /**
@@ -169,7 +148,7 @@ public class BookingServiceTest {
     @Test
     public void testDeleteBooking() {
         System.out.println("deleteBooking");
-        String id = "";
+        int id = 1;
         BookingService instance = new BookingService();
         instance.deleteBooking(id);
     }

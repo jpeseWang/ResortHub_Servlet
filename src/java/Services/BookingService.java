@@ -134,7 +134,7 @@ public class BookingService extends RepositoryBase<BookingEntity> {
         return super.executeNonQueryReturnsId(query, params);
     }
 
-    public void deleteBooking(String id) {
+    public void deleteBooking(int id) {
         BookingEntity entity = super.getById(id);
 
         if (entity == null) {
