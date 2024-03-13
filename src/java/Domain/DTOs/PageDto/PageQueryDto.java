@@ -26,8 +26,12 @@ public class PageQueryDto {
     }
 
     public PageQueryDto(HttpServletRequest request) {
-        page = ConvertUtils.convertStringToInt(request.getParameter("Page"));
-        pageSize = ConvertUtils.convertStringToInt(request.getParameter("PageSize"));
+        page = ConvertUtils.convertStringToInt(request.getParameter("Page")) != -1
+                ? ConvertUtils.convertStringToInt(request.getParameter("Page"))
+                : 1;
+        pageSize = ConvertUtils.convertStringToInt(request.getParameter("PageSize")) != -1
+                ? ConvertUtils.convertStringToInt(request.getParameter("PageSize"))
+                : 10;
     }
 
     public Order getOrder() {
