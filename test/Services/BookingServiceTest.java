@@ -149,18 +149,18 @@ public class BookingServiceTest {
      */
     @Test
     public void testCreateBooking() {
-        Date BookingDate = ConvertUtils.convertStringToDate("2024-02-02");
-        Date EndDate = ConvertUtils.convertStringToDate("2024-02-02");
-        Date StartDate = ConvertUtils.convertStringToDate("2024-02-02");
-        String CustomerId = "KH-0005";
-        String FacilityId = "SVVL-2004";
+        Date bookingDate = ConvertUtils.convertStringToDate("2024-02-02");
+        Date startDate = ConvertUtils.convertStringToDate("2024-02-04");
+        Date endDate = ConvertUtils.convertStringToDate("2024-02-06");
+        int occupancy = 10;
+        String customerId = "KH-0002";
+        String facilityId = "SVVL-0001";
         // Create a valid CreateBookingDto object
-        // CreateBookingDto dto = new CreateBookingDto(BookingDate, StartDate, EndDate, CustomerId, FacilityId);
+        CreateBookingDto dto = new CreateBookingDto(bookingDate, startDate, endDate, occupancy, customerId, facilityId);
 
-        //BookingService instance = new BookingService();
-        //int result = instance.createBooking(dto);
-        //assertNotNull(result);
-    
+        BookingService instance = new BookingService();
+        int result = instance.createBooking(dto);
+        assertNotEquals(0, result);
     }
 
     /**
@@ -172,8 +172,6 @@ public class BookingServiceTest {
         String id = "";
         BookingService instance = new BookingService();
         instance.deleteBooking(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }
