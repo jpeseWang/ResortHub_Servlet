@@ -27,6 +27,11 @@ public abstract class RepositoryBase<TEntity> {
         return executeQuery(query, new ArrayList<>());
     }
 
+    protected List<TEntity> getAllWithOrderBy(String orderByClause) {
+        String query = String.format("SELECT * FROM %s ORDER BY %s;", getTableName(), orderByClause);
+        return executeQuery(query, new ArrayList<>());
+    }
+
     protected TEntity getById(Object id) {
         String query = String.format("SELECT TOP 1 * FROM %s WHERE Id = ?;", getTableName());
         List<Object> params = new ArrayList<>();
