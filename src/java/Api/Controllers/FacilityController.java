@@ -1,9 +1,9 @@
 package Api.Controllers;
 
 import Api.Validators.FacilityValidator;
-import Domain.DTOs.BookingDto.CreateRentalContractDto;
 import Domain.DTOs.CustomerFeedbackDto.CreateCustomerFeedbackDto;
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
+import Domain.DTOs.FacilityDto.FilterFacilitiesDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.DTOs.StoryDto.CreateStoryDto;
@@ -74,9 +74,39 @@ public class FacilityController extends HttpServlet {
         switch (action) {
 
             case "getMarketplaceItem":
-                request.setAttribute("facilities", pageDto.getData());
-                request.setAttribute("meta", pageDto.getMeta());
-                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+
+                if (facilityType != null) {
+                    switch (facilityType) {
+                        case "villa":
+
+                            pageDto = facilityService.getAllFacilities(pageQueryDto, FacilityType.Villa);
+                            request.setAttribute("facilities", pageDto.getData());
+                            request.setAttribute("meta", pageDto.getMeta());
+                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request,
+                                    response);
+                            break;
+                        case "house":
+                            pageDto = facilityService.getAllFacilities(pageQueryDto, FacilityType.House);
+                            request.setAttribute("facilities", pageDto.getData());
+                            request.setAttribute("meta", pageDto.getMeta());
+                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request,
+                                    response);
+                            break;
+                        case "room":
+                            pageDto = facilityService.getAllFacilities(pageQueryDto, FacilityType.Room);
+                            request.setAttribute("facilities", pageDto.getData());
+                            request.setAttribute("meta", pageDto.getMeta());
+                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request,
+                                    response);
+                            break;
+                        default:
+                            response.sendRedirect("pages/Facility/Marketplace.jsp");
+                    }
+                } else {
+                    request.setAttribute("facilities", pageDto.getData());
+                    request.setAttribute("meta", pageDto.getMeta());
+                    request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                }
                 break;
             case "getAll":
                 switch (facilityType) {
@@ -148,6 +178,15 @@ public class FacilityController extends HttpServlet {
                 request.setAttribute("meta", storyDto.getMeta());
                 request.getRequestDispatcher("pages/Story/ListStory.jsp").forward(request, response);
                 break;
+
+            case "getFilterFacility":
+                FilterFacilitiesDto filterFacilitiesDto = new FilterFacilitiesDto(request);
+                pageDto = facilityService.filterFacilities(pageQueryDto, filterFacilitiesDto);
+                request.setAttribute("facility", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                break;
+
             default:
                 request.getRequestDispatcher("Admin/FacilityManagement/ListFacility.jsp").forward(request,
                         response);
@@ -164,9 +203,19 @@ public class FacilityController extends HttpServlet {
         FacilityValidator facilityValidator = new FacilityValidator();
 
         List<String> validationErrors;
-        String customerId;
+        PageQueryDto pageQueryDto;
+        PageDto<Facility> pageDto;
+        PageDto<CustomerFeedback> customerFeedback;
+        PageDto<Customer> customerPageDto;
+     
+
+        String id = request.getParameter("id");
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
+
+        pageQueryDto = new PageQueryDto(request);
+        String customerId;
+
         String facilityId = request.getParameter("facilityId");
 
         User user = SessionUtils.getUserFromSession(request);
@@ -231,7 +280,13 @@ public class FacilityController extends HttpServlet {
                 request.setAttribute("message", storyMessage);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
                 break;
-
+            case "getFilterFacility":
+                FilterFacilitiesDto filterFacilitiesDto = new FilterFacilitiesDto(request);
+                pageDto = facilityService.filterFacilities(pageQueryDto, filterFacilitiesDto);
+                request.setAttribute("facilities", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                break;
             default:
 
                 request.getRequestDispatcher("Admin/FacilityManagement/Villa/CreateVilla.jsp?").forward(request,

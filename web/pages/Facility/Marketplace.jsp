@@ -1,8 +1,4 @@
-<%-- 
-    Document   : MarketPlace
-    Created on : Jan 30, 2024, 11:39:22 PM
-    Author     : jpesewang
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,11 +17,6 @@
             <%@ include file="/layout/header.jsp" %>
 
             <div>
-                <!--
-                  Mobile filter dialog
-            
-                  Off-canvas filters for mobile, show/hide based on off-canvas filters state.
-                -->
                 <div class="relative z-40 sm:hidden" role="dialog" aria-modal="true">
 
                     <!-- Off-canvas menu backdrop -->
@@ -52,7 +43,7 @@
                                     <h3 class="-mx-2 -my-3 flow-root">
                                         <!-- Expand/collapse section button -->
                                         <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400" aria-controls="filter-section-1" aria-expanded="false">
-                                            <span class="font-medium text-gray-900">Color</span>
+                                            <span class="font-medium text-gray-900">Category</span>
                                             <span class="ml-6 flex items-center">
 
                                                 <svg class="rotate-0 h-5 w-5 transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -66,28 +57,17 @@
                                         <div class="space-y-6">
                                             <div class="flex items-center">
                                                 <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-color-0" class="ml-3 text-sm text-gray-500">White</label>
+                                                <label for="filter-mobile-color-0" class="ml-3 text-sm text-gray-500">Family</label>
                                             </div>
                                             <div class="flex items-center">
                                                 <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-color-1" class="ml-3 text-sm text-gray-500">Beige</label>
+                                                <label for="filter-mobile-color-1" class="ml-3 text-sm text-gray-500">Couple</label>
                                             </div>
                                             <div class="flex items-center">
                                                 <input id="filter-mobile-color-2" name="color[]" value="blue" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-color-2" class="ml-3 text-sm text-gray-500">Blue</label>
+                                                <label for="filter-mobile-color-2" class="ml-3 text-sm text-gray-500">Custom</label>
                                             </div>
-                                            <div class="flex items-center">
-                                                <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-color-3" class="ml-3 text-sm text-gray-500">Brown</label>
-                                            </div>
-                                            <div class="flex items-center">
-                                                <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-color-4" class="ml-3 text-sm text-gray-500">Green</label>
-                                            </div>
-                                            <div class="flex items-center">
-                                                <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-color-5" class="ml-3 text-sm text-gray-500">Purple</label>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -97,11 +77,6 @@
                                         <button type="button" class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400" aria-controls="filter-section-2" aria-expanded="false">
                                             <span class="font-medium text-gray-900">Sizes</span>
                                             <span class="ml-6 flex items-center">
-                                                <!--
-                                                  Expand/collapse icon, toggle classes based on section open state.
-                            
-                                                  Open: "-rotate-180", Closed: "rotate-0"
-                                                -->
                                                 <svg class="rotate-0 h-5 w-5 transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                                                 </svg>
@@ -190,7 +165,7 @@
 
                                             <div class="relative inline-block px-4 text-left">
                                                 <button onclick="toggleColor()" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
-                                                    <span>Color</span>
+                                                    <span>Category</span>
                                                     <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                                                     </svg>
@@ -201,34 +176,23 @@
                                                     <form class="space-y-4">
                                                         <div class="flex items-center">
                                                             <input id="filter-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-color-0" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">White</label>
+                                                            <label for="filter-color-0" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Family</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-color-1" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Beige</label>
+                                                            <label for="filter-color-1" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Couple</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-color-2" name="color[]" value="blue" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-color-2" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Blue</label>
+                                                            <label for="filter-color-2" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Custom</label>
                                                         </div>
-                                                        <div class="flex items-center">
-                                                            <input id="filter-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-color-3" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Brown</label>
-                                                        </div>
-                                                        <div class="flex items-center">
-                                                            <input id="filter-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-color-4" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Green</label>
-                                                        </div>
-                                                        <div class="flex items-center">
-                                                            <input id="filter-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-color-5" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">Purple</label>
-                                                        </div>
+
                                                     </form>
                                                 </div>
                                             </div>
                                             <div class="relative inline-block px-4 text-left">
                                                 <button onclick="toggleSize()" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" aria-expanded="false">
-                                                    <span>Sizes</span>
+                                                    <span>Areas</span>
                                                     <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                                                     </svg>
@@ -239,27 +203,27 @@
                                                     <form class="space-y-4">
                                                         <div class="flex items-center">
                                                             <input id="filter-sizes-0" name="sizes[]" value="xs" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-sizes-0" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">XS</label>
+                                                            <label for="filter-sizes-0" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"><= 15 m2</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-sizes-1" name="sizes[]" value="s" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-sizes-1" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">S</label>
+                                                            <label for="filter-sizes-1" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"><= 30 m2</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-sizes-2" name="sizes[]" value="m" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-sizes-2" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">M</label>
+                                                            <label for="filter-sizes-2" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"><= 50 m2</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-sizes-3" name="sizes[]" value="l" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-sizes-3" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">L</label>
+                                                            <label for="filter-sizes-3" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"><= 100 m2</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-sizes-4" name="sizes[]" value="xl" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-sizes-4" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">XL</label>
+                                                            <label for="filter-sizes-4" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"><= 150 m2</label>
                                                         </div>
                                                         <div class="flex items-center">
                                                             <input id="filter-sizes-5" name="sizes[]" value="2xl" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                                            <label for="filter-sizes-5" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">2XL</label>
+                                                            <label for="filter-sizes-5" class="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900">> 150 m2</label>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -283,22 +247,118 @@
                                 <div class="mt-2 sm:ml-4 sm:mt-0">
                                     <div class="-m-1 flex flex-wrap items-center" id="filter-buttons">
                                         <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="All">
-                                            <span>All</span>
+                                            <span>
+                                                <a href="/ResortHub/FacilityController?action=getMarketplaceItem&Page=1&PageSize=12">All</a>
+
+                                            </span>
                                         </span>
                                         <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="Villa">
-                                            <span>Villa</span>
+                                            <span>
+                                                <a href="/ResortHub/FacilityController?action=getMarketplaceItem&facilityType=villa&Page=1&PageSize=12">Villa</a>
+
+                                            </span>
                                         </span>
                                         <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="House">
-                                            <span>House</span>
+                                            <span>
+                                                <a href="/ResortHub/FacilityController?action=getMarketplaceItem&facilityType=house&Page=1&PageSize=12">House</a>
+
+                                            </span>
                                         </span>
                                         <span class="cursor-pointer m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900 filter-button" data-type="Room">
-                                            <span>Room</span>
+                                            <span>
+                                                <a href="/ResortHub/FacilityController?action=getMarketplaceItem&facilityType=room&Page=1&PageSize=12">Room</a>
+
+                                            </span>
                                         </span>
                                     </div>
                                 </div>
 
 
                             </div>
+                            <form class="block sm:flex gap-x-4 mt-4 mx-6"
+                                  name="FacilityController"
+                                  method="POST"
+                                  action="/ResortHub/FacilityController?action=getFilterFacility&Page=1&PageSize=12">
+                                <div>
+                                    <div class="">
+                                        <input
+                                            name="MinArea"
+                                            type="text"
+                                            placeholder="Min Area"
+                                           
+                                            class="w-[100px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="">
+                                        <input
+                                            name="MaxArea"
+                                            type="text"
+                                            placeholder="Max Area"
+                                            
+                                            class="w-[100px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                    </div>
+                                </div>
+                                 <div>
+                                    <div class="">
+                                        <input
+                                            name="MinRentalCost"
+                                            type="text"
+                                            placeholder="MinRentalCost"
+                                            
+                                            class="w-[150px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                    </div>
+                                </div>
+                                 <div>
+                                    <div class="">
+                                        <input
+                                            name="MaxRentalCost"
+                                            type="text"
+                                            placeholder="MaxRentalCost"
+                                            
+                                            class="w-[150px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                    </div>
+                                </div>
+                                 <div>
+                                    <div class="">
+                                        <input
+                                            name="LowerMaxOccupancy"
+                                            type="text"
+                                            placeholder="LowerMaxOccupancy"
+                                            
+                                            class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                    </div>
+                                </div>
+                                 <div>
+                                    <div class="">
+                                        <input
+                                            name="UpperMaxOccupancy"
+                                            type="text"
+                                            placeholder="UpperMaxOccupancy"
+                                            
+                                            class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    <button
+                                        type="submit"
+                                        class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        >
+                                        <span>Filter facility</span>
+                                    </button>
+
+                                </div>
+                            </form>
+
                         </div>
                     </section>
 

@@ -1,21 +1,21 @@
 -- Inserting 15 random records into the Employees table
 INSERT INTO Employees ("Id", "FullName", "BirthDate", "Gender", "IdNumber", "PhoneNumber", "Email", "Qualification", "Position", "Salary")
 VALUES
-    ('NV-0001', 'John Doe', '1990-05-15', 'Male', '1234567890', '0123456789', 'john.doe@example.com', 1, 2, 50000.00),
-    ('NV-0002', 'Jane Smith', '1988-09-25', 'Female', '2345678901', '0987654321', 'jane.smith@example.com', 2, 3, 60000.00),
-    ('NV-0003', 'Michael Johnson', '1995-02-10', 'Male', '3456789012', '0567890123', 'michael.johnson@example.com', 1, 1, 45000.00),
-    ('NV-0004', 'Emily Brown', '1992-11-18', 'Female', '4567890123', '0345678901', 'emily.brown@example.com', 3, 2, 55000.00),
-    ('NV-0005', 'David Wilson', '1987-07-07', 'Male', '5678901234', '0789012345', 'david.wilson@example.com', 2, 3, 62000.00),
-    ('NV-0006', 'Sarah Garcia', '1993-04-30', 'Female', '6789012345', '0234567890', 'sarah.garcia@example.com', 1, 2, 51000.00),
-    ('NV-0007', 'James Martinez', '1991-12-22', 'Male', '7890123456', '0901234567', 'james.martinez@example.com', 3, 1, 47000.00),
-    ('NV-0008', 'Linda Rodriguez', '1989-08-14', 'Female', '8901234567', '0456789012', 'linda.rodriguez@example.com', 2, 3, 59000.00),
-    ('NV-0009', 'Christopher Lee', '1994-06-02', 'Male', '9012345678', '0678901234', 'christopher.lee@example.com', 3, 2, 53000.00),
-    ('NV-0010', 'Amanda Harris', '1990-03-05', 'Female', '0123456789', '0123456789', 'amanda.harris@example.com', 1, 1, 48000.00),
-    ('NV-0011', 'Ryan Martinez', '1986-10-12', 'Male', '1234567890', '0890123456', 'ryan.martinez@example.com', 2, 3, 61000.00),
-    ('NV-0012', 'Jessica Davis', '1997-08-28', 'Female', '2345678901', '0456789012', 'jessica.davis@example.com', 1, 2, 52000.00),
-    ('NV-0013', 'Matthew Taylor', '1996-01-15', 'Male', '3456789012', '0123456789', 'matthew.taylor@example.com', 3, 1, 49000.00),
-    ('NV-0014', 'Olivia Brown', '1993-05-20', 'Female', '4567890123', '0890123456', 'olivia.brown@example.com', 2, 3, 63000.00),
-    ('NV-0015', 'Daniel Wilson', '1985-09-08', 'Male', '5678901234', '0567890123', 'daniel.wilson@example.com', 1, 2, 54000.00);
+    ('NV-0001', 'John Doe', '1990-05-15', 'Male', '123456789', '0123456789', 'john.doe@example.com', 1, 2, 50000.00),
+    ('NV-0002', 'Jane Smith', '1988-09-25', 'Female', '234567890', '0987654321', 'jane.smith@example.com', 2, 3, 60000.00),
+    ('NV-0003', 'Michael Johnson', '1995-02-10', 'Male', '345678901', '0567890123', 'michael.johnson@example.com', 1, 1, 45000.00),
+    ('NV-0004', 'Emily Brown', '1992-11-18', 'Female', '456789012', '0345678901', 'emily.brown@example.com', 3, 2, 55000.00),
+    ('NV-0005', 'David Wilson', '1987-07-07', 'Male', '567890124', '0789012345', 'david.wilson@example.com', 2, 3, 62000.00),
+    ('NV-0006', 'Sarah Garcia', '1993-04-30', 'Female', '678901245', '0234567890', 'sarah.garcia@example.com', 1, 2, 51000.00),
+    ('NV-0007', 'James Martinez', '1991-12-22', 'Male', '789013456', '0901234567', 'james.martinez@example.com', 3, 1, 47000.00),
+    ('NV-0008', 'Linda Rodriguez', '1989-08-14', 'Female', '890234567', '0456789012', 'linda.rodriguez@example.com', 2, 3, 59000.00),
+    ('NV-0009', 'Christopher Lee', '1994-06-02', 'Male', '901245678', '0678901234', 'christopher.lee@example.com', 3, 2, 53000.00),
+    ('NV-0010', 'Amanda Harris', '1990-03-05', 'Female', '012356789', '0123456789', 'amanda.harris@example.com', 1, 1, 48000.00),
+    ('NV-0011', 'Ryan Martinez', '1986-10-12', 'Male', '123457890', '0890123456', 'ryan.martinez@example.com', 2, 3, 61000.00),
+    ('NV-0012', 'Jessica Davis', '1997-08-28', 'Female', '234568901', '0456789012', 'jessica.davis@example.com', 1, 2, 52000.00),
+    ('NV-0013', 'Matthew Taylor', '1996-01-15', 'Male', '345679012', '0123456789', 'matthew.taylor@example.com', 3, 1, 49000.00),
+    ('NV-0014', 'Olivia Brown', '1993-05-20', 'Female', '456780123', '0890123456', 'olivia.brown@example.com', 2, 3, 63000.00),
+    ('NV-0015', 'Daniel Wilson', '1985-09-08', 'Male', '567891234', '0567890123', 'daniel.wilson@example.com', 1, 2, 54000.00);
 
 
 -- Insert 15 random records into the Customers table
@@ -63,6 +63,7 @@ VALUES
 
 INSERT INTO Villas (Id, StandardRoom, PoolArea, Floors) 
 VALUES 
+('SVVL-0000', 'Normal', 36.0, 6),
 ('SVVL-0001', 'Normal', 56.0, 6),
 ('SVVL-0002', 'Superior', 40.0, 4),
 ('SVVL-0003', 'Luxury', 70.0, 7),
@@ -87,6 +88,7 @@ VALUES
 
 INSERT INTO Houses (Id, StandardRoom, Floors) 
 VALUES 
+('SVHO-0000', 'Luxury',  3),
 ('SVHO-0001', 'Normal',  6),
 ('SVHO-0002', 'Superior', 4),
 ('SVHO-0003', 'Luxury', 7),
@@ -107,6 +109,7 @@ VALUES
 
 INSERT INTO Rooms (Id, FreeService) 
 VALUES 
+('SVRO-0000', 'Mini Bar'),
 ('SVRO-0001', 'Wi-Fi Access'),
 ('SVRO-0002', 'Private Balcony'),
 ('SVRO-0003', 'Jacuzzi Tub'),
