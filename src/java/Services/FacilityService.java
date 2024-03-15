@@ -10,6 +10,7 @@ import java.util.Map;
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
 import Domain.DTOs.FacilityDto.FilterFacilitiesDto;
 import Domain.DTOs.FacilityDto.SuggestFacilitiesDto;
+import Domain.DTOs.FacilityDto.SuggestedFacilitiesDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageMetaDto;
 import Domain.DTOs.PageDto.PageQueryDto;
@@ -110,8 +111,8 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         return new PageDto<>(facilities, meta);
     }
 
-    public List<List<Facility>> suggestFacilities(SuggestFacilitiesDto suggestDto) {
-        List<List<Facility>> suggestedFacilities = new ArrayList<>();
+    public List<SuggestedFacilitiesDto> suggestFacilities(SuggestFacilitiesDto suggestDto) {
+        List<SuggestedFacilitiesDto> suggestedFacilitiesDtos = new ArrayList<>();
         List<FacilityEntity> entities = super.getAllWithOrderBy("MaxOccupancy DESC, RentalCost ASC");
         List<Facility> facilities = new ArrayList<>();
 
@@ -119,9 +120,9 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
             facilities.add(mapEntityToFacility(entity));
         }
 
-        findFacilityCombinations(suggestedFacilities, facilities, new ArrayList<>(), 0, 0, suggestDto.getTotalOccupancy());
+        findFacilityCombinations(suggestedFacilitiesDtos, facilities, new ArrayList<>(), 0, 0, 0, suggestDto.getTotalOccupancy());
         
-        return suggestedFacilities;
+        return suggestedFacilitiesDtos;
     }
 
     public Facility getFacilityById(String id) {
@@ -216,20 +217,21 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         }
     }
 
-    private void findFacilityCombinations(List<List<Facility>> suggestedFacilities, List<Facility> allFacilities, 
-                                           List<Facility> currentCombination, int currentOccupancy, int currentIndex, int totalOccupancy) {
-        if (currentOccupancy > totalOccupancy || currentCombination.size() > totalOccupancy) // Ensuring the combination does not exceed the total occupancy
+    private void findFacilityCombinations(List<SuggestedFacilitiesDto> suggestedFacilitiesDtos, List<Facility> allFacilities, 
+                                           List<Facility> currentCombination, int currentOccupancy, BigDecimal currentRentalCost, int currentIndex, int totalOccupancy) {
+        if (currentCombination.size() > totalOccupancy) // Ensuring the combination does not exceed the total occupancy
             return;
 
-        if (currentOccupancy == totalOccupancy) {
-            suggestedFacilities.add(new ArrayList<>(currentCombination));
+        if (currentOccupancy >= totalOccupancy) {
+            SuggestedFacilitiesDto dto = new SuggestedFacilitiesDto(new ArrayList<>(currentCombination), currentCombination.size(), currentRentalCost, currentOccupancy);
+            suggestedFacilitiesDtos.add(dto);
             return;
         }
 
         for (int i = currentIndex; i < allFacilities.size(); i++) {
             Facility facility = allFacilities.get(i);
             currentCombination.add(facility);
-            findFacilityCombinations(suggestedFacilities, allFacilities, currentCombination, currentOccupancy + facility.getMaxOccupancy(), i + 1, totalOccupancy);
+            findFacilityCombinations(suggestedFacilitiesDtos, allFacilities, currentCombination, currentOccupancy + facility.getMaxOccupancy(), currentRentalCost + facility.getRentalCost(), i + 1, totalOccupancy);
             currentCombination.remove(currentCombination.size() - 1);
         }
     }
