@@ -1,10 +1,9 @@
 package Domain.DTOs.FacilityDto;
 
+import Domain.Models.Facility;
 import java.math.BigDecimal;
 
-import Utils.ConvertUtils;
-
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class SuggestedFacilitiesDto {
     private List<Facility> suggestedFacilities;
