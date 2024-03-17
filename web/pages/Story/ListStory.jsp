@@ -25,7 +25,7 @@
 // Generate a random size between 1 and 100
 int size = (int) (Math.random() * 100) + 1;
                             %>
-                            <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+                            <a href="/ResortHub/FacilityController?action=getStoryById&id=${c.id}" class="pt-8 sm:inline-block sm:w-full sm:px-4">
                                 <figure class="rounded-2xl bg-gray-50 p-8 text-sm leading-6">
                                     <blockquote class="text-gray-900">
 
@@ -44,7 +44,7 @@ int size = (int) (Math.random() * 100) + 1;
 
                                 </figure>
 
-                            </div>
+                            </a>
 
                         </c:forEach>
 

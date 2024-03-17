@@ -124,6 +124,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         findFacilityCombinations(suggestedFacilitiesDtos, facilities, new ArrayList<>(), 0, new BigDecimal(0), 0, suggestDto.getTotalOccupancy());
         
         return suggestedFacilitiesDtos;
+  
     }
 
     public Facility getFacilityById(String id) {
