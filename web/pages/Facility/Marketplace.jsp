@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.tailwindcss.com"></script>
         <title>JSP Page</title>
-        <script src="pages/Facility/MarketplaceScript.js"></script>
+      
     </head>
     <body>
 
@@ -276,14 +276,14 @@
 
                             </div>
                             <div class="">
-                                <nav class="flex space-x-4" aria-label="Tabs">
+                                <nav class="flex space-x-4 mx-12" aria-label="Tabs">
 
-                                    <button id="filterBtn" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Filter</button>
-                                    <button id="suggestBtn" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Suggest</button>
+                                    <button id="filterBtn" class=" bg-indigo-100 text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Filter</button>
+                                    <button id="suggestBtn" class="bg-indigo-100 text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Suggest</button>
 
                                 </nav>
                             </div>
-                            <div id="filterForm" class="hidden">
+                            <div id="filterForm" class="">
                                 <form class="gap-x-4 mt-4 mx-6 block sm:flex"
                                       name="FacilityController"
                                       method="POST"
@@ -380,7 +380,7 @@
                                             <input
                                                 name="TotalOccupancy"
                                                 type="text"
-                                                placeholder="TotalOccupancy"
+                                                placeholder="Total Occupancy"
                                                 value="${totalOccupancy}"
                                                 class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -392,7 +392,7 @@
                                             <input
                                                 name="MaxNumOfFacilities"
                                                 type="text"
-                                                placeholder="MaxNumOfFacilities"
+                                                placeholder="Max number of facilities"
                                                 value="${maxNumOfFacilities}"
                                                 class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                 />
@@ -404,7 +404,7 @@
                                             type="submit"
                                             class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                             >
-                                            <span>Filter facility</span>
+                                            <span>Suggest facility</span>
                                         </button>
 
                                     </div>
@@ -488,6 +488,8 @@
 
             </div>
         </div>
+                
+               
         <script type="text/javascript"><%@include file="MarketplaceScript.js" %></script>
     </body>
 </html>
