@@ -219,7 +219,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
 
     private void findFacilityCombinations(List<SuggestedFacilitiesDto> suggestedFacilitiesDtos, List<Facility> allFacilities, 
                                            List<Facility> currentCombination, int currentOccupancy, BigDecimal currentRentalCost, int currentIndex, int totalOccupancy) {
-        if (currentCombination.size() > totalOccupancy) // Ensuring the combination does not exceed the total occupancy
+        if (currentCombination.size() > totalOccupancy || suggestedFacilitiesDtos.size() > 10) // Ensuring the combination does not exceed the total occupancy
             return;
 
         if (currentOccupancy >= totalOccupancy) {
