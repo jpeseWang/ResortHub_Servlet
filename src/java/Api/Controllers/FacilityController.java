@@ -1,9 +1,11 @@
 package Api.Controllers;
 
 import Api.Validators.FacilityValidator;
-import Domain.DTOs.BookingDto.CreateRentalContractDto;
 import Domain.DTOs.CustomerFeedbackDto.CreateCustomerFeedbackDto;
 import Domain.DTOs.FacilityDto.CreateFacilityDto;
+import Domain.DTOs.FacilityDto.FilterFacilitiesDto;
+import Domain.DTOs.FacilityDto.SuggestFacilitiesDto;
+import Domain.DTOs.FacilityDto.SuggestedFacilitiesDto;
 import Domain.DTOs.PageDto.PageDto;
 import Domain.DTOs.PageDto.PageQueryDto;
 import Domain.DTOs.StoryDto.CreateStoryDto;
@@ -27,6 +29,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -74,9 +78,39 @@ public class FacilityController extends HttpServlet {
         switch (action) {
 
             case "getMarketplaceItem":
-                request.setAttribute("facilities", pageDto.getData());
-                request.setAttribute("meta", pageDto.getMeta());
-                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+
+                if (facilityType != null) {
+                    switch (facilityType) {
+                        case "villa":
+
+                            pageDto = facilityService.getAllFacilities(pageQueryDto, FacilityType.Villa);
+                            request.setAttribute("facilities", pageDto.getData());
+                            request.setAttribute("meta", pageDto.getMeta());
+                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request,
+                                    response);
+                            break;
+                        case "house":
+                            pageDto = facilityService.getAllFacilities(pageQueryDto, FacilityType.House);
+                            request.setAttribute("facilities", pageDto.getData());
+                            request.setAttribute("meta", pageDto.getMeta());
+                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request,
+                                    response);
+                            break;
+                        case "room":
+                            pageDto = facilityService.getAllFacilities(pageQueryDto, FacilityType.Room);
+                            request.setAttribute("facilities", pageDto.getData());
+                            request.setAttribute("meta", pageDto.getMeta());
+                            request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request,
+                                    response);
+                            break;
+                        default:
+                            response.sendRedirect("pages/Facility/Marketplace.jsp");
+                    }
+                } else {
+                    request.setAttribute("facilities", pageDto.getData());
+                    request.setAttribute("meta", pageDto.getMeta());
+                    request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                }
                 break;
             case "getAll":
                 switch (facilityType) {
@@ -118,6 +152,12 @@ public class FacilityController extends HttpServlet {
                 request.getRequestDispatcher("pages/Facility/FacilityDetails.jsp").forward(request, response);
                 break;
 
+            case "getStoryById":
+                Story story = storyService.getStoryById(Integer.parseInt(id));
+                request.setAttribute("story", story);
+                request.getRequestDispatcher("pages/Story/StoryDetails.jsp").forward(request, response);
+                break;
+
             case "getListMaintenance":
                 String yearParam = request.getParameter("Year");
                 String monthParam = request.getParameter("Month");
@@ -148,6 +188,15 @@ public class FacilityController extends HttpServlet {
                 request.setAttribute("meta", storyDto.getMeta());
                 request.getRequestDispatcher("pages/Story/ListStory.jsp").forward(request, response);
                 break;
+
+            case "getFilterFacility":
+                FilterFacilitiesDto filterFacilitiesDto = new FilterFacilitiesDto(request);
+                pageDto = facilityService.filterFacilities(pageQueryDto, filterFacilitiesDto);
+                request.setAttribute("facility", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                break;
+
             default:
                 request.getRequestDispatcher("Admin/FacilityManagement/ListFacility.jsp").forward(request,
                         response);
@@ -164,9 +213,18 @@ public class FacilityController extends HttpServlet {
         FacilityValidator facilityValidator = new FacilityValidator();
 
         List<String> validationErrors;
-        String customerId;
+        PageQueryDto pageQueryDto;
+        PageDto<Facility> pageDto;
+        PageDto<CustomerFeedback> customerFeedback;
+        PageDto<Customer> customerPageDto;
+
+        String id = request.getParameter("id");
         String action = request.getParameter("action");
         String facilityType = request.getParameter("facilityType");
+
+        pageQueryDto = new PageQueryDto(request);
+        String customerId;
+
         String facilityId = request.getParameter("facilityId");
 
         User user = SessionUtils.getUserFromSession(request);
@@ -230,6 +288,34 @@ public class FacilityController extends HttpServlet {
                 String storyMessage = "Create Story successfully!";
                 request.setAttribute("message", storyMessage);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
+                break;
+            case "getFilterFacility":
+                FilterFacilitiesDto filterFacilitiesDto = new FilterFacilitiesDto(request);
+                pageDto = facilityService.filterFacilities(pageQueryDto, filterFacilitiesDto);
+                request.setAttribute("facilities", pageDto.getData());
+                request.setAttribute("meta", pageDto.getMeta());
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
+                break;
+
+            case "getSuggestFacility":
+                SuggestFacilitiesDto suggestFacilitiesDto = new SuggestFacilitiesDto(request);
+                List<SuggestedFacilitiesDto> suggestFacilities = facilityService.suggestFacilities(suggestFacilitiesDto);
+
+                List<Facility> facilitiesList = new ArrayList<>();
+                List<Integer> numOfFacilitiesList = new ArrayList<>();
+
+                for (SuggestedFacilitiesDto suggestedFacilitiesDto : suggestFacilities) {
+                    facilitiesList.addAll(suggestedFacilitiesDto.getSuggestedFacilities());
+                    numOfFacilitiesList.add(suggestedFacilitiesDto.getNumOfFacilities());
+                }
+
+                request.setAttribute("facilities", facilitiesList);
+                request.setAttribute("numOfFacilities", numOfFacilitiesList.size());
+                request.setAttribute("maxNumOfFacilities", suggestFacilitiesDto.getMaxNumOfFacilities());
+                request.setAttribute("totalOccupancy", suggestFacilitiesDto.getTotalOccupancy());
+
+                // Forward the request
+                request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);
                 break;
 
             default:

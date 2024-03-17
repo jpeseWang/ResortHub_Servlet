@@ -22,6 +22,7 @@ import Domain.Models.Facility;
 import Domain.Models.MaintenanceFacility;
 import Repositories.Common.RepositoryBase;
 import Repositories.Entities.FacilityEntity;
+import java.math.BigDecimal;
 
 public class FacilityService extends RepositoryBase<FacilityEntity> {
 
@@ -120,9 +121,10 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
             facilities.add(mapEntityToFacility(entity));
         }
 
-        findFacilityCombinations(suggestedFacilitiesDtos, facilities, new ArrayList<>(), 0, 0, 0, suggestDto.getTotalOccupancy());
+        findFacilityCombinations(suggestedFacilitiesDtos, facilities, new ArrayList<>(), 0, new BigDecimal(0), 0, suggestDto.getTotalOccupancy());
         
         return suggestedFacilitiesDtos;
+  
     }
 
     public Facility getFacilityById(String id) {
@@ -231,7 +233,7 @@ public class FacilityService extends RepositoryBase<FacilityEntity> {
         for (int i = currentIndex; i < allFacilities.size(); i++) {
             Facility facility = allFacilities.get(i);
             currentCombination.add(facility);
-            findFacilityCombinations(suggestedFacilitiesDtos, allFacilities, currentCombination, currentOccupancy + facility.getMaxOccupancy(), currentRentalCost + facility.getRentalCost(), i + 1, totalOccupancy);
+            findFacilityCombinations(suggestedFacilitiesDtos, allFacilities, currentCombination, currentOccupancy + facility.getMaxOccupancy(), currentRentalCost.add(facility.getRentalCost()), i + 1, totalOccupancy);
             currentCombination.remove(currentCombination.size() - 1);
         }
     }

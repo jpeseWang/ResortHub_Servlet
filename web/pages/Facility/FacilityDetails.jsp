@@ -1,8 +1,4 @@
-<%-- 
-    Document   : MarketPlace
-    Created on : Jan 30, 2024, 11:39:22 PM
-    Author     : jpesewang
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -43,7 +39,6 @@
                         </div>
 
                         <div class="">
-
                             <div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
                                 <img src="${c.imgSrc}" alt="Angled front view with bag zipped and handles upright." class="h-full w-full object-cover object-center sm:rounded-lg max-h-[524px]">
                             </div>
@@ -202,7 +197,7 @@
                                         <div class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                                             <div class="flex items-center xl:col-span-1">
                                                 <div class="flex items-center">
-                                                  
+
                                                     <c:forEach begin="1" end="${fb.starRating}" varStatus="loop">
                                                         <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                         <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
@@ -280,6 +275,11 @@
 
                 if (startDateObj >= endDateObj) {
                     alert("Check-out date must be after the check-in date.");
+                    return false;
+                }
+
+                if (endDateObj < startDateObj) {
+                    alert("Check-in date must be less the check-in date.");
                     return false;
                 }
 

@@ -8,10 +8,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.tailwindcss.com"></script>
         <title>JSP Page</title>
-      
+        <script src="pages/Facility/MarketplaceScript.js"></script>
     </head>
     <body>
-
+        <script type="text/javascript"><%@include file="MarketplaceScript.js" %></script>
 
         <div class="bg-gray-50">
             <%@ include file="/layout/header.jsp" %>
@@ -275,151 +275,134 @@
 
 
                             </div>
-                            <div class="">
-                                <nav class="flex space-x-4 mx-12" aria-label="Tabs">
+                            <!--                            <form class="block sm:flex gap-x-4 mt-4 mx-6"
+                                                              name="FacilityController"
+                                                              method="POST"
+                                                              action="/ResortHub/FacilityController?action=getFilterFacility&Page=1&PageSize=12">
+                                                            <div>
+                                                                <div class="">
+                                                                    <input
+                                                                        name="MinArea"
+                                                                        type="text"
+                                                                        placeholder="Min Area"
+                                                                       
+                                                                        class="w-[100px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
+                                                                </div>
+                                                            </div>
+                            
+                                                            <div>
+                                                                <div class="">
+                                                                    <input
+                                                                        name="MaxArea"
+                                                                        type="text"
+                                                                        placeholder="Max Area"
+                                                                        
+                                                                        class="w-[100px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
+                                                                </div>
+                                                            </div>
+                                                             <div>
+                                                                <div class="">
+                                                                    <input
+                                                                        name="MinRentalCost"
+                                                                        type="text"
+                                                                        placeholder="MinRentalCost"
+                                                                        
+                                                                        class="w-[150px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
+                                                                </div>
+                                                            </div>
+                                                             <div>
+                                                                <div class="">
+                                                                    <input
+                                                                        name="MaxRentalCost"
+                                                                        type="text"
+                                                                        placeholder="MaxRentalCost"
+                                                                        
+                                                                        class="w-[150px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
+                                                                </div>
+                                                            </div>
+                                                             <div>
+                                                                <div class="">
+                                                                    <input
+                                                                        name="LowerMaxOccupancy"
+                                                                        type="text"
+                                                                        placeholder="LowerMaxOccupancy"
+                                                                        
+                                                                        class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
+                                                                </div>
+                                                            </div>
+                                                             <div>
+                                                                <div class="">
+                                                                    <input
+                                                                        name="UpperMaxOccupancy"
+                                                                        type="text"
+                                                                        placeholder="UpperMaxOccupancy"
+                                                                        
+                                                                        class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                                        />
+                                                                </div>
+                                                            </div>
+                            
+                            
+                                                            <div>
+                                                                <button
+                                                                    type="submit"
+                                                                    class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                                    >
+                                                                    <span>Filter facility</span>
+                                                                </button>
+                            
+                                                            </div>
+                                                        </form>-->
+                            <form class="block sm:flex gap-x-4 mt-4 mx-6"
+                                  name="FacilityController"
+                                  method="POST"
+                                  action="/ResortHub/FacilityController?action=getSuggestFacility">
 
-                                    <button id="filterBtn" class=" bg-indigo-100 text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Filter</button>
-                                    <button id="suggestBtn" class="bg-indigo-100 text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium">Suggest</button>
+                                <div>
+                                    <div class="">
+                                        <input
+                                            name="TotalOccupancy"
+                                            type="text"
+                                            placeholder="TotalOccupancy"
 
-                                </nav>
-                            </div>
-                            <div id="filterForm" class="">
-                                <form class="gap-x-4 mt-4 mx-6 block sm:flex"
-                                      name="FacilityController"
-                                      method="POST"
-                                      action="/ResortHub/FacilityController?action=getFilterFacility&Page=1&PageSize=12">
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="MinArea"
-                                                type="text"
-                                                placeholder="Min Area"
-
-                                                class="w-[100px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
+                                            class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
                                     </div>
+                                </div>
 
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="MaxArea"
-                                                type="text"
-                                                placeholder="Max Area"
+                                <div>
+                                    <div class="">
+                                        <input
+                                            name="MaxNumOfFacilities"
+                                            type="text"
+                                            placeholder="MaxNumOfFacilities"
 
-                                                class="w-[100px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
+                                            class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            />
                                     </div>
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="MinRentalCost"
-                                                type="text"
-                                                placeholder="MinRentalCost"
-
-                                                class="w-[150px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="MaxRentalCost"
-                                                type="text"
-                                                placeholder="MaxRentalCost"
-
-                                                class="w-[150px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="LowerMaxOccupancy"
-                                                type="text"
-                                                placeholder="LowerMaxOccupancy"
-
-                                                class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="UpperMaxOccupancy"
-                                                type="text"
-                                                placeholder="UpperMaxOccupancy"
-
-                                                class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
-                                    </div>
+                                </div>
 
 
-                                    <div>
-                                        <button
-                                            type="submit"
-                                            class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                            >
-                                            <span>Filter facility</span>
-                                        </button>
 
-                                    </div>
-                                </form>
-                            </div>
+                                <div>
+                                    <button
+                                        type="submit"
+                                        class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        >
+                                        <span>Filter facility</span>
+                                    </button>
 
-                            <div id="suggestForm" class="hidden">
-                                <form class="block sm:flex gap-x-4 mt-4 mx-6"
-                                      name="FacilityController"
-                                      method="POST"
-                                      action="/ResortHub/FacilityController?action=getSuggestFacility">
-
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="TotalOccupancy"
-                                                type="text"
-                                                placeholder="Total Occupancy"
-                                                value="${totalOccupancy}"
-                                                class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="">
-                                            <input
-                                                name="MaxNumOfFacilities"
-                                                type="text"
-                                                placeholder="Max number of facilities"
-                                                value="${maxNumOfFacilities}"
-                                                class="w-[200px] rounded border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <button
-                                            type="submit"
-                                            class="flex w-full justify-center rounded-sm bg-black px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                            >
-                                            <span>Suggest facility</span>
-                                        </button>
-
-                                    </div>
-                                </form>
-                            </div>
-
-
+                                </div>
+                            </form>
                         </div>
                     </section>
-                    <c:if test="${not empty numOfFacilities}">
-                        <p class="mx-auto max-w-2xl px-4  sm:px-6 lg:max-w-7xl lg:px-8 font-medium"> Found ${numOfFacilities} results</p>
-
-                    </c:if>
-
-
+                    
+                 Count: 
 
                     <!-- Product grid -->
                     <section aria-labelledby="products-heading" class="mx-auto max-w-2xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-16 lg:max-w-7xl lg:px-8">
@@ -428,7 +411,7 @@
                         <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
 
-                            <c:forEach items="${facilities}" var="c">
+                            <c:forEach items="${facilities.getSuggestedFacilities()}" var="c">
                                 <div class="facility-item" data-type="${c.facilityType}">
                                     <a href="/ResortHub/FacilityController?action=getById&id=${c.id}&Page=1&PageSize=90" class="group">
                                         <div class="w-[300px] h-[200px] overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
@@ -483,13 +466,9 @@
                     </section>
                 </main>
 
-
                 <%@ include file="/layout/footer.jsp" %>
-
             </div>
         </div>
-                
-               
-        <script type="text/javascript"><%@include file="MarketplaceScript.js" %></script>
+
     </body>
 </html>
