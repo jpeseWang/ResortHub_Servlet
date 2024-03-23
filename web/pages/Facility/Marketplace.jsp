@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.tailwindcss.com"></script>
         <title>JSP Page</title>
-      
+
     </head>
     <body>
 
@@ -415,7 +415,7 @@
                         </div>
                     </section>
                     <c:if test="${not empty numOfFacilities}">
-                        <p class="mx-auto max-w-2xl px-4  sm:px-6 lg:max-w-7xl lg:px-8 font-medium"> Found ${numOfFacilities} results</p>
+                        <p class="mx-auto max-w-2xl px-4  sm:px-6 lg:max-w-7xl lg:px-8 font-medium"> Found ${suggestFacilities.size()} results</p>
 
                     </c:if>
 
@@ -442,7 +442,102 @@
 
 
 
+                            <!--                            Suggest List-->
+
+                            <!--                     <c:if test="${not empty suggestFacilities}">
+                                <c:forEach items="${suggestFacilities}" var="suggestedFacilitiesDto">
+                                    <div class="mb-4"> 
+                                        <h2 class="text-xl font-bold mb-2">Suggested Facilities</h2>
+                                        <p class="mb-1">Number of Facilities: ${suggestedFacilitiesDto.numOfFacilities}</p>
+                                        <p class="mb-1">Total Rental Cost: ${suggestedFacilitiesDto.totalRentalCost}$</p>
+                                        <p class="mb-4">Total Occupancy: ${suggestedFacilitiesDto.totalOccupancy}</p>
+                                        <ul>
+                                    <c:forEach items="${suggestedFacilitiesDto.suggestedFacilities}" var="facility">
+                                        <li class="mb-2"> 
+                                            Facility Name: ${facility.name}
+                                          <img src="${facility.imgSrc}"/>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                                
+                                <p>Total cost: ${suggestedFacilitiesDto.totalOccupancy * suggestedFacilitiesDto.totalRentalCost}$</p>
+                            </div>
+                                </c:forEach>
+                            </c:if>
+              
+                            -->
+
+
+
+
+
+
+
+
                         </div>
+
+
+
+                        <c:if test="${not empty suggestFacilities}">
+                            <c:forEach items="${suggestFacilities}" var="suggestedFacilitiesDto" varStatus="comboIndex">
+                                <div class="mb-4 mx-12 ring-1 ring-gray-300 px-12 py-12 rounded-md bg-white"> 
+                                    <h2 class="text-xl font-bold mb-2">Suggested Facilities ${comboIndex.index + 1}</h2>
+                                
+
+
+
+                                    <!-- Order summary -->
+                                    <section aria-labelledby="summary-heading" class="my-12 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
+                                        <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Order summary</h2>
+
+                                        <dl class="mt-6 space-y-4">
+                                            <div class="flex items-center justify-between">
+                                                <dt class="text-sm text-gray-600">Number of Facilities</dt>
+                                                <dd class="text-sm font-medium text-gray-900">${suggestedFacilitiesDto.numOfFacilities}</dd>
+                                            </div>
+                                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                                <dt class="flex items-center text-sm text-gray-600">
+                                                    <span>Total Rental Cost</span>
+
+                                                </dt>
+                                                <dd class="text-sm font-medium text-gray-900">$${suggestedFacilitiesDto.totalRentalCost}</dd>
+                                            </div>
+                                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                                <dt class="flex text-sm text-gray-600">
+                                                    <span>Total Occupancy</span>
+
+                                                </dt>
+                                                <dd class="text-sm font-medium text-gray-900">${suggestedFacilitiesDto.totalOccupancy}</dd>
+                                            </div>
+                                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+                                                <dt class="text-base font-medium text-gray-900">Order total</dt>
+                                                <dd class="text-base font-medium text-gray-900">$${suggestedFacilitiesDto.totalOccupancy * suggestedFacilitiesDto.totalRentalCost}</dd>
+                                            </div>
+                                        </dl>
+
+
+                                    </section>
+
+                                    <div class="grid grid-cols-1 gap-x-16 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+
+
+                                        <c:forEach items="${suggestedFacilitiesDto.suggestedFacilities}" var="facility">
+                                            <div class="facility-item" data-type="${facility.facilityType}">
+                                                <a href="/ResortHub/FacilityController?action=getById&id=${facility.id}&Page=1&PageSize=90" class="group">
+                                                    <div class="w-[300px] h-[200px] overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                                        <img src="${facility.imgSrc}" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                                    </div>
+                                                    <h3 class="mt-4 text-sm text-gray-700">${facility.name} | ${facility.facilityType}</h3>
+                                                    <p class="mt-1 text-lg font-medium text-gray-900">$${facility.rentalCost}</p>
+                                                </a>
+                                            </div>
+                                        </c:forEach></div>
+
+
+
+                                </div>
+                            </c:forEach>
+                        </c:if>
                         <!--Pagination-->
                         <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0 mt-6">
                             <div class="-mt-px flex w-0 flex-1">
@@ -488,8 +583,8 @@
 
             </div>
         </div>
-                
-               
+
+
         <script type="text/javascript"><%@include file="MarketplaceScript.js" %></script>
     </body>
 </html>

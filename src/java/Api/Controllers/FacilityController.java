@@ -215,8 +215,6 @@ public class FacilityController extends HttpServlet {
         List<String> validationErrors;
         PageQueryDto pageQueryDto;
         PageDto<Facility> pageDto;
-        PageDto<CustomerFeedback> customerFeedback;
-        PageDto<Customer> customerPageDto;
 
         String id = request.getParameter("id");
         String action = request.getParameter("action");
@@ -289,6 +287,7 @@ public class FacilityController extends HttpServlet {
                 request.setAttribute("message", storyMessage);
                 request.getRequestDispatcher("components/SuccessToast.jsp").forward(request, response);
                 break;
+                
             case "getFilterFacility":
                 FilterFacilitiesDto filterFacilitiesDto = new FilterFacilitiesDto(request);
                 pageDto = facilityService.filterFacilities(pageQueryDto, filterFacilitiesDto);
@@ -309,10 +308,13 @@ public class FacilityController extends HttpServlet {
                     numOfFacilitiesList.add(suggestedFacilitiesDto.getNumOfFacilities());
                 }
 
-                request.setAttribute("facilities", facilitiesList);
+//                request.setAttribute("facilities", facilitiesList);
                 request.setAttribute("numOfFacilities", numOfFacilitiesList.size());
                 request.setAttribute("maxNumOfFacilities", suggestFacilitiesDto.getMaxNumOfFacilities());
                 request.setAttribute("totalOccupancy", suggestFacilitiesDto.getTotalOccupancy());
+                
+                
+                 request.setAttribute("suggestFacilities", suggestFacilities);
 
                 // Forward the request
                 request.getRequestDispatcher("pages/Facility/Marketplace.jsp").forward(request, response);

@@ -9,7 +9,7 @@ filterBtn.addEventListener('click', function () {
     suggestForm.classList.add('hidden');
 });
 
-suggestBtn.addEventListener('click', function () {
+suggestBtn.addEventListener('click', function () { 
     filterForm.classList.add('hidden');
     suggestForm.classList.remove('hidden');
 });
